@@ -1,0 +1,19 @@
+.Container {
+  margin: 10px 80px;
+  .Form {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    .Submit {
+      color: #1da1f2;
+      background-color: white;
+      border-radius: 20px;
+      border: 2px solid #1da1f2;
+      &:hover {
+        color: #1da1f2;
+        background-color: rgb(250, 250, 250);
+      }
+    }
+  }
+}

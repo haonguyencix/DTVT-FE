@@ -1,24 +1,16 @@
 import React from "react";
-import { BrowserRouter, Switch } from "react-router-dom";
 
-// import guards
-import IntroGuard from "./auth/introduction/introGuard";
+// import libraries
+import { ToastContainer } from "react-toastify";
 
 // import routes
-import { introRouteArr } from "./auth/introduction/introRoute";
+import Routes from "./routes/Routes";
 
 function App() {
-  let IntroRoutes = introRouteArr.map((route, index) => (
-    <IntroGuard key={index} path={route.path} component={route.main} />
-  ));
-
   return (
     <>
-      <BrowserRouter>
-        <Switch>
-          {IntroRoutes}
-        </Switch>
-      </BrowserRouter>
+      <Routes />
+      <ToastContainer />
     </>
   );
 }

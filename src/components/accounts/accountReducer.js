@@ -1,28 +1,37 @@
-import { FETCH_USERLOGIN } from "./accountConst";
+// import const
+import { FETCH_STUDENT_ID, FETCH_STUDENT_SIGN_IN } from "./accountConst";
+
+// import services
+import { getLocalStorage } from "../../services/common";
 
 let initialState = {
-  userLogin: null,
+  studentId: getLocalStorage("studentId"),
+  studentSignIn: null,
   isLoading: false
 };
 
 const AccountReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_USERLOGIN["REQUEST"]: {
+    case FETCH_STUDENT_ID: {
+      return { ...state, studentId: action.payload };
+    }
+
+    case FETCH_STUDENT_SIGN_IN["REQUEST"]: {
       return {
         ...state,
         isLoading: true
       };
     }
 
-    case FETCH_USERLOGIN["SUCCESS"]: {
+    case FETCH_STUDENT_SIGN_IN["SUCCESS"]: {
       return {
         ...state,
-        userLogin: action.payload.user,
+        studentSignIn: action.payload.studentSignIn,
         isLoading: false
       };
     }
 
-    case FETCH_USERLOGIN["FAILURE"]: {
+    case FETCH_STUDENT_SIGN_IN["FAILURE"]: {
       return {
         ...state,
         isLoading: false

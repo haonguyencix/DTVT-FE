@@ -4,8 +4,8 @@ import React from "react";
 import { Grid } from "@material-ui/core";
 
 // import components
-import Slogans from "../../screens/organisms/Introduction/Slogans/Slogans";
-import SignIn from "../../screens/organisms/Introduction/SignIn/SignIn";
+import Slogans from "../../organisms/Introduction/Slogans/Slogans";
+import SignIn from "../../organisms/Introduction/SignIn/SignIn";
 
 const IntroLayout = props => {
   return (

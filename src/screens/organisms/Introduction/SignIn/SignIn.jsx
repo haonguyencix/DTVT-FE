@@ -3,6 +3,8 @@ import styles from "./SignIn.module.scss";
 
 // import libraries
 import { Formik, Form } from "formik";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 // import Material UI
 import { TextField, Button } from "@material-ui/core";
@@ -10,7 +12,13 @@ import { TextField, Button } from "@material-ui/core";
 // import components
 import InputPassword from "../../../atoms/InputPassword/InputPassword";
 
-const SignIn = () => {
+// import action and schema
+import { studentSignIn } from "../../../../components/accounts/accountAction";
+
+const SignIn = props => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
   return (
     <>
       <div className={styles.Container}>
@@ -20,7 +28,7 @@ const SignIn = () => {
             password: ""
           }}
           onSubmit={values => {
-            console.log("TCL: SignIn -> values", values);
+            dispatch(studentSignIn(values, history.replace));
           }}
         >
           {({ handleChange }) => {

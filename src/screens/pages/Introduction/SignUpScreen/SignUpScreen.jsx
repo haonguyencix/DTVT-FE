@@ -3,32 +3,30 @@ import styles from "./SignUpScreen.module.scss";
 
 // import libraries
 import { Formik, Form } from "formik";
-import { withRouter} from "react-router-dom";
+import { useDispatch } from "react-redux";
 import DateFnsUtils from "@date-io/date-fns";
 
 // import Material UI
-import { TextField, Button, Typography, Fab } from "@material-ui/core";
+import { TextField, Button, Typography } from "@material-ui/core";
 import { PersonAdd } from "@material-ui/icons";
 import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker
+  KeyboardDatePicker,
+  MuiPickersUtilsProvider
 } from "@material-ui/pickers";
 
 // import action and schema
 import { studentSignUp } from "../../../../components/accounts/accountAction";
-import { accountSchema } from "../../../../components/accounts/accountSchema";
+import { AccountSchema } from "../../../../components/accounts/account";
 
 // import components
 import InputPassword from "../../../atoms/InputPassword/InputPassword";
 
 const SignUpScreen = props => {
+  const dispatch = useDispatch();
+
   return (
     <>
-      <div className={styles.PersonAddWrapper}>
-        <Fab size="large" className={styles.PersonAddFab}>
-          <PersonAdd fontSize="large" />
-        </Fab>
-      </div>
+      {props.render({ slug: "/", icon: PersonAdd, title: "Quay về trang chủ" })}
       <div className={styles.Container}>
         <Typography variant="h4" component="h4">
           Đăng kí
@@ -40,83 +38,69 @@ const SignUpScreen = props => {
             password: "",
             email: "",
             birth: new Date(),
-            role: ["student"]
+            role: "student"
           }}
-          validationSchema={accountSchema}
+          validationSchema={AccountSchema}
           onSubmit={values => {
-            studentSignUp(values, props.history.replace);
+            dispatch(studentSignUp(values, props.history.replace));
           }}
         >
           {({
-            handleChange,
-            handleBlur,
+            values,
             errors,
             touched,
-            values,
+            handleBlur,
+            handleChange,
             setFieldValue
           }) => {
             return (
               <Form className={styles.Form}>
                 <TextField
-                  error={errors.id && touched.id ? true : false}
-                  label="Mã số sinh viên"
-                  variant="outlined"
-                  type="text"
                   name="id"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  autoComplete="username"
-                  margin="normal"
                   required
                   fullWidth
-                  helperText={errors.id && touched.id ? errors.id : ""}
+                  type="text"
+                  margin="normal"
+                  variant="outlined"
+                  onBlur={handleBlur}
+                  label="Mã số sinh viên"
+                  autoComplete="username"
+                  onChange={handleChange}
+                  error={errors.id && touched.id ? true : false}
+                  helperText={errors.id && touched.id && errors.id}
                 />
                 <InputPassword
-                  error={errors.password && touched.password ? "true" : "false"}
-                  id="signUpPassword"
-                  handleChange={handleChange}
-                  handleBlur={handleBlur}
-                  placeholder="Gồm ít nhất 1 ký tự viết hoa, 1 ký tự đặc biệt và 1 số (vd: K16@dtvt)"
                   fullWidth={true}
+                  id="signUpPassword"
+                  handleBlur={handleBlur}
+                  handleChange={handleChange}
+                  error={errors.password && touched.password ? "true" : "false"}
                   helperText={
-                    errors.password && touched.password ? errors.password : ""
+                    errors.password && touched.password && errors.password
                   }
-                />
-                <TextField
-                  error={errors.email && touched.email ? true : false}
-                  label="Email"
-                  variant="outlined"
-                  type="email"
-                  name="email"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  autoComplete="email"
-                  margin="normal"
-                  required
-                  fullWidth
-                  helperText={errors.email && touched.email && errors.email}
+                  placeholder="Gồm ít nhất 1 ký tự viết hoa, 1 ký tự đặc biệt và 1 số (vd: K16@dtvt)"
                 />
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <KeyboardDatePicker
                     autoOk
-                    disableFuture
-                    label="Ngày sinh"
-                    variant="dialog"
-                    name="birth"
-                    inputVariant="outlined"
-                    margin="normal"
-                    value={values.birth}
-                    format="dd/MM/yyyy"
-                    InputAdornmentProps={{ position: "end" }}
-                    onChange={date => setFieldValue("birth", date)}
                     required
                     fullWidth
+                    name="birth"
+                    disableFuture
+                    margin="normal"
+                    variant="dialog"
+                    label="Ngày sinh"
+                    format="dd/MM/yyyy"
+                    value={values.birth}
+                    inputVariant="outlined"
+                    InputAdornmentProps={{ position: "end" }}
+                    onChange={date => setFieldValue("birth", date)}
                   />
                 </MuiPickersUtilsProvider>
                 <Button
-                  className={styles.Submit}
                   type="submit"
                   variant="contained"
+                  className={styles.Submit}
                 >
                   Đăng kí
                 </Button>
@@ -129,4 +113,4 @@ const SignUpScreen = props => {
   );
 };
 
-export default withRouter(SignUpScreen);
+export default SignUpScreen;

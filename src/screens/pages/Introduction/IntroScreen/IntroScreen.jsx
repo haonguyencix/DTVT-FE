@@ -3,20 +3,16 @@ import styles from "./IntroScreen.module.scss";
 import { Link } from "react-router-dom";
 
 // import Material UI
-import { Fab, Typography, Button } from "@material-ui/core";
+import { Typography, Button } from "@material-ui/core";
 import { Lock } from "@material-ui/icons";
 
 // import images
 import FetLogo from "../../../../assets/img/logo-fet.png";
 
-const IntroScreen = () => {
+const IntroScreen = props => {
   return (
     <>
-      <div className={styles.IconWrapper}>
-        <Fab size="large" className={styles.Icon}>
-          <Lock fontSize="large" />
-        </Fab>
-      </div>
+      {props.render({ slug: "/", icon: Lock, title: "Đăng nhập để mở khóa" })}
       <div className={styles.Container}>
         <img src={FetLogo} alt="FET Logo" width="60px" height="60px" />
         <Typography variant="h4" component="h4">

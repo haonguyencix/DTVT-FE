@@ -6,21 +6,22 @@ import { Link } from "react-router-dom";
 import { Typography, Button } from "@material-ui/core";
 import { Lock } from "@material-ui/icons";
 
-// import images
-import FetLogo from "../../../../assets/img/logo-fet.png";
+// import logo fethub
+import FetHubLogo from "../../../../assets/img/fethub_logo.png";
 
 const IntroScreen = props => {
   return (
     <>
       {props.render({ slug: "/", icon: Lock, title: "Đăng nhập để mở khóa" })}
       <div className={styles.Container}>
-        <img src={FetLogo} alt="FET Logo" width="60px" height="60px" />
-        <Typography variant="h4" component="h4">
-          Xem điều gì xảy ra trên thế giới ngay bây giờ!
+        <img src={FetHubLogo} alt="FEThub Logo" width="100px" />
+        <Typography className={styles.Title} variant="h5" component="h5">
+          Bạn đã thật sự quản lý hoạt các động học tập của mình một cách tốt
+          nhất?
         </Typography>
-        <p className={styles.Title}>Tham gia với chúng tôi ngay hôm nay!</p>
+        <p className={styles.SubTitle}>Tham gia với FEThub ngay hôm nay!</p>
         <Link to="/student-signup">
-          <Button variant="contained" className={styles.Button} fullWidth>
+          <Button className={styles.Button} variant="contained" fullWidth>
             Đăng kí
           </Button>
         </Link>

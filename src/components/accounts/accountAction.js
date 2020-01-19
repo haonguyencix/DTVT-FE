@@ -2,15 +2,14 @@
 import { toast } from "react-toastify";
 
 // import const
-import { FETCH_STUDENT_ID, FETCH_STUDENT_SIGN_IN } from "./accountConst";
+import { FETCH_STUDENT_ID, FETCH_STUDENT_SIGN_IN, FETCH_STUDENT_SIGN_UP } from "./accountConst";
 
 // import services
 import AccountService from "./accountService";
-import {
-  asyncCall,
-  setLocalStorage,
-  sendAccessToken
-} from "../../services/common";
+import { setLocalStorage, sendAccessToken } from "../../services/common";
+
+// import errors
+import AccountErrors from "./accountErrors";
 
 // import models
 import { StudentAccount } from "./account";
@@ -20,33 +19,26 @@ export const studentSignUp = (values, replace) => {
   const { id, password, birth, role } = values;
   let studentModel = new StudentAccount(id, password, birth, role);
   return dispatch => {
+    dispatch({
+      type: FETCH_STUDENT_SIGN_UP["REQUEST"]
+    });
     AccountService.studentSignUp(studentModel)
-      .then(res => {
-      console.log("TCL: studentSignUp -> res", res)
+      .then(() => {
         dispatch({
           type: FETCH_STUDENT_ID,
           payload: id
+        }, {
+          type: FETCH_STUDENT_SIGN_UP["SUCCESS"],
         });
         setLocalStorage("studentId", id);
         toast.success("Đăng ký thành công!");
-        replace("/verify-email");
+        replace("/verify");
       })
       .catch(err => {
-        console.log("TCL: studentSignUp -> err.response.data.message", err.response.data.message)
-        switch (err.response.data.message) {
-          case "Please enter exact ID":
-            toast.error("Vui lòng kiểm tra lại mã số sinh viên");
-            break;
-          case "ID already registed":
-            toast.error("Mã số sinh viên này đã được đăng ký");
-            break;
-          case "Can not access!":
-            toast.error("Không phải bạn?");
-            break;
-          default:
-            toast.error("Lỗi mạng");
-            break;
-        }
+        dispatch({
+          type: FETCH_STUDENT_SIGN_UP["FAILURE"]
+        });
+        AccountErrors.studentSignUpErrors(err);
       });
   };
 };
@@ -58,40 +50,20 @@ export const studentSignIn = (values, replace) => {
     });
     AccountService.studentSignIn(values)
       .then(res => {
-      console.log("TCL: studentSignIn -> res", res)
+        dispatch({
+          type: FETCH_STUDENT_SIGN_IN["SUCCESS"],
+          payload: { studentSignIn: res.data }
+        });
         setLocalStorage("studentSignIn", res.data);
         sendAccessToken(res.data.token);
-        asyncCall(1000)
-          .then(() => dispatch({
-            type: FETCH_STUDENT_SIGN_IN["SUCCESS"],
-            payload: { studentSignIn: res.data }
-          }))
-          .then(() => {
-            toast.success("Đăng nhập thành công!");
-            replace("/home");
-          });
+        toast.success("Đăng nhập thành công!");
+        replace("/home");
       })
       .catch(err => {
-        asyncCall(1000)
-          .then(() =>
-            dispatch({
-              type: FETCH_STUDENT_SIGN_IN["FAILURE"]
-            })
-          )
-          .then(() => {
-            console.log("TCL: studentSignIn -> err.response.data.message", err.response.data.message)
-            switch (err.response.data.message) {
-              case "Email or password is incorrect!":
-                toast.error("Mã số sinh viên hoặc mật khẩu không đúng!");
-                break;
-              case "Account has not actived":
-                toast.error("Tài khoản chưa được kích hoạt");
-                break;
-              default:
-                toast.error("Lỗi mạng");
-                break;
-            }
-          });
+        dispatch({
+          type: FETCH_STUDENT_SIGN_IN["FAILURE"]
+        });
+        AccountErrors.studentSignInErrors(err);
       });
   };
 };

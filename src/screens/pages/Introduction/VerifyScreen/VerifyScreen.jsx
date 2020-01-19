@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./VerifyEmailScreen.module.scss";
+import styles from "./VerifyScreen.module.scss";
 
 // import libraries
 import { Formik, Form } from "formik";
@@ -47,14 +47,12 @@ const VerifyEmailScreen = props => {
       })}
       <div className={styles.Container}>
         <img src={FetHubLogo} width="100px" alt="FEThub Logo" />
-        <Typography variant="h5" component="h5">
+        <Typography className={styles.Title} variant="h5" component="h5">
           Cảm ơn bạn đã đến với FEThub!
         </Typography>
         <p className={styles.Text}>
-          Vui lòng xác thực địa chỉ email của bạn để tiếp tục. Nhấn vào nút bên
-          dưới để nhận thông tin xác thực đến địa chỉ.... Sau khi nhận được tin,
-          bạn hãy nhập đúng thông tin xác thực vào ô xác thực để hoàn thành đăng
-          ký nhé!
+          Vui lòng xác thực địa chỉ email của bạn để tiếp tục. Sau khi nhận được mã xác thực từ chúng tôi qua email,
+          bạn hãy nhập chính xác mã xác thực ấy vào ô xác thực để hoàn thành đăng ký nhé!
         </p>
         {otpData.isSubmit && (
           <Formik
@@ -83,7 +81,11 @@ const VerifyEmailScreen = props => {
                       inputProps={{ maxLength: 6 }}
                       endAdornment={
                         <InputAdornment position="start">
-                          <IconButton edge="end" type="submit">
+                          <IconButton
+                            edge="end"
+                            type="submit"
+                            disabled={otpData.isLoading}
+                          >
                             <Send color="primary" />
                           </IconButton>
                         </InputAdornment>

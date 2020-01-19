@@ -2,15 +2,15 @@
 import IntroGuard from "../auth/IntroGuard";
 
 // import screens
-import VerifyEmailScreen from "../screens/pages/Introduction/VerifyEmailScreen/VerifyEmailScreen";
+import VerifyScreen from "../screens/pages/Introduction/VerifyScreen/VerifyScreen";
 import SignUpScreen from "../screens/pages/Introduction/SignUpScreen/SignUpScreen";
 import IntroScreen from "../screens/pages/Introduction/IntroScreen/IntroScreen";
 
 const introRoutes = {
-  verifyEmail: {
-    path: "/verify-email",
+  verify: {
+    path: "/verify",
     guard: IntroGuard,
-    component: VerifyEmailScreen
+    component: VerifyScreen
   },
   studentSignUp: {
     path: "/student-signup",

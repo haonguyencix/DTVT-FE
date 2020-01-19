@@ -7,6 +7,9 @@ import { FETCH_OTP, FETCH_VERIFY } from "./otpConst";
 // import services
 import OTPService from "./otpService";
 
+// import errors
+import OTPErrors from "./otpErrors";
+
 // import models
 import { OTP, Credentials } from "./otp";
 
@@ -18,7 +21,6 @@ export const sendOtpToUserByMail = values => {
     });
     OTPService.sendOtpFromServer(credentials)
       .then(res => {
-        console.log("TCL: res", res);
         dispatch({
           type: FETCH_OTP["SUCCESS"],
           payload: res.data.data.expirationTime / 1000
@@ -26,24 +28,10 @@ export const sendOtpToUserByMail = values => {
         toast.success("Kiểm tra email để lấy mã xác thực nhé!");
       })
       .catch(err => {
-        console.log(
-          "TCL: err.response.data.message",
-          err.response.data.message
-        );
         dispatch({
           type: FETCH_OTP["FAILURE"]
         });
-        switch (err.response.data.message) {
-          case "Account is actived":
-            toast.error("Tài khoản đã được kích hoạt trước đó");
-            break;
-          case "Fail to send mail!":
-            toast.error("Gửi mã xác thực thất bại");
-            break;
-          default:
-            toast.error("Lỗi mạng");
-            break;
-        }
+        OTPErrors.sendOTPErrors(err);
       });
   };
 };
@@ -56,7 +44,6 @@ export const verifyOTP = (values, replace) => {
     });
     OTPService.verifyOTP(otpModel)
       .then(res => {
-        console.log("TCL: res", res);
         dispatch({
           type: FETCH_VERIFY
         });
@@ -65,24 +52,10 @@ export const verifyOTP = (values, replace) => {
         replace("/");
       })
       .catch(err => {
-        console.log(
-          "TCL: err.response.data.message",
-          err.response.data.message
-        );
         dispatch({
           type: FETCH_OTP["FAILURE"]
         });
-        switch (err.response.data.message) {
-          case "OTP was expired":
-            toast.info("Mã không còn tồn tại. Vui lòng bấm xác thực lại!");
-            break;
-          case "Account is actived":
-            toast.error("Tài khoản đã được kích hoạt trước đó");
-            break;
-          default:
-            toast.error("Lỗi mạng");
-            break;
-        }
+        OTPErrors.verifyOTPErrors(err);
       });
   };
 };

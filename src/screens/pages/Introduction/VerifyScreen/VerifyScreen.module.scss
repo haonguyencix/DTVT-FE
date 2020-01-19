@@ -1,10 +1,15 @@
 .Container {
   margin: 58px 80px 0;
+  .Title {
+    margin-top: 20px;
+    font-weight: 500;
+  }
   .Text {
-    margin: 30px 0;
+    margin: 20px 0;
   }
   .Submit {
     color: white;
+    padding: 6px 12px;
     background-color: #1da1f2;
     margin-top: 20px;
     border-radius: 20px;
@@ -15,11 +20,11 @@
     }
   }
   .OtpArea {
-      .ResendOtp {
-        cursor: pointer;
-        &:hover {
-          color: black;
-        }
+    .ResendOtp {
+      cursor: pointer;
+      &:hover {
+        color: black;
       }
+    }
   }
 }

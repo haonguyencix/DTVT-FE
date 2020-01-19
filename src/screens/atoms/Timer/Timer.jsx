@@ -22,7 +22,7 @@ const Timer = props => {
 
       --expirationTime;
 
-      if (expirationTime < 0) {
+      if (expirationTime <= 0) {
         clearInterval(interval);
         toast.error("Mã xác thực đã hết hạn!");
       }

@@ -2,7 +2,7 @@
 import { toast } from "react-toastify";
 
 // import const
-import { FETCH_STUDENT_ID, FETCH_STUDENT_SIGN_IN, FETCH_STUDENT_SIGN_UP } from "./accountConst";
+import { FETCH_STUDENT_SIGN_IN, FETCH_STUDENT_SIGN_UP } from "./accountConst";
 
 // import services
 import AccountService from "./accountService";
@@ -23,14 +23,12 @@ export const studentSignUp = (values, replace) => {
       type: FETCH_STUDENT_SIGN_UP["REQUEST"]
     });
     AccountService.studentSignUp(studentModel)
-      .then(() => {
+      .then(res => {
         dispatch({
-          type: FETCH_STUDENT_ID,
-          payload: id
-        }, {
           type: FETCH_STUDENT_SIGN_UP["SUCCESS"],
+          payload: res.data.id
         });
-        setLocalStorage("studentId", id);
+        setLocalStorage("studentId", res.data.id);
         toast.success("Đăng ký thành công!");
         replace("/verify");
       })

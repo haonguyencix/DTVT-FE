@@ -1,21 +1,17 @@
 // import const
-import { FETCH_STUDENT_ID, FETCH_STUDENT_SIGN_IN, FETCH_STUDENT_SIGN_UP } from "./accountConst";
+import { FETCH_STUDENT_SIGN_IN, FETCH_STUDENT_SIGN_UP } from "./accountConst";
 
 // import services
 import { getLocalStorage } from "../../services/common";
 
 let initialState = {
-  studentId: getLocalStorage("studentId") ? getLocalStorage("studentId") : "",
+  studentId: getLocalStorage("studentId") ? getLocalStorage("studentId") : null,
   studentSignIn: null,
   isLoading: false
 };
 
 const AccountReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_STUDENT_ID: {
-      return { ...state, studentId: action.payload };
-    }
-
     case FETCH_STUDENT_SIGN_IN["REQUEST"]: {
       return {
         ...state,
@@ -48,6 +44,7 @@ const AccountReducer = (state = initialState, action) => {
     case FETCH_STUDENT_SIGN_UP["SUCCESS"]: {
       return {
         ...state,
+        studentId: action.payload,
         isLoading: false
       };
     }

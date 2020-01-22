@@ -1,18 +1,16 @@
 import React from "react";
-
-// import libraries
 import { ToastContainer } from "react-toastify";
-
-// import routes
-import Routes from "./routes/Routes";
+import ROUTES, { RenderRoutes } from "./routes/routes";
 
 function App() {
   return (
-    <>
-      <Routes />
+    <React.Fragment>
+      <RenderRoutes routes={ROUTES} />
       <ToastContainer />
-    </>
+    </React.Fragment>
   );
 }
 
 export default App;
+
+

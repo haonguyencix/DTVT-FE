@@ -33,18 +33,15 @@ import Timer from "../../../atoms/Timer/Timer";
 
 // import logo fethub
 import FetHubLogo from "../../../../assets/img/fethub_logo.png";
+import FabProgress from "../../../atoms/FabProgress/FabProgress";
 
 const VerifyEmailScreen = props => {
   const dispatch = useDispatch();
   const { otpData, studentId } = props;
 
   return (
-    <>
-      {props.render({
-        slug: "/",
-        icon: MailOutline,
-        title: "Quay về trang chủ"
-      })}
+    <React.Fragment>
+      <FabProgress slug="/" icon={MailOutline} title="Đăng nhập để mở khóa" />
       <div className={styles.Container}>
         <img src={FetHubLogo} width="100px" alt="FEThub Logo" />
         <Typography className={styles.Title} variant="h5" component="h5">
@@ -149,7 +146,7 @@ const VerifyEmailScreen = props => {
           </div>
         )}
       </div>
-    </>
+    </React.Fragment>
   );
 };
 

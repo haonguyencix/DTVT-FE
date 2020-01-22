@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.scss";
 import 'react-toastify/dist/ReactToastify.css';
+import { BrowserRouter as Router } from 'react-router-dom';
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
@@ -25,7 +26,9 @@ const store = createStore(rootReducer, enhancer);
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Router>
+      <App />
+    </Router>
   </Provider>,
   document.getElementById("root")
 );

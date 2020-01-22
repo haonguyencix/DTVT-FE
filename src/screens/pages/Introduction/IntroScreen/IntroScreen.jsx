@@ -8,11 +8,12 @@ import { Lock } from "@material-ui/icons";
 
 // import logo fethub
 import FetHubLogo from "../../../../assets/img/fethub_logo.png";
+import FabProgress from "../../../atoms/FabProgress/FabProgress";
 
 const IntroScreen = props => {
   return (
-    <>
-      {props.render({ slug: "/", icon: Lock, title: "Đăng nhập để mở khóa" })}
+    <React.Fragment>
+      <FabProgress slug="/" icon={Lock} title="Đăng nhập để mở khóa" />
       <div className={styles.Container}>
         <img src={FetHubLogo} alt="FEThub Logo" width="100px" />
         <Typography className={styles.Title} variant="h5" component="h5">
@@ -26,7 +27,7 @@ const IntroScreen = props => {
           </Button>
         </Link>
       </div>
-    </>
+    </React.Fragment>
   );
 };
 

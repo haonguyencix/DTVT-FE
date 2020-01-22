@@ -20,13 +20,14 @@ import { AccountSchema } from "../../../../components/accounts/account";
 
 // import components
 import InputPassword from "../../../atoms/InputPassword/InputPassword";
+import FabProgress from "../../../atoms/FabProgress/FabProgress";
 
 const SignUpScreen = props => {
   const dispatch = useDispatch();
 
   return (
-    <>
-      {props.render({ slug: "/", icon: PersonAdd, title: "Quay về trang chủ" })}
+    <React.Fragment>
+      <FabProgress slug="/" icon={PersonAdd} title="Đăng nhập để mở khóa" />
       <div className={styles.Container}>
         <Typography variant="h4" component="h4">
           Đăng kí
@@ -109,7 +110,7 @@ const SignUpScreen = props => {
           }}
         </Formik>
       </div>
-    </>
+    </React.Fragment>
   );
 };
 

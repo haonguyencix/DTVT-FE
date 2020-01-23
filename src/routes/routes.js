@@ -2,8 +2,9 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import introRoutes from "./homeRoutes";
 import homeRoutes from "./introRoutes";
+import taskRoutes from './taskRoutes';
 
-const ROUTES = [...introRoutes, ...homeRoutes];
+const ROUTES = [...introRoutes, ...homeRoutes,...taskRoutes];
 
 function RouteCustom(route) {
   return (

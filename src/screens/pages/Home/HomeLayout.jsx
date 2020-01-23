@@ -25,11 +25,11 @@ const HomeLayout = props => {
   }, [dispatch]);
 
   return (
-    <>
+    <React.Fragment>
       <Header {...props} />
       {props.children}
       <Footer />
-    </>
+    </React.Fragment>
   );
 };
 

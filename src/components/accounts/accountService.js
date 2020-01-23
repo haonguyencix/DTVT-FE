@@ -3,7 +3,7 @@ import { restConnector } from "../../connector/axios";
 class AccountService {
   studentSignUp(student) {
     return restConnector({
-      url: 'Accounts/Student',
+      url: 'accounts/student',
       method: "POST",
       data: student
     });
@@ -11,7 +11,7 @@ class AccountService {
 
   studentSignIn(student) {
     return restConnector({
-      url: 'Accounts/Student/Login',
+      url: 'accounts/student/login',
       method: "POST",
       data: student
     });

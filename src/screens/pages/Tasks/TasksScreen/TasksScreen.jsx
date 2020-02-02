@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import clsx from 'clsx';
+import { connect } from 'react-redux';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -16,6 +17,9 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 
 import TaskBoard from '../../../organisms/Tasks/TaskBoard/TaskBoard';
+import Spinner from '../../../atoms/Spinner/Spinner';
+
+import { fetchTasks } from '../../../../components/tasks/tasksAction';
 
 const drawerWidth = 240;
 
@@ -58,16 +62,16 @@ const useStyles = makeStyles(theme => ({
         }),
         marginRight: 0,
     },
-    toolbar:{
-        justifyContent:'flex-end'
+    toolbar: {
+        justifyContent: 'flex-end'
     }
 }));
-const TasksScreen = () => {
+const TasksScreen = (props) => {
     const classes = useStyles();
     const theme = useTheme();
-
+    const { tasks, isLoading, onFetchTasks } = props;
+  
     const [open, setOpen] = React.useState(false);
-
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -75,6 +79,17 @@ const TasksScreen = () => {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+
+    useEffect(() => {
+        onFetchTasks();
+    }, [onFetchTasks]);
+
+
+    let taskBoard = <TaskBoard tasks = {tasks} />
+    
+    if(isLoading){
+        taskBoard = <Spinner />
+    }
 
     return (
         <div className={classes.root}>
@@ -92,7 +107,7 @@ const TasksScreen = () => {
                         <MenuIcon />
                     </IconButton>
                 </Toolbar>
-                <TaskBoard />
+                {taskBoard}
             </main>
             <Drawer
                 className={classes.drawer}
@@ -131,4 +146,17 @@ const TasksScreen = () => {
     );
 }
 
-export default TasksScreen;
+const mapStateToProps = (state) => {
+    return {
+        tasks: state.tasksData.tasks,
+        isLoading: state.tasksData.isLoading
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onFetchTasks: () => dispatch(fetchTasks())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TasksScreen);

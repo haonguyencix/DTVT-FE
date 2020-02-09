@@ -25,3 +25,20 @@ export const sendAccessToken = accessToken => {
     "Authorization"
   ] = `Bearer ${accessToken}`);
 };
+
+// string shortcut
+export const stringShortcut = (str, limit) => {
+  if (str.length > limit) {
+    return str.substr(0, limit) + "...";
+  }
+  return str;
+};
+
+// get the first letter of the any index string item
+export const getFirstLetter = (str, isInverse, index) => {
+  const strSplitted = str.split(" ");
+  if (isInverse) {
+    return strSplitted[strSplitted.length - (1 + index)].slice(0, 1);
+  }
+  return strSplitted[index].slice(0, 1);
+};

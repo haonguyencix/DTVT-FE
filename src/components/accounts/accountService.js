@@ -16,6 +16,14 @@ class AccountService {
       data: student
     });
   }
+
+  forgotPassword(email) {
+    return restConnector({
+      url: 'Accounts/Password/Forgot',
+      method: "POST",
+      data: email
+    });
+  }
 }
 
 export default new AccountService();

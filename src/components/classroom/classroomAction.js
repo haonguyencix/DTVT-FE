@@ -2,14 +2,14 @@
 import { toast } from "react-toastify";
 
 // import const
-import { FETCH_STUDENT_SIGN_IN, FETCH_STUDENT_SIGN_UP } from "./accountConst";
+import { FETCH_STUDENT_SIGN_IN, FETCH_STUDENT_SIGN_UP } from "./classConst";
 
 // import services
-import AccountService from "./accountService";
+import AccountService from "./classroomService";
 import { setLocalStorage, sendAccessToken } from "../../services/common";
 
 // import errors
-import AccountErrors from "./accountErrors";
+import AccountErrors from "./classErrors";
 
 // import models
 import { StudentAccount } from "./account";

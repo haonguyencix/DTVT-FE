@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import introRoutes from "./homeRoutes";
-import homeRoutes from "./introRoutes";
+import introRoutes from "./HomeRoutes";
+import homeRoutes from "./IntroRoutes";
 
 const ROUTES = [...introRoutes, ...homeRoutes];
 

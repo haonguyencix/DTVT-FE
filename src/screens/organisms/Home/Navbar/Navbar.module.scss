@@ -1,0 +1,63 @@
+.Container {
+  width: 231px;
+  position: fixed;
+  list-style: none;
+  background-color: #fff;
+  border: 1px solid #c1c1c1;
+  border-radius: 8px;
+  z-index: 800;
+  padding: 10px 0;
+  .Subheader {
+    padding-left: 25px;
+    color: #606060;
+  }
+  .NavLink {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px 25px;
+    color: #000;
+    .Icon {
+      margin-right: 8px;
+      color: #6b7989;
+    }
+    .Avt {
+      width: 24px;
+      height: 24px;
+      font-size: 13px;
+      margin-right: 8px;
+      background-color: #0f4c81;
+    }
+    &:hover {
+      color: #000;
+    }
+    &:hover .Icon {
+      color: #000;
+    }
+  }
+  .NavLinkActive {
+    position: relative;
+    font-weight: bold;
+    color: #000;
+    background-color: #eee;
+    .Icon {
+      color: #000;
+    }
+    &:hover {
+      color: #000;
+    }
+    &:hover .Icon {
+      color: #000;
+    }
+    &::before {
+      content: "";
+      position: absolute;
+      border-radius: 8px;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 4px;
+      background-color: #000;
+    }
+  }
+}

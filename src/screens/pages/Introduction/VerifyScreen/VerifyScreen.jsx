@@ -35,7 +35,7 @@ import Timer from "../../../atoms/Timer/Timer";
 import FetHubLogo from "../../../../assets/img/fethub_logo.png";
 import FabProgress from "../../../atoms/FabProgress/FabProgress";
 
-const VerifyEmailScreen = props => {
+const VerifyScreen = props => {
   const dispatch = useDispatch();
   const { otpData, studentId } = props;
 
@@ -153,4 +153,4 @@ const VerifyEmailScreen = props => {
 export default connect(state => ({
   studentId: state.accountData.studentId,
   otpData: state.otpData
-}))(VerifyEmailScreen);
+}))(VerifyScreen);

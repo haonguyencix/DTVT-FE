@@ -5,13 +5,13 @@
   }
   .Submit {
     color: white;
-    background-color: #1da1f2;
     margin-top: 20px;
     border-radius: 20px;
-    border: 2px solid #1da1f2;
+    background-color: #000;
+    border: 2px solid #000;
     &:hover {
       color: white;
-      background-color: #1da1f2;
+      background-color: #000;
     }
   }
 }

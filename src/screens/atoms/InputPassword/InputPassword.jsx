@@ -59,7 +59,7 @@ const InputPassword = props => {
       />
       {props.id === "signInPassword" && (
         <FormHelperText>
-          <Link to="/">
+          <Link to="/reset-password">
             Quên mật khẩu?
           </Link>
         </FormHelperText>

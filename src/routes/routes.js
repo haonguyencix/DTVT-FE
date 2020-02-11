@@ -1,10 +1,13 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
+
+
 import introRoutes from "./HomeRoutes";
 import homeRoutes from "./IntroRoutes";
+import taskRoutes from './taskRoutes';
 import lectureRoutes from "./LectureRoutes";
 
-const ROUTES = [...introRoutes, ...homeRoutes, ...lectureRoutes];
+const ROUTES = [...introRoutes, ...homeRoutes, ...taskRoutes, ...lectureRoutes];
 
 function RouteCustom(route) {
   return (

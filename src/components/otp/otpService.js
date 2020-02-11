@@ -3,7 +3,7 @@ import { restConnector } from "../../connector/axios";
 class OTPService {
   sendOtpFromServer(credentials) {
     return restConnector({
-      url: 'OTP/Send',
+      url: 'otp/send',
       method: "POST",
       data: credentials
     });
@@ -11,7 +11,7 @@ class OTPService {
   
   verifyOTP(otp) {
     return restConnector({
-      url: 'OTP/Verify',
+      url: 'otp/verify',
       method: "POST",
       data: otp
     });

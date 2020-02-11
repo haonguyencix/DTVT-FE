@@ -3,7 +3,7 @@ import { restConnector } from "../../connector/axios";
 class AccountService {
   studentSignUp(student) {
     return restConnector({
-      url: "Accounts/Student",
+      url: 'accounts/student',
       method: "POST",
       data: student
     });
@@ -11,7 +11,7 @@ class AccountService {
 
   studentSignIn(student) {
     return restConnector({
-      url: "Accounts/Student/Login",
+      url: 'accounts/student/login',
       method: "POST",
       data: student
     });
@@ -19,7 +19,7 @@ class AccountService {
 
   lectureSignUp(lecture) {
     return restConnector({
-      url: "Accounts/Lecture",
+      url: "accounts/lecture",
       method: "POST",
       data: lecture
     });
@@ -27,7 +27,7 @@ class AccountService {
 
   lectureSignIn(lecture) {
     return restConnector({
-      url: "Accounts/Lecture/Login",
+      url: "accounts/lecture/login",
       method: "POST",
       data: lecture
     });
@@ -35,7 +35,7 @@ class AccountService {
 
   forgotPassword(email) {
     return restConnector({
-      url: "Accounts/Password/Forgot",
+      url: "accounts/password/forgot",
       method: "POST",
       data: email
     });

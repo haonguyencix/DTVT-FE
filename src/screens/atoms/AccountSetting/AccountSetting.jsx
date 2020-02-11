@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./AccountSetting.module.scss";
 import { connect, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import AvtDefaut from "../../../assets/img/avt-default-2.png";
 
@@ -20,13 +21,16 @@ import { stringShortcut } from "../../../services/common";
 const AccountSetting = props => {
   const { profile } = props;
   const dispatch = useDispatch();
+  const history = useHistory;
 
   const signOut = () => {
+    // phát triển xong loader của homepage sẽ phát triển tiếp
     dispatch({
       type: FETCH_STUDENT_SIGN_IN["SUCCESS"],
       payload: { studentSignIn: null }
     });
-    // localStorage.removeItem("studentSignIn"); // đang phát triển chưa mở được
+    localStorage.removeItem("studentSignIn");
+    history.replace("/");
   };
 
   return (

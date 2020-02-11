@@ -1,5 +1,8 @@
 .Container {
-  margin: 58px 80px 0;
+  margin-top: 58px;
+  .Logo {
+    width: 200px;
+  }
   .Title {
     margin-top: 20px;
     font-weight: 500;
@@ -19,12 +22,17 @@
       background-color: #000;
     }
   }
-  .OtpArea {
-    .ResendOtp {
-      cursor: pointer;
-      &:hover {
-        color: black;
-      }
+  .FormControl {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .Container {
+    margin-top: 36px;
+    width: 100%;
+    .Logo {
+      width: 140px;
     }
   }
 }

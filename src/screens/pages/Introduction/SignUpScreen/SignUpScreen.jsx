@@ -3,7 +3,7 @@ import styles from "./SignUpScreen.module.scss";
 
 // import libraries
 import { Formik, Form } from "formik";
-import { useDispatch } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import DateFnsUtils from "@date-io/date-fns";
 
 // import Material UI
@@ -27,12 +27,14 @@ const SignUpScreen = props => {
 
   return (
     <React.Fragment>
-      <FabProgress slug="/" icon={PersonAdd} title="Đăng nhập để mở khóa" />
+      <FabProgress slug="/" icon={PersonAdd} title="Trở về trang chủ" />
       <div className={styles.Container}>
         <Typography variant="h4" component="h4">
-          Đăng kí
+          Đăng ký
         </Typography>
-        <p className={styles.Title}>Tham gia với chúng tôi ngay hôm nay!</p>
+        <p className={styles.Title}>
+          Hãy điền đầy đủ và chính xác những thông tin bên dưới nhé!
+        </p>
         <Formik
           initialValues={{
             id: "",
@@ -102,8 +104,9 @@ const SignUpScreen = props => {
                   type="submit"
                   variant="contained"
                   className={styles.Submit}
+                  disabled={props.isLoading}
                 >
-                  Đăng kí
+                  Đăng ký
                 </Button>
               </Form>
             );
@@ -114,4 +117,6 @@ const SignUpScreen = props => {
   );
 };
 
-export default SignUpScreen;
+export default connect(state => ({
+  isLoading: state.accountData.isLoading
+}))(SignUpScreen);

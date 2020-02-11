@@ -1,21 +1,21 @@
 import React from "react";
-import { Grid } from "@material-ui/core";
+import styles from "./IntroLayout.module.scss";
 import Slogans from "../../organisms/Introduction/Slogans/Slogans";
 import SignIn from "../../organisms/Introduction/SignIn/SignIn";
 
 const IntroLayout = props => {
   return (
-    <React.Fragment>
-      <Grid container spacing={0}>
-        <Grid item lg={6}>
-          <Slogans />
-        </Grid>
-        <Grid item lg={6}>
+    <div className={styles.Container}>
+      <div className={styles.Left}>
+        <Slogans />
+      </div>
+      <div className={styles.Right}>
+        <div className={styles.Inner}>
           <SignIn />
           {props.children}
-        </Grid>
-      </Grid>
-    </React.Fragment>
+        </div>
+      </div>
+    </div>
   );
 };
 

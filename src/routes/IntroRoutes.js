@@ -27,7 +27,8 @@ const introRoutes = [
     component: authGuardWithWrapper(
       IntroLayout,
       VerifyScreen,
-      !getLocalStorage("studentSignIn") && getLocalStorage("studentId"),
+      // !getLocalStorage("studentSignIn") && getLocalStorage("studentId"),
+      !getLocalStorage("studentSignIn"),
       "/home"
     )
   },

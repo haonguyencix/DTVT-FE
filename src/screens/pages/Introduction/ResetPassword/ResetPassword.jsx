@@ -43,7 +43,7 @@ const ResetPassword = props => {
     <React.Fragment>
       <FabProgress slug="/" icon={ContactSupport} title="Đăng nhập để mở khóa" />
       <div className={styles.Container}>
-        <img src={FetHubLogo} width="100px" alt="FEThub Logo" />
+      <img className={styles.Logo} src={FetHubLogo} alt="FEThub Logo" />
         <Typography className={styles.Title} variant="h5" component="h5">
           Đừng lo lắng! Chúng tôi sẽ giúp bạn.
         </Typography>

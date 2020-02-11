@@ -10,22 +10,28 @@ import { Lock } from "@material-ui/icons";
 import FetHubLogo from "../../../../assets/img/fethub_logo.png";
 import FabProgress from "../../../atoms/FabProgress/FabProgress";
 
-const IntroScreen = props => {
+const IntroScreen = () => {
   return (
     <React.Fragment>
       <FabProgress slug="/" icon={Lock} title="Đăng nhập để mở khóa" />
       <div className={styles.Container}>
-        <img src={FetHubLogo} alt="FEThub Logo" width="100px" />
+        <img className={styles.Logo} src={FetHubLogo} alt="FEThub Logo" />
         <Typography className={styles.Title} variant="h5" component="h5">
-          Bạn đã thật sự quản lý hoạt các động học tập của mình một cách tốt
-          nhất?
+          Cập nhật những thông tin mới nhất từ khoa Điện tử viễn thông!
         </Typography>
-        <p className={styles.SubTitle}>Tham gia với FEThub ngay hôm nay!</p>
-        <Link to="/student-signup">
-          <Button className={styles.Button} variant="contained" fullWidth>
-            Đăng kí
+        <p className={styles.SubTitle}>
+          Đăng ký tham gia với FEThub ngay hôm nay!
+        </p>
+        <div className={styles.Buttons}>
+          <Button className={styles.BtnSignIn} variant="contained">
+            Đăng nhập
           </Button>
-        </Link>
+          <Link to="/student-signup" className={styles.BtnSignUp}>
+            <Button variant="contained" fullWidth>
+              Đăng ký
+            </Button>
+          </Link>
+        </div>
       </div>
     </React.Fragment>
   );

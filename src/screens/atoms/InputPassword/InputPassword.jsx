@@ -30,6 +30,7 @@ const InputPassword = props => {
   return (
     <FormControl
       error={isTrueSet(props.error)}
+      className={props.className}
       variant="outlined"
       required
       fullWidth={props.fullWidth}
@@ -59,9 +60,7 @@ const InputPassword = props => {
       />
       {props.id === "signInPassword" && (
         <FormHelperText>
-          <Link to="/reset-password">
-            Quên mật khẩu?
-          </Link>
+          <Link to="/reset-password">Quên mật khẩu?</Link>
         </FormHelperText>
       )}
       {isTrueSet(props.error) && (

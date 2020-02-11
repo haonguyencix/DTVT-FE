@@ -1,5 +1,5 @@
 .Container {
-  margin: 58px 80px 0;
+  margin-top: 64px;
   .Title {
     margin: 10px 0;
   }
@@ -12,6 +12,15 @@
     &:hover {
       color: white;
       background-color: #000;
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .Container {
+    margin-top: 24px;
+    .Submit {
+      width: 100%;
     }
   }
 }

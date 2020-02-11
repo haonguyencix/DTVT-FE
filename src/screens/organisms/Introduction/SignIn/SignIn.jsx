@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 // import Material UI
-import { TextField, Button } from "@material-ui/core";
+import { TextField, Button, Typography } from "@material-ui/core";
 
 // import components
 import InputPassword from "../../../atoms/InputPassword/InputPassword";
@@ -15,13 +15,16 @@ import InputPassword from "../../../atoms/InputPassword/InputPassword";
 // import action and schema
 import { studentSignIn } from "../../../../components/accounts/accountAction";
 
-const SignIn = props => {
+const SignIn = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
   return (
     <>
       <div className={styles.Container}>
+        <Typography variant="h4" component="h4" className={styles.Typography}>
+          Đăng nhập
+        </Typography>
         <Formik
           initialValues={{
             id: "",
@@ -42,12 +45,14 @@ const SignIn = props => {
                   onChange={handleChange}
                   autoComplete="username"
                   margin="normal"
+                  className={styles.TextField}
                   required
                 />
                 <InputPassword
                   id="signInPassword"
                   handleChange={handleChange}
                   fullWidth={false}
+                  className={styles.TextField}
                 />
                 <Button
                   className={styles.Submit}

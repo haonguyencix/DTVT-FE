@@ -2,8 +2,9 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import introRoutes from "./HomeRoutes";
 import homeRoutes from "./IntroRoutes";
+import lectureRoutes from "./LectureRoutes";
 
-const ROUTES = [...introRoutes, ...homeRoutes];
+const ROUTES = [...introRoutes, ...homeRoutes, ...lectureRoutes];
 
 function RouteCustom(route) {
   return (
@@ -18,7 +19,7 @@ function RouteCustom(route) {
 export function RenderRoutes({ routes }) {
   return (
     <Switch>
-      {routes.map((route) => {
+      {routes.map(route => {
         return <RouteCustom key={route.key} {...route} />;
       })}
       <Route component={() => <h1>Not Found!</h1>} />

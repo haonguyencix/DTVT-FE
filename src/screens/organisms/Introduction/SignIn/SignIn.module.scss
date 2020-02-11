@@ -1,5 +1,8 @@
 .Container {
-  margin: 10px 80px;
+  margin: 10px 0;
+  .Typography {
+    display: none;
+  }
   .Form {
     width: 100%;
     display: flex;
@@ -13,6 +16,25 @@
       &:hover {
         color: #000;
         background-color: white;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .Container {
+    .Typography {
+      display: block;
+    }
+    .Form {
+      flex-direction: column;
+      align-items: center;
+      .TextField {
+        width: 100%;
+      }
+      .Submit {
+        margin-top: 16px;
+        width: 100%;
       }
     }
   }

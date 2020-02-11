@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import styles from "./HomeLayout.module.scss";
 import { connect, useDispatch } from "react-redux";
 import { getLocalStorage, sendAccessToken } from "../../../services/common";
 
@@ -7,14 +8,19 @@ import { FETCH_STUDENT_SIGN_IN } from "../../../components/accounts/accountConst
 
 // import components
 import Header from "../../organisms/Home/Header/Header";
-import Footer from "../../organisms/Home/Footer/Footer";
+import Navbar from "../../organisms/Home/Navbar/Navbar";
+// import Footer from "../../organisms/Home/Footer/Footer";
+import Classrooms from "../../organisms/Home/Classrooms/Classrooms";
+
+// import Material UI
+import { Container } from "@material-ui/core";
 
 const HomeLayout = props => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const studentSignIn = getLocalStorage("studentSignIn").data;
-    
+    const studentSignIn = getLocalStorage("studentSignIn");
+
     if (studentSignIn) {
       dispatch({
         type: FETCH_STUDENT_SIGN_IN["SUCCESS"],
@@ -27,8 +33,18 @@ const HomeLayout = props => {
   return (
     <React.Fragment>
       <Header {...props} />
-      {props.children}
-      <Footer />
+      <Container>
+        <div className={styles.Wrapper}>
+          <div className={styles.Navbar}>
+            <Navbar />
+          </div>
+          <div className={styles.Children}>{props.children}</div>
+          <div className={styles.Classrooms}>
+            <Classrooms />
+          </div>
+        </div>
+      </Container>
+      {/* <Footer /> */}
     </React.Fragment>
   );
 };

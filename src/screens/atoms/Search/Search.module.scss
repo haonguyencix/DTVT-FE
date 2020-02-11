@@ -1,0 +1,31 @@
+.Container {
+  position: relative;
+  border: 1px solid #c1c1c1;
+  background-color: #fff;
+  border-radius: 8px;
+  &:hover {
+    background-color: #f9f9f9;
+  }
+  .Icon {
+    position: absolute;
+    color: #c1c1c1;
+    width: 40px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+  .ColorChanged {
+    color: #000;
+  }
+  .InputBase {
+    padding-left: 40px;
+    padding-right: 8px;
+    width: 100%;
+  }
+}
+
+.BorderColorChanged {
+  border: 1px solid #000;
+}

@@ -1,9 +1,21 @@
-import { authGuardWithWrapper } from '../auth/AuthGuard';
+import { authGuardWithWrapper } from "../auth/AuthGuard";
+import { getLocalStorage } from "../services/common";
+
+import HomeLayout from "../screens/pages/Home/HomeLayout";
+
 import HomeScreen from "../screens/pages/Home/HomeScreen/HomeScreen";
-import HomeLayout from '../screens/pages/Home/HomeLayout';
 
 const homeRoutes = [
-  { path: "/home", key: "HOME", component: authGuardWithWrapper(HomeLayout, HomeScreen, true) }
-]
+  {
+    path: "/home",
+    key: "HOME",
+    component: authGuardWithWrapper(
+      HomeLayout,
+      HomeScreen,
+      getLocalStorage("studentSignIn"),
+      "/"
+    )
+  }
+];
 
 export default homeRoutes;

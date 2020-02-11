@@ -35,7 +35,7 @@ import Timer from "../../../atoms/Timer/Timer";
 import FetHubLogo from "../../../../assets/img/fethub_logo.png";
 import FabProgress from "../../../atoms/FabProgress/FabProgress";
 
-const VerifyEmailScreen = props => {
+const VerifyScreen = props => {
   const dispatch = useDispatch();
   const { otpData, studentId } = props;
 
@@ -43,13 +43,14 @@ const VerifyEmailScreen = props => {
     <React.Fragment>
       <FabProgress slug="/" icon={MailOutline} title="Đăng nhập để mở khóa" />
       <div className={styles.Container}>
-        <img src={FetHubLogo} width="100px" alt="FEThub Logo" />
+        <img className={styles.Logo} src={FetHubLogo} alt="FEThub Logo" />
         <Typography className={styles.Title} variant="h5" component="h5">
           Cảm ơn bạn đã đến với FEThub!
         </Typography>
         <p className={styles.Text}>
-          Vui lòng xác thực địa chỉ email của bạn để tiếp tục. Sau khi nhận được mã xác thực từ chúng tôi qua email,
-          bạn hãy nhập chính xác mã xác thực ấy vào ô xác thực để hoàn thành đăng ký nhé!
+          Vui lòng xác thực địa chỉ email của bạn để tiếp tục. Sau khi nhận được
+          mã xác thực từ chúng tôi qua email, bạn hãy nhập chính xác mã xác thực
+          ấy vào ô xác thực để hoàn thành đăng ký nhé!
         </p>
         {otpData.isSubmit && (
           <Formik
@@ -63,8 +64,8 @@ const VerifyEmailScreen = props => {
           >
             {({ handleChange }) => {
               return (
-                <Form className={styles.OtpArea}>
-                  <FormControl variant="outlined" margin="normal" required>
+                <Form>
+                  <FormControl variant="outlined" margin="normal" required className={styles.FormControl}>
                     <InputLabel htmlFor="otp">Mã OTP</InputLabel>
                     <OutlinedInput
                       id="otp"
@@ -91,16 +92,16 @@ const VerifyEmailScreen = props => {
                     <FormHelperText>
                       Mã sẽ tồn tại trong{" "}
                       <Timer expirationTime={otpData.expirationTime} />
-                      <span
-                        type="button"
-                        className={styles.ResendOtp}
-                        onClick={() => dispatch({ type: FETCH_OTP_RESEND })}
-                      >
-                        {" "}
-                        -> Xác thực lại!
-                      </span>
                     </FormHelperText>
                   </FormControl>
+                  <Button
+                    type="button"
+                    className={styles.Submit}
+                    disabled={otpData.isLoading || otpData.isSubmit}
+                    onClick={() => dispatch({ type: FETCH_OTP_RESEND })}
+                  >
+                    Gửi lại mã xác thực
+                  </Button>
                 </Form>
               );
             }}
@@ -119,7 +120,7 @@ const VerifyEmailScreen = props => {
             >
               {({ handleChange }) => {
                 return (
-                  <Form className={styles.OtpArea}>
+                  <Form>
                     <TextField
                       required
                       fullWidth
@@ -153,4 +154,4 @@ const VerifyEmailScreen = props => {
 export default connect(state => ({
   studentId: state.accountData.studentId,
   otpData: state.otpData
-}))(VerifyEmailScreen);
+}))(VerifyScreen);

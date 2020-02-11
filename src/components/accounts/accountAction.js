@@ -54,7 +54,6 @@ export const studentSignIn = (values, replace) => {
         });
         setLocalStorage("studentSignIn", res.data);
         sendAccessToken(res.data.token);
-        toast.success("Đăng nhập thành công!");
         replace("/home");
       })
       .catch(err => {

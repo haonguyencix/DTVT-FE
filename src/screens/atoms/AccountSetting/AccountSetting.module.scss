@@ -1,0 +1,51 @@
+.Container {
+  list-style: none;
+  border-radius: 8px;
+  padding: 3px;
+  padding-bottom: 10px;
+  &::before {
+    content: "";
+    position: absolute;
+    background-color: #fff;
+    border-left: 1px solid #c1c1c1;
+    border-top: 1px solid #c1c1c1;
+    transform: rotate(45deg);
+    top: -6px;
+    right: 22px;
+    width: 10px;
+    height: 10px;
+  }
+  .Profile {
+    position: relative;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #eee;
+    .AvtImg {
+      margin-right: 8px;
+      border: 1px solid #c1c1c1;
+    }
+    .Email {
+      color: #606060;
+      font-size: 11px;
+    }
+  }
+  .LinkItem {
+    margin-top: 5px;
+    .Link {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      padding: 5px 21px;
+      color: #000;
+      &:hover {
+        background-color: #0F4C81;
+        color: #fff;
+      }
+      .Icon {
+        margin-right: 16px;
+      }
+    }
+  }
+}

@@ -16,6 +16,30 @@ class AccountService {
       data: student
     });
   }
+
+  lectureSignUp(lecture) {
+    return restConnector({
+      url: "accounts/lecture",
+      method: "POST",
+      data: lecture
+    });
+  }
+
+  lectureSignIn(lecture) {
+    return restConnector({
+      url: "accounts/lecture/login",
+      method: "POST",
+      data: lecture
+    });
+  }
+
+  forgotPassword(email) {
+    return restConnector({
+      url: "accounts/password/forgot",
+      method: "POST",
+      data: email
+    });
+  }
 }
 
 export default new AccountService();

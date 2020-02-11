@@ -1,8 +1,8 @@
 .Container {
   position: absolute;
-  top: 50%;
+  bottom: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, 50%);
   .Wrapper {
     position: relative;
     background-color: white;
@@ -16,11 +16,18 @@
       color: white;
     }
     .FabProgress {
-      color: #4CAF50;
+      color: #000;
       position: absolute;
       top: 1.5px;
       left: 1.5px;
       z-index: 1;
     }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .Container {
+    bottom: 4px;
+    transform: translateX(-50%);
   }
 }

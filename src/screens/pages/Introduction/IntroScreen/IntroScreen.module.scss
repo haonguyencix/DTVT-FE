@@ -1,22 +1,57 @@
-.Container{
-  margin: 80px 200px 0;
+.Container {
+  width: 80%;
+  margin: 100px auto 0;
+  .Logo {
+    width: 200px;
+  }
   .Title {
-    margin-top: 20px;
-    font-weight: bold;
+    margin-top: 32px;
+    margin-bottom: 8px;
+    font-weight: 700;
+    font-size: 2rem;
   }
   .SubTitle {
-    margin: 40px 0 15px;
-    font-weight: bold;
+    margin: 32px 0 40px;
+    font-weight: 500;
+    font-size: 1.25rem;
   }
-  .Button {
-    color: white;
-    background-color: #1da1f2;
+  .Buttons {
     margin-top: 20px;
-    border-radius: 20px;
-    border: 2px solid #1da1f2;
-    &:hover {
-      color: white;
-      background-color: #1da1f2;
+    display: flex;
+    justify-content: space-between;
+    .BtnSignUp {
+      width: 49%;
+      > button {
+        color: #fff;
+        border-radius: 20px;
+        background-color: #000;
+        border: 2px solid #000;
+        &:hover {
+          color: #fff;
+          background-color: #000;
+        }
+      }
+    }
+    .BtnSignIn {
+      color: #000;
+      border-radius: 20px;
+      background-color: #fff;
+      border: 2px solid #000;
+      width: 49%;
+      &:hover {
+        color: #000;
+        background-color: #fff;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .Container {
+    margin-top: 58px;
+    width: 100%;
+    .Logo {
+      width: 140px;
     }
   }
 }

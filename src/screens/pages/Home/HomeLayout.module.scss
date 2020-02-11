@@ -1,0 +1,13 @@
+.Wrapper {
+  display: flex;
+  margin-top: calc(64px + 25px);
+  .Navbar {
+    width: 19%;
+  }
+  .Children {
+    width: 50%;
+  }
+  .Classrooms {
+    width: 31%;
+  }
+}

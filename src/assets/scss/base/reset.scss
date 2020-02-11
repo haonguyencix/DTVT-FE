@@ -2,24 +2,17 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-size: 16px;
+  font-size: 14px;
+}
+@media screen and (max-width: 576px) {
+  * {
+    font-size: 12px;
+  }
 }
 
 html,
 body {
   scroll-behavior: smooth;
-  &::-webkit-scrollbar {
-    background-color: rgba(10, 10, 10, 1);
-    width: 5px;
-  }
-  &::-webkit-scrollbar-thumb {
-    background-color: gainsboro;
-    border-radius: 15px;
-    cursor: pointer;
-    &:hover {
-      background-color: rgba(130, 130, 130, 1);
-    }
-  }
 }
 
 input:-webkit-autofill,
@@ -29,8 +22,11 @@ input:-webkit-autofill:active {
   box-shadow: 0 0 0 30px white inset !important;
 }
 
-button:focus {
-  outline: none !important;
+button {
+  text-transform: none !important;
+  &:focus {
+    outline: none !important;
+  }
 }
 
 a,

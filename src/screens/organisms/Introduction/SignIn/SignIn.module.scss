@@ -1,18 +1,40 @@
 .Container {
-  margin: 10px 80px;
+  margin: 10px 0;
+  .Typography {
+    display: none;
+  }
   .Form {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: baseline;
     .Submit {
-      color: #1da1f2;
-      background-color: white;
+      color: #000;
       border-radius: 20px;
-      border: 2px solid #1da1f2;
+      background-color: white;
+      border: 2px solid #000;
       &:hover {
-        color: #1da1f2;
-        background-color: rgb(250, 250, 250);
+        color: #000;
+        background-color: white;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .Container {
+    .Typography {
+      display: block;
+    }
+    .Form {
+      flex-direction: column;
+      align-items: center;
+      .TextField {
+        width: 100%;
+      }
+      .Submit {
+        margin-top: 16px;
+        width: 100%;
       }
     }
   }

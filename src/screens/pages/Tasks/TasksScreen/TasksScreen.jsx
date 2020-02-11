@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useCallback, useReducer } from 'react';
 import clsx from 'clsx';
-import { connect } from 'react-redux';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -18,8 +17,8 @@ import MailIcon from '@material-ui/icons/Mail';
 
 import TaskBoard from '../../../organisms/Tasks/TaskBoard/TaskBoard';
 import Spinner from '../../../atoms/Spinner/Spinner';
-
-import { fetchTasks } from '../../../../components/tasks/tasksAction';
+import TasksService from '../../../../components/tasks/tasksService';
+import CardsService from '../../../../components/cards/cardsService';
 
 const drawerWidth = 240;
 
@@ -66,12 +65,55 @@ const useStyles = makeStyles(theme => ({
         justifyContent: 'flex-end'
     }
 }));
+
+const taskReducer = (currentTasks, action) => {
+    switch (action.type) {
+        case 'GET_TASKS':
+            return action.tasks;
+        case 'ADD_TASK':
+            return [...currentTasks, action.task];
+        case 'DELETE_TASK':
+            return currentTasks.filter(task => task.id !== action.id);
+        case 'UPDATE_TASK':
+            const index = currentTasks.findIndex(task => task.id === action.updateTask.id);
+            currentTasks[index].title = action.updateTask.title;
+            return [...currentTasks];
+        case 'ADD_CARD':
+            return;
+        default:
+            throw new Error('Should not get there!');
+    }
+};
+
+const httpReducer = (curHttpState, action) => {
+    switch (action.type) {
+        case 'SEND':
+            return { loading: true, error: null };
+        case 'RESPONSE':
+            return { loading: false, error: false };
+        case 'ERROR':
+            return { loading: false, error: action.errorMessage };
+        case 'CLEAR':
+            return { ...curHttpState, error: null };
+        default:
+            throw new Error('Should not get there!');
+    }
+};
+
 const TasksScreen = (props) => {
+
     const classes = useStyles();
     const theme = useTheme();
-    const { tasks, isLoading, onFetchTasks } = props;
-  
-    const [open, setOpen] = React.useState(false);
+
+    const [open, setOpen] = useState(false);
+    const [tasks, dispatchTask] = useReducer(taskReducer, []);
+    console.log("TCL: TasksScreen -> tasks", tasks)
+    
+    const [httpState, dispatchHttp] = useReducer(httpReducer, {
+        loading: false,
+        error: null
+    });
+
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -80,14 +122,86 @@ const TasksScreen = (props) => {
         setOpen(false);
     };
 
+    const onFetchTasks = useCallback(() => {
+        dispatchHttp({ type: 'SEND' });
+        TasksService.fetchTasks().then(res => {
+            dispatchTask({ type: 'GET_TASKS', tasks: res.data });
+            dispatchHttp({ type: 'RESPONSE' });
+        }).catch(err => {
+            console.log("TCL: onFetchTasks -> err", err)
+            dispatchHttp({ type: 'ERROR', errorMessage: err });
+        })
+    }, []);
+
+    const onAddTask = useCallback((task) => {
+        TasksService.addTask(task).then(res => {
+            dispatchTask({ type: 'ADD_TASK', task: res.data.new });
+            dispatchHttp({ type: 'RESPONSE' });
+        }).catch(err => {
+            dispatchHttp({ type: 'ERROR', errorMessage: err });
+        })
+    }, []);
+
+    const onDeleteTask = useCallback(id => {
+        TasksService.deleteTask(id).then(res => {
+            dispatchTask({ type: 'DELETE_TASK', id: res.data.deleteId });
+            dispatchHttp({ type: 'RESPONSE' });
+        }).catch(err => {
+            dispatchHttp({ type: 'ERROR', errorMessage: err });
+        })
+    }, []);
+
+
+    const onUpdateTask = useCallback((updateData) => {
+        TasksService.updateTask(updateData).then(res => {
+            dispatchTask({ type: 'UPDATE_TASK', updateTask: res.data.update });
+            dispatchHttp({ type: 'RESPONSE' });
+        }).catch(err => {
+            dispatchHttp({ type: 'ERROR', errorMessage: err });
+        })
+    }, []);
+
+    const onAddCard = useCallback(card => {
+
+        CardsService.addCard(card).then(res => {
+        }).catch(err => {
+            dispatchHttp({ type: 'ERROR', errorMessage: err });
+        })
+    }, []);
+
+    const onDeleteCard = useCallback(cardId => {
+        CardsService.deleteCard(cardId).then(res => {
+
+        }).catch(err => {
+            dispatchHttp({ type: 'ERROR', errorMessage: err });
+        })
+    }, []);
+
+    const onChangeCard = useCallback(cardId => {
+        CardsService.updateCard(cardId).then(res => {
+
+        }).catch(err => {
+            dispatchHttp({ type: 'ERROR', errorMessage: err });
+        })
+    }, []);
+
+
     useEffect(() => {
         onFetchTasks();
     }, [onFetchTasks]);
 
 
-    let taskBoard = <TaskBoard tasks = {tasks} />
-    
-    if(isLoading){
+    let taskBoard = <TaskBoard
+        tasks={tasks}
+        addTask={onAddTask}
+        deleteTask={onDeleteTask}
+        updateTask={onUpdateTask}
+        addCard={onAddCard}
+        deleteCard={onDeleteCard}
+        changeCard={onChangeCard}
+    />
+
+    if (httpState.loading) {
         taskBoard = <Spinner />
     }
 
@@ -146,17 +260,5 @@ const TasksScreen = (props) => {
     );
 }
 
-const mapStateToProps = (state) => {
-    return {
-        tasks: state.tasksData.tasks,
-        isLoading: state.tasksData.isLoading
-    }
-};
+export default TasksScreen;
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onFetchTasks: () => dispatch(fetchTasks())
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(TasksScreen);

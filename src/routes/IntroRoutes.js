@@ -1,8 +1,6 @@
-
 import { authGuardWithWrapper } from '../auth/AuthGuard';
 
 import IntroLayout from '../screens/pages/Introduction/IntroLayout';
-
 import VerifyScreen from "../screens/pages/Introduction/VerifyScreen/VerifyScreen";
 import SignUpScreen from "../screens/pages/Introduction/SignUpScreen/SignUpScreen";
 import IntroScreen from "../screens/pages/Introduction/IntroScreen/IntroScreen";

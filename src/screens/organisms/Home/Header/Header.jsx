@@ -8,13 +8,8 @@ import { Link } from "react-router-dom";
 import FetHubLogo from "../../../../assets/img/logo-min.png";
 
 // import material
-import {
-  Container,
-  Avatar,
-  IconButton,
-  Tooltip
-} from "@material-ui/core";
-import { Notifications, LibraryBooks } from "@material-ui/icons";
+import { Container, Avatar, IconButton, Tooltip } from "@material-ui/core";
+import { Notifications, Assignment } from "@material-ui/icons";
 
 // import avatar default
 import AvtDefault from "../../../../assets/img/avt-default-2.png";
@@ -23,19 +18,7 @@ import AvtDefault from "../../../../assets/img/avt-default-2.png";
 import Search from "../../../atoms/Search/Search";
 import AccountSetting from "../../../atoms/AccountSetting/AccountSetting";
 
-const iconButtons = [
-  { key: "BOOK_ICON", icon: LibraryBooks, title: "Quản lý học phần" },
-  { key: "NOTI_ICON", icon: Notifications, title: "Thông báo" }
-];
-
-const Header = props => {
-  const renderIconButton = iconButtons.map(item => (
-    <Tooltip key={item.key} title={item.title} arrow>
-      <IconButton className={styles.IconButton}>
-        <item.icon className={styles.Icon} />
-      </IconButton>
-    </Tooltip>
-  ));
+const Header = () => {
   return (
     <header className={styles.Header}>
       <Container>
@@ -54,7 +37,18 @@ const Header = props => {
             <Search />
           </div>
           <div className={styles.Right}>
-            {renderIconButton}
+            <Tooltip title="Lên kế hoạch" arrow>
+              <Link to="/tasks">
+                <IconButton className={styles.IconButton}>
+                  <Assignment className={styles.Icon} />
+                </IconButton>
+              </Link>
+            </Tooltip>
+            <Tooltip title="Thông báo" arrow>
+              <IconButton className={styles.IconButton}>
+                <Notifications className={styles.Icon} />
+              </IconButton>
+            </Tooltip>
             <div className={styles.Avatar}>
               <Avatar
                 src={AvtDefault}

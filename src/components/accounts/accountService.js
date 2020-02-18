@@ -33,11 +33,11 @@ class AccountService {
     });
   }
 
-  forgotPassword(email) {
+  resetPassword(newPassword) {
     return restConnector({
-      url: "accounts/password/forgot",
+      url: "accounts/password/reset",
       method: "POST",
-      data: email
+      data: newPassword
     });
   }
 }

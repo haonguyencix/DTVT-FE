@@ -1,5 +1,4 @@
 import { authGuardWithWrapper } from "../auth/AuthGuard";
-import { getLocalStorage } from "../services/common";
 
 import HomeLayout from "../screens/pages/Home/HomeLayout";
 
@@ -9,12 +8,13 @@ const homeRoutes = [
   {
     path: "/home",
     key: "HOME",
-    component: authGuardWithWrapper(
-      HomeLayout,
-      HomeScreen,
-      getLocalStorage("studentSignIn"),
-      "/"
-    )
+    exact: true,
+    component: authGuardWithWrapper({
+      authen: "home",
+      layout: HomeLayout,
+      screen: HomeScreen,
+      redirect: "/"
+    })
   }
 ];
 

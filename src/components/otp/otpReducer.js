@@ -1,48 +1,48 @@
 // import const
-import { FETCH_OTP, FETCH_OTP_RESEND, FETCH_VERIFY } from "./otpConst";
+import {
+  FETCH_OTP,
+  FETCH_IS_SEND,
+  FETCH_OTP_FORGOT_PASSWORD,
+  FETCH_TOKEN_RESET_PASSWORD
+} from "./otpConst";
 
 let initialState = {
   expirationTime: 0,
-  isLoading: false, 
-  isSubmit: false
+  isSend: false,
+  email: "",
+  token: ""
 };
 
 const OtpReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_OTP["REQUEST"]:
-      return {
-        ...state,
-        isLoading: true
-      };
-
-    case FETCH_OTP["SUCCESS"]: {
+    case FETCH_OTP: {
       return {
         ...state,
         expirationTime: action.payload,
-        isLoading: false,
-        isSubmit: true
+        isSend: true
       };
     }
 
-    case FETCH_OTP["FAILURE"]: {
+    case FETCH_OTP_FORGOT_PASSWORD: {
       return {
         ...state,
-        isLoading: false,
+        expirationTime: action.payload.expirationTime,
+        email: action.payload.email,
+        isSend: true
       };
     }
 
-    case FETCH_OTP_RESEND: {
+    case FETCH_IS_SEND: {
       return {
         ...state,
-        isSubmit: false
+        isSend: false
       };
     }
 
-    case FETCH_VERIFY: {
+    case FETCH_TOKEN_RESET_PASSWORD: {
       return {
         ...state,
-        isLoading: false,
-        isSubmit: false
+        token: action.payload
       };
     }
 

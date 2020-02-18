@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import styles from "./HomeLayout.module.scss";
-import { connect, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getLocalStorage, sendAccessToken } from "../../../services/common";
 
 // import const
@@ -23,7 +23,7 @@ const HomeLayout = props => {
 
     if (studentSignIn) {
       dispatch({
-        type: FETCH_STUDENT_SIGN_IN["SUCCESS"],
+        type: FETCH_STUDENT_SIGN_IN,
         payload: { studentSignIn }
       });
       sendAccessToken(studentSignIn.token);
@@ -32,7 +32,7 @@ const HomeLayout = props => {
 
   return (
     <React.Fragment>
-      <Header {...props} />
+      <Header />
       <Container>
         <div className={styles.Wrapper}>
           <div className={styles.Navbar}>
@@ -49,6 +49,4 @@ const HomeLayout = props => {
   );
 };
 
-export default connect(state => ({
-  studentSignIn: state.accountData.studentSignIn
-}))(HomeLayout);
+export default HomeLayout;

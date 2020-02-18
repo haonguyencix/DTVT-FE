@@ -31,7 +31,7 @@ const SignIn = () => {
             password: ""
           }}
           onSubmit={values => {
-            dispatch(studentSignIn(values, history.replace));
+            dispatch(studentSignIn(values, history.push));
           }}
         >
           {({ handleChange }) => {

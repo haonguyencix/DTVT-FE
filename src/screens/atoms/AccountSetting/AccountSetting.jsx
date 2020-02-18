@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./AccountSetting.module.scss";
-import { connect, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import AvtDefaut from "../../../assets/img/avt-default-2.png";
@@ -19,18 +19,21 @@ import { FETCH_STUDENT_SIGN_IN } from "../../../components/accounts/accountConst
 import { stringShortcut } from "../../../services/common";
 
 const AccountSetting = props => {
-  const { profile } = props;
+  const history = useHistory();
   const dispatch = useDispatch();
-  const history = useHistory;
+  const profile = useSelector(
+    state =>
+      state.accountData.studentSignIn && state.accountData.studentSignIn.profile
+  );
 
   const signOut = () => {
     // phát triển xong loader của homepage sẽ phát triển tiếp
     dispatch({
-      type: FETCH_STUDENT_SIGN_IN["SUCCESS"],
+      type: FETCH_STUDENT_SIGN_IN,
       payload: { studentSignIn: null }
     });
     localStorage.removeItem("studentSignIn");
-    history.replace("/");
+    history.push("/");
   };
 
   return (
@@ -42,7 +45,7 @@ const AccountSetting = props => {
           alt="Avatar mặc định"
         />
         <div>
-          <h6>{profile && profile.name}</h6>
+          <h6>{profile && profile.firstName + " " + profile.lastName}</h6>
           <span className={styles.Email}>
             {profile && stringShortcut(profile.email, 29)}
           </span>
@@ -64,7 +67,4 @@ const AccountSetting = props => {
   );
 };
 
-export default connect(state => ({
-  profile:
-    state.accountData.studentSignIn && state.accountData.studentSignIn.profile
-}))(AccountSetting);
+export default AccountSetting;

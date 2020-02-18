@@ -15,7 +15,7 @@ import AccountErrors from "./classErrors";
 import { StudentAccount } from "./account";
 
 // async action
-export const studentSignUp = (values, replace) => {
+export const studentSignUp = (values, push) => {
   const { id, password, birth, role } = values;
   let studentModel = new StudentAccount(id, password, birth, role);
   return dispatch => {
@@ -30,7 +30,7 @@ export const studentSignUp = (values, replace) => {
         });
         setLocalStorage("studentId", res.data.id);
         toast.success("Đăng ký thành công!");
-        replace("/verify");
+        push("/verify");
       })
       .catch(err => {
         dispatch({
@@ -41,7 +41,7 @@ export const studentSignUp = (values, replace) => {
   };
 };
 
-export const studentSignIn = (values, replace) => {
+export const studentSignIn = (values, push) => {
   return dispatch => {
     dispatch({
       type: FETCH_STUDENT_SIGN_IN["REQUEST"]
@@ -54,7 +54,7 @@ export const studentSignIn = (values, replace) => {
         });
         setLocalStorage("studentSignIn", res.data);
         sendAccessToken(res.data.token);
-        replace("/home");
+        push("/home");
       })
       .catch(err => {
         dispatch({

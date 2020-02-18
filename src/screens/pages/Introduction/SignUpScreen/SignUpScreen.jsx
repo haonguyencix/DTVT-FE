@@ -3,7 +3,7 @@ import styles from "./SignUpScreen.module.scss";
 
 // import libraries
 import { Formik, Form } from "formik";
-import { connect, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import DateFnsUtils from "@date-io/date-fns";
 
 // import Material UI
@@ -24,6 +24,7 @@ import FabProgress from "../../../atoms/FabProgress/FabProgress";
 
 const SignUpScreen = props => {
   const dispatch = useDispatch();
+  const isLoading = useSelector(state => state.accountData.isLoading);
 
   return (
     <React.Fragment>
@@ -45,7 +46,7 @@ const SignUpScreen = props => {
           }}
           validationSchema={AccountSchema}
           onSubmit={values => {
-            dispatch(studentSignUp(values, props.history.replace));
+            dispatch(studentSignUp(values, props.history.push));
           }}
         >
           {({
@@ -104,7 +105,7 @@ const SignUpScreen = props => {
                   type="submit"
                   variant="contained"
                   className={styles.Submit}
-                  disabled={props.isLoading}
+                  disabled={isLoading}
                 >
                   Đăng ký
                 </Button>
@@ -117,6 +118,4 @@ const SignUpScreen = props => {
   );
 };
 
-export default connect(state => ({
-  isLoading: state.accountData.isLoading
-}))(SignUpScreen);
+export default SignUpScreen;

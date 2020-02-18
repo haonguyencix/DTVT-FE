@@ -11,6 +11,13 @@ export class StudentAccount {
   }
 }
 
+export class NewPassword {
+  constructor(_id, _newPassword) {
+    this.id = _id;
+    this.newPassword = _newPassword;
+  }
+}
+
 export const AccountSchema = yup.object().shape({
   id: yup
     .string()
@@ -20,10 +27,13 @@ export const AccountSchema = yup.object().shape({
   password: yup
     .string()
     .required("Mật khẩu không được bỏ trống")
-    .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{4,}$/,
-      "Mật khẩu phải có ít nhất 1 ký tự viết hoa, 1 ký tự đặc biệt và 1 số (ví dụ: K16@dtvt)"
-    )
     .min(8, "Phải có ít nhất 8 kí tự"),
   birth: yup.string().required("Ngày sinh không được bỏ trống")
+});
+
+export const newPasswordSchema = yup.object().shape({
+  newPassword: yup
+    .string()
+    .required("Ô này không được bỏ trống")
+    .min(8, "Mật khẩu phải có ít nhất 8 kí tự")
 });

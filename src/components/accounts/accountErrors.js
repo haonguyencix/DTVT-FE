@@ -40,6 +40,24 @@ class AccountErrors {
       toast.error("Lỗi mạng, vui lòng kiểm tra lại kết nối!");
     }
   }
+
+  resetPasswordErrors(err) {
+    if (err.response) {
+      switch (err.response.data.message) {
+        case "Account not found":
+          toast.error("Mã số sinh viên không tồn tại!");
+          break;
+        case "Update fail!":
+          toast.error("Reset mật khẩu lỗi!");
+          break;
+        default:
+          toast.error("Lỗi mạng");
+          break;
+      }
+    } else {
+      toast.error("Lỗi mạng, vui lòng kiểm tra lại kết nối!");
+    }
+  }
 }
 
 export default new AccountErrors();

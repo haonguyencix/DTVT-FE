@@ -6,14 +6,14 @@ import StudentLogin from "pages/StudentLogin/routes";
 import StudentHome from "pages/StudentHome/routes";
 import LectureLogin from "pages/LectureLogin/routes";
 import LectureHome from "pages/LectureHome/routes";
-import ToDoList from "pages/ToDoList/routes";
+import TreeSubject from 'pages/TreeSubject/routes';
 
 const ROUTES = [
   ...StudentLogin,
   ...StudentHome,
   ...LectureLogin,
   ...LectureHome,
-  ...ToDoList
+  ...TreeSubject
 ];
 
 export const RenderRoutes = ({ routes }) => (

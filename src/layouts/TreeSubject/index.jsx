@@ -1,16 +1,14 @@
-import React from 'react';
-
-// import components
+import React from 'react'
 import Header from "../StudentHome/Header";
 
-const ToDoList = props => {
+const TreeSubjectLayout = (props) => {
     return (
         <React.Fragment>
-            <Header />
+            <Header {...props} />
             <main>
                 {props.children}
             </main>
         </React.Fragment>
     )
 }
-export default ToDoList;
+export default TreeSubjectLayout;

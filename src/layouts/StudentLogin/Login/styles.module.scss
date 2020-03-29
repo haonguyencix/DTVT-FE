@@ -1,0 +1,44 @@
+@import "styles/variables";
+@import "styles/mixin";
+
+.Container {
+  margin: 10px 0;
+  .Typography {
+    display: none;
+  }
+  .Form {
+    width: 100%;
+    @include flex();
+    justify-content: space-between;
+    align-items: baseline;
+    .Submit {
+      color: $color-default-darkest;
+      @include border-radius(20px);
+      background-color: $color-default-lightest;
+      border: 2px solid $color-default-darkest;
+      &:hover {
+        color: $color-default-darkest;
+        background-color: $color-default-lightest;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .Container {
+    .Typography {
+      display: block;
+    }
+    .Form {
+      flex-direction: column;
+      align-items: center;
+      .TextField {
+        width: 100%;
+      }
+      .Submit {
+        margin-top: 16px;
+        width: 100%;
+      }
+    }
+  }
+}

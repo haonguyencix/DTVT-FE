@@ -1,0 +1,76 @@
+// Zoom in
+@include keyframes(ZoomIn) {
+  from {
+    @include opacity(0);
+    @include transform(scale3d(0.3, 0.3, 0.3));
+  }
+  50% {
+    @include opacity(1);
+  }
+}
+
+.ZoomIn {
+  @include animation(ZoomIn $duration $ease-out);
+}
+
+// Rotate in up left
+@include keyframes(RotateInUpLeft) {
+  from {
+    @include transform-origin(left bottom);
+    @include transform(translate3d(0, 0, 1, 45deg));
+    @include opacity(0);
+  }
+  to {
+    @include transform-origin(left bottom);
+    @include transform(translate3d(0, 0, 0));
+    @include opacity(1);
+  }
+}
+
+.RotateInUpLeft {
+  @include animation(RotateInUpLeft $duration $ease-out);
+}
+
+// Slide in down
+@include keyframes(SlideInDown) {
+  from {
+    @include transform(translate3d(0, -100%, 0));
+    visibility: visible;
+  }
+  to {
+    @include transform(translate3d(0, 0, 0));
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.SlideInDown {
+  @include animation(SlideInDown $duration $ease-out);
+}
+
+// Fade in
+@include keyframes(FadeIn) {
+  from {
+    @include opacity(0);
+  }
+  to {
+    @include opacity(1);
+  }
+}
+
+.FadeIn {
+  @include animation(FadeIn $duration $ease-in-out)
+}
+
+// Fade out
+@include keyframes(FadeOut) {
+  from {
+    @include opacity(1);
+  }
+  to {
+    @include opacity(0);
+  }
+}
+
+.FadeOut {
+  @include animation(FadeOut $duration $ease-in-out)
+}

@@ -1,0 +1,45 @@
+* {
+  padding: 0;
+  margin: 0;
+  @include box-sizing();
+}
+
+html, body {
+  scroll-behavior: smooth;
+  font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-size: $fs-default;
+  @include lg {
+    font-size: $fs-semi;
+  }
+  @include md {
+    font-size: $fs-regular;
+  }
+  @include sm {
+    font-size: $fs-small;
+  }
+  @include xs {
+    font-size: $fs-min;
+  }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  box-shadow: 0 0 0 30px white inset !important;
+}
+
+button {
+  text-transform: none !important;
+  &:focus {
+    outline: none !important;
+  }
+}
+
+a,
+a:hover,
+a:focus {
+  color: inherit;
+  text-decoration: none !important;
+}

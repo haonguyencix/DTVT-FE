@@ -1,0 +1,42 @@
+@import "styles/variables";
+@import "styles/mixin";
+
+.FabProgress {
+  @include center-inside-element();
+}
+.Container {
+  margin-top: 58px;
+  .Logo {
+    width: 200px;
+  }
+  .Title {
+    margin-top: 20px;
+    font-weight: $fw-bold;
+  }
+  .Text {
+    margin: 20px 0;
+  }
+  .Submit {
+    color: $color-default-lightest;
+    padding: 6px 12px;
+    margin-top: 20px;
+    background-color: $color-default-darkest;
+    @include border-radius(20px);
+    margin-right: 10px;
+    border: 2px solid $color-default-darkest;
+    &:hover {
+      color: $color-default-lightest;
+      background-color: $color-default-darkest;
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .Container {
+    margin-top: 36px;
+    width: 100%;
+    .Logo {
+      width: 140px;
+    }
+  }
+}

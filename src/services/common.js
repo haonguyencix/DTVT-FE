@@ -1,4 +1,4 @@
-import { restConnector } from "../connector/axios";
+import { restConnector } from "./axios";
 
 // async call API
 export const asyncCall = timer => {

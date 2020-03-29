@@ -1,0 +1,22 @@
+@import "styles/variables";
+@import "styles/mixin";
+
+.Container {
+  margin: 0 auto;
+  .Item {
+    @include flex();
+    line-height: 33px;
+    margin: 30px 0;
+    .Text {
+      margin-left: 12px;
+      font-weight: $fw-bold;
+      @include font-size($fs-bigger);
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .Container {
+    padding-top: 26px;
+  }
+}

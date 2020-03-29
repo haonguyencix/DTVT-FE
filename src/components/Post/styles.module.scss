@@ -1,0 +1,92 @@
+@import "styles/variables";
+@import "styles/mixin";
+
+.Container {
+  background-color: $color-default-lightest;
+  border: 1px solid $color-default-lighter;
+  margin-bottom: 25px;
+  @include border-radius(8px);
+  padding: 8px;
+  .Header {
+    @include flex();
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 6px;
+    .Left {
+      @include flex();
+      align-items: center;
+      .AvtImg {
+        cursor: pointer;
+        margin-right: 8px;
+        border: 1px solid $color-default-lighter;
+      }
+      .PostedBy {
+        cursor: pointer;
+        @include font-size($fs-regular);
+      }
+      .PostedAt {
+        color: $color-default-darker;
+        @include font-size($fs-small);
+      }
+    }
+  }
+  .Body {
+    .Content {
+      width: 100%;
+      padding: 8px 6px;
+      > p {
+        margin-bottom: 8px;
+        overflow-y: auto;
+        &::-webkit-scrollbar {
+          background-color: $color-default;
+          border-radius: 15px;
+          width: 8px;
+        }
+        &::-webkit-scrollbar-thumb {
+          cursor: pointer;
+          border-radius: 15px;
+          background-color: $color-default-lighter;
+          &:hover {
+            background-color: $color-default-darker;
+          }
+        }
+      }
+      span {
+        cursor: pointer;
+        font-weight: $fw-bold;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+    .Img {
+      cursor: pointer;
+      @include border-radius(5px);
+      width: 100%;
+    }
+  }
+  .Footer {
+    .WhoLike {
+      @include flex();
+      align-items: center;
+      position: relative;
+      padding: 8px 6px;
+      > img {
+        margin-right: 4px;
+      }
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background-color: $color-default;
+      }
+    }
+    .Interacts {
+      @include flex();
+      align-items: center;
+    }
+  }
+}

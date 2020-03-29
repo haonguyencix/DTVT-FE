@@ -1,0 +1,2 @@
+export const SEND_POST_LIST = "SEND_POST_LIST";
+export const FETCH_POST_DETAIL = "FETCH_POST_DETAIL";

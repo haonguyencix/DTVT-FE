@@ -1,0 +1,55 @@
+@import "styles/variables";
+@import "styles/mixin";
+
+.Loader {
+  z-index: 5;
+  @include center-inside-element();
+  @include font-size(100px);
+  .SugarcubeSpinner {
+    position: relative;
+    &:before {
+      content: "";
+      position: relative;
+      display: block;
+      width: 1em;
+      height: 1em;
+      @include animation(sugarcube-spinner 2s cubic-bezier(0.75, 0, 0.5, 1) infinite normal);
+      @include background-linear-gradient(45deg, $primary-classic-blue, $color-default-darkest);
+      @include border-radius(15px);
+    }
+    &:after {
+      content: "";
+      position: relative;
+      display: block;
+      bottom: -0.5em;
+      height: 0.25em;
+      @include animation(spinner-shadow 2s cubic-bezier(0.75, 0, 0.5, 1) infinite normal);
+      @include background-opacity($color-default-darkest, 0.7);
+      @include border-radius(50%);
+    }
+  }
+}
+.OverlayLoader {
+  z-index: 4;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $color-default;
+}
+
+@keyframes sugarcube-spinner {
+  50% {
+    @include transform(scale(0.5) rotate(360deg));
+    @include border-radius(50%);
+  }
+  100% {
+    @include transform(scale(1) rotate(720deg));
+  }
+}
+@keyframes spinner-shadow {
+  50% {
+    @include transform(scale(0.5));
+  }
+}

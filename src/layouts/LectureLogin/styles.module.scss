@@ -1,0 +1,11 @@
+@import "styles/variables";
+@import "styles/mixin";
+
+.Container {
+  width: 100%;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background-color: $primary-classic-blue;
+  @include flex();
+}

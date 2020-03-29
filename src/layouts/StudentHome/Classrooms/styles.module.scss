@@ -1,0 +1,8 @@
+@import "styles/variables";
+@import "styles/mixin";
+
+.Container {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  @include flex();
+}

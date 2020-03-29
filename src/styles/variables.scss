@@ -1,0 +1,71 @@
+//
+// font-size
+//
+
+$fs-min: 11px;
+$fs-small: 12px;
+$fs-regular: 14px;
+$fs-semi: 15px;
+$fs-default: 16px; //default
+$fs-medium: 18px;
+$fs-big: 22px;
+$fs-bigger: 24px;
+$fs-max: 28px;
+
+//
+// font-weight
+//
+
+$fw-light: 300;
+$fw-regular: 400;
+$fw-medium: 500;
+// $fw-semi-bold: 600;
+$fw-bold: 700;
+// $fw-extra-bold: 800;
+
+//
+// devices
+//
+
+$screen-xs: 500px; // Extra small devices
+$screen-sm: 576px; // Small devices
+$screen-md: 768px; // Medium devices
+$screen-lg: 992px; // Large devices
+$screen-xl: 1200px; // Extra large devices
+
+//
+// colors
+//
+
+// default
+$color-default: #eee;
+$color-default-lighter: #c1c1c1;
+$color-default-lightest: #fff;
+$color-default-darker: #606060;
+$color-default-darkest: #000;
+$color-default-dark: #111;
+
+// primary
+$primary-classic-blue: #0f4c81;
+
+// success
+$color-green-400: #66bb6a;
+$color-green-900: #1b5e20;
+
+// warning
+$color-yellow-400: #ffeb3b;
+$color-yellow-900: #f57f17;
+
+// danger
+$color-red-400: #ef5350;
+$color-red-900: #b71c1c;
+
+// other color
+$dark-grayish-blue: #6b7989;
+
+
+// transition options
+$duration: 0.5s;
+$ease-in-out: cubic-bezier(0.445, 0.050, 0.550, 0.950);
+$ease-in: cubic-bezier(0.470, 0.000, 0.745, 0.715);
+$ease-out: cubic-bezier(0.390, 0.575, 0.565, 1.000);

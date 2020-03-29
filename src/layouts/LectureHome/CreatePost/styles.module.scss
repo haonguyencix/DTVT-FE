@@ -1,0 +1,146 @@
+@import "styles/variables";
+@import "styles/mixin";
+
+.ShowOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  @include background-opacity($color-default-darkest, 0.6);
+  @include opacity(1);
+  visibility: visible;
+  @include transition($duration $ease-in);
+  z-index: 4;
+}
+.HideOverlay {
+  @include opacity(0);
+  visibility: hidden;
+  @include transition($duration $ease-out);
+}
+.Bubble {
+  position: relative;
+  width: 544px;
+  z-index: 5;
+}
+.Container {
+  margin-bottom: 25px;
+  background-color: $color-default-lightest;
+  border: 1px solid $color-default-lighter;
+  @include border-radius(8px);
+  overflow: hidden;
+  padding: 3px;
+  .Header {
+    @include flex();
+    justify-content: space-between;
+    align-items: center;
+    background-color: $color-default;
+    margin-bottom: 3px;
+    padding: 3px 10px;
+    height: 33px;
+    @include border-radius(5px);
+    .Title {
+      @include font-size($fs-regular);
+    }
+    .CloseBtn {
+      position: relative;
+      padding: 3px;
+      z-index: 6;
+    }
+  }
+  .Body {
+    padding: 10px;
+    border: 1px solid $color-default;
+    @include border-radius(5px);
+    cursor: pointer;
+    .Content {
+      padding-bottom: 20px;
+      position: relative;
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background-color: $color-default;
+      }
+      .ContentInput {
+        @include flex();
+        .Textarea {
+          padding: 10px;
+          resize: none;
+          outline: none;
+          border: none;
+          background-color: transparent;
+          width: 100%;
+          font-family: "Roboto", sans-serif;
+          @include font-size($fs-regular);
+          @include placeholder() {
+            font-family: "Roboto", sans-serif;
+          }
+        }
+      }
+      .ImageItems {
+        margin-top: 16px; 
+        padding-bottom: 4px;
+        @include flex(); 
+        overflow-x: auto;
+        &::-webkit-scrollbar {
+          background-color: $color-default;
+          border-radius: 15px;
+          height: 6px;
+        }
+        &::-webkit-scrollbar-thumb {
+          cursor: pointer;
+          border-radius: 15px;
+          background-color: $color-default-lighter;
+          &:hover {
+            background-color: $color-default-darker;
+          }
+        }
+      }
+    }
+    .AttachFiles {
+      margin-top: 8px;
+      @include flex();
+      .FileUpload {
+        input[type="file"] {
+          display: none;
+        }
+        margin-right: 8px;
+        padding: 5px 12px;
+        @include border-radius(20px);
+        @include font-size($fs-regular);
+        color: $color-default-darkest;
+        background-color: $color-default;
+        &:hover {
+          color: $color-default-darkest;
+          background-color: $color-default;
+        }
+      }
+    }
+  }
+  .Footer {
+    @include border-radius(5px);
+    background-color: $color-default;
+    margin-top: 3px;
+    .RadioGroup {
+      padding: 8px 19px;
+      .Radio {
+        color: $primary-classic-blue;
+        &:hover {
+          @include background-opacity($primary-classic-blue, 0.08);
+        }
+      }
+    }
+    .Submit {
+      color: $color-default-lightest;
+      background-color: $primary-classic-blue;
+      &:hover {
+        color: $color-default-lightest;
+        background-color: $primary-classic-blue;
+      }
+    }
+  }
+}

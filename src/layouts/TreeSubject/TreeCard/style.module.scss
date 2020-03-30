@@ -1,0 +1,20 @@
+.TreeCard{
+    width: 150px;
+    height: 50px;
+    border: 1px solid #cccccc;
+    padding: 4px;
+    text-align: center;
+    margin-right: 5px;
+    margin-bottom: 30px;
+    .hiddenName{
+        text-overflow: ellipsis;
+        overflow: hidden; 
+        white-space: nowrap;
+    }
+    .content{
+        span{
+            margin: 0 4px;
+            font-size: small;
+        }
+    }
+}

@@ -17,7 +17,7 @@ const AccountSetting = props => {
     dispatch(actSendLoginToken(null));
     dispatch(actSetCredential(null));
     localStorage.clear();
-    history.push("/");
+    history.push(props.redirectTo);
   };
 
   return (

@@ -8,10 +8,18 @@ class PostService {
       data: formData
     });
   }
-  
-  getPosts() {
+
+  deletePost(delObj) {
     return restConnector({
       url: "posts",
+      method: "DELETE",
+      data: delObj
+    });
+  }
+  
+  getPosts(pagination) {
+    return restConnector({
+      url: `posts?page=${pagination.page}&limit=${pagination.limit}`,
       method: "GET"
     });
   }
@@ -21,6 +29,20 @@ class PostService {
       url: `posts/interact`,
       method: "POST",
       data: interact
+    });
+  }
+
+  getImgs(postId) {
+    return restConnector({
+      url: `images?postId=${postId}`,
+      method: "GET"
+    });
+  }
+
+  getInteracts(postId) {
+    return restConnector({
+      url: `interacts?postId=${postId}`,
+      method: "GET"
     });
   }
 }

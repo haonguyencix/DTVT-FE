@@ -17,7 +17,6 @@ const LectureHome = props => {
     const lectureLoginToken = getLocalStorage(TOKEN.LECTURE_LOGIN);
     
     if (lectureLoginToken) {
-      console.log(lectureLoginToken)
       dispatch(actSendLoginToken(lectureLoginToken));
       sendAccessToken(lectureLoginToken);
       dispatch(getCredential());
@@ -26,7 +25,7 @@ const LectureHome = props => {
 
   return (
     <React.Fragment>
-      <Header />
+      <Header redirectTo="/lecture" />
       <Container>
         <div className={styles.Wrapper}>
           <div className={styles.Navbar}>

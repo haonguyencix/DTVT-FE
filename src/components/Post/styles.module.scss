@@ -33,7 +33,7 @@
   .Body {
     .Content {
       width: 100%;
-      padding: 8px 6px;
+      padding: 8px 6px 0 6px;
       > p {
         margin-bottom: 8px;
         overflow-y: auto;
@@ -58,35 +58,6 @@
           text-decoration: underline;
         }
       }
-    }
-    .Img {
-      cursor: pointer;
-      @include border-radius(5px);
-      width: 100%;
-    }
-  }
-  .Footer {
-    .WhoLike {
-      @include flex();
-      align-items: center;
-      position: relative;
-      padding: 8px 6px;
-      > img {
-        margin-right: 4px;
-      }
-      &::after {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 1px;
-        background-color: $color-default;
-      }
-    }
-    .Interacts {
-      @include flex();
-      align-items: center;
     }
   }
 }

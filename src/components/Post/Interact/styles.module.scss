@@ -1,0 +1,34 @@
+@import "styles/variables";
+@import "styles/mixin";
+
+.WhoLike {
+  @include flex();
+  align-items: center;
+  position: relative;
+  padding: 8px 6px;
+  > img {
+    cursor: pointer;
+    margin-right: 4px;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: $color-default;
+  }
+}
+.Interacts {
+  @include flex();
+  align-items: center;
+  .IconButton {
+    &:hover {
+      background-color: transparent;
+    }
+  }
+  .IsTrue {
+    color: #f44336;
+  }
+}

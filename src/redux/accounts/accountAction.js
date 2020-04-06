@@ -10,22 +10,13 @@ import {
 import { actCheckLoading } from "components/FabProgress/action";
 import AccountService from "./accountService";
 
-const checkWho = role => {
-  switch (role) {
-    case "lecture":
-      return true;
-    case "student":
-      return false;
-    default:
-      break;
-  }
-};
+const checkWho = { lecture: true, student: false }
 
 // async action
 export const signUp = (values, push, role) => {
   const { id, password, birth } = values;
 
-  const account = checkWho(role)
+  const account = checkWho[role]
     ? new Lecture(id, password, role)
     : new Student(id, password, role, birth);
 
@@ -68,7 +59,7 @@ export const login = (values, push, role) => {
 
         dispatch(actSendLoginToken(token));
 
-        setLocalStorage(checkWho(role) ? TOKEN.LECTURE_LOGIN : TOKEN.STUDENT_LOGIN, token);
+        setLocalStorage(checkWho[role] ? TOKEN.LECTURE_LOGIN : TOKEN.STUDENT_LOGIN, token);
 
         sendAccessToken(token);
 

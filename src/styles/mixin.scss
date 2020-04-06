@@ -166,6 +166,24 @@
   }
 }
 
+/// Background blur
+/// @param {Size} $blur [8px] - Blur
+
+@mixin background-blur($blur: 8px) {
+  @include css3-prefix("filter", blur($blur))
+}
+
+/// Overlay full
+/// @param {Position} $position [absolute] - Position
+
+@mixin overlay-full($position: absolute) {
+  position: $position;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
 /// Box Sizing
 /// @param {*} $type [border-box] - Type
 /// @require {mixin} css3-prefix
@@ -397,6 +415,15 @@
   @include css3-prefix("transform", "translateY(-50%)");
 }
 
+/// Vertical horizon an element
+/// @param {Position} $position
+
+@mixin horizon-align($position: relative) {
+  position: $position;
+  left: 50%;
+  @include css3-prefix("transform", "translateX(-50%)");
+}
+
 /// Absolute center inside an element
 
 @mixin center-inside-element() {
@@ -427,6 +454,8 @@
 @mixin box-square($size) {
   width: $size;
   height: $size;
+  line-height: $size;
+  text-align: center;
   display: block;
 }
 

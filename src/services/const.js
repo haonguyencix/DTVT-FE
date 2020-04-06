@@ -5,3 +5,7 @@ export const TOKEN = {
 };
 
 export const ACCOUNT_ID = "ACCOUNT_ID"
+
+export const SOCKET = {
+  CREATE_POST_NOTI: "CREATE_POST_NOTI"
+}

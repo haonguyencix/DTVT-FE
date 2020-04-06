@@ -1,7 +1,7 @@
-import React, { useState, useRef, Fragment } from "react";
+import React, { useState, useRef, useEffect, Fragment } from "react";
 import styles from "./styles.module.scss";
 import Avt from "assets/img/avt-default-2.png";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import clsx from "clsx";
 import {
   Avatar,
@@ -15,15 +15,20 @@ import {
 import { Image, Close } from "@material-ui/icons";
 import { createPost } from "redux/posts/postAction";
 import ImageItem from "./ImageItem";
+import { SOCKET } from "services/const";
+import socket from "services/socket";
 
 const CreatePost = () => {
   const dispatch = useDispatch();
 
+  const credential = useSelector(state => state.accountData.credential);
+
   const imageUpload = useRef(null);
+  const closeBtn = useRef(null);
   const textarea = useRef(null);
 
-  const [values, setValues] = useState({ textarea: null, radio: null });
-  const [showCreatePostArea, setShowCreatePostArea] = useState(false);
+  const [values, setValues] = useState({ textarea: "", radio: null });
+  const [isActive, setIsActive] = useState(false);
   const [imgUploadArr, setImgUploadArr] = useState([]);
 
   const radioArr = [
@@ -68,32 +73,42 @@ const CreatePost = () => {
       formData.append("image", item.file);
     }
 
-    // acountId sẽ được gửi lên từ token qua headers Author
     formData.append("postContent", values.textarea);
     // formData.append("postCategoryId", values.radio);
 
-    dispatch(createPost(formData));
+    if(values.textarea.length > 0) {
+      dispatch(
+        createPost(formData, credential, closeBtn.current, textarea.current)
+      );
+    }
   };
+
+  useEffect(() => {
+    socket.on(SOCKET.CREATE_POST_NOTI, notiObj => {
+      console.log(notiObj);
+    });
+  }, []);
 
   return (
     <Fragment>
       <div
-        onClick={() => setShowCreatePostArea(false)}
+        onClick={() => setIsActive(false)}
         className={clsx(styles.ShowOverlay, {
-          [styles.HideOverlay]: !showCreatePostArea
+          [styles.HideOverlay]: !isActive
         })}
       ></div>
       <div
         className={clsx(styles.Container, {
-          [styles.Bubble]: showCreatePostArea
+          [styles.Bubble]: isActive
         })}
       >
         <div className={styles.Header}>
           <h2 className={styles.Title}>Tạo bài viết</h2>
-          {showCreatePostArea && (
+          {isActive && (
             <IconButton
+              ref={closeBtn}
               className={styles.CloseBtn}
-              onClick={() => setShowCreatePostArea(false)}
+              onClick={() => setIsActive(false)}
             >
               <Close />
             </IconButton>
@@ -102,7 +117,7 @@ const CreatePost = () => {
         <div
           className={styles.Body}
           onClick={() => {
-            setShowCreatePostArea(true);
+            setIsActive(true);
             textarea.current.focus();
           }}
         >
@@ -113,11 +128,11 @@ const CreatePost = () => {
                 ref={textarea}
                 name="textarea"
                 className={styles.Textarea}
-                placeholder="Nội dung bạn muốn chia sẻ là gì?"
+                placeholder={isActive ? "Bạn viết gì đó đi..." : "Nội dung bạn muốn chia sẻ là gì?"}
                 onChange={handleChange}
               ></TextareaAutosize>
             </div>
-            {showCreatePostArea && (
+            {isActive && (
               <div className={styles.ImageItems}>
                 {imgUploadArr.map((item, index) => (
                   <ImageItem
@@ -148,7 +163,7 @@ const CreatePost = () => {
             </Button>
           </div>
         </div>
-        {showCreatePostArea && (
+        {isActive && (
           <div className={styles.Footer}>
             <RadioGroup
               className={styles.RadioGroup}
@@ -157,7 +172,12 @@ const CreatePost = () => {
             >
               {renderRadios}
             </RadioGroup>
-            <Button className={styles.Submit} fullWidth onClick={handleSumit}>
+            <Button
+              fullWidth
+              onClick={handleSumit}
+              className={styles.Submit}
+              disabled={values.textarea.length === 0}
+            >
               Đăng
             </Button>
           </div>

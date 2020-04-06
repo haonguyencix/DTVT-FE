@@ -1,24 +1,14 @@
 import React from "react";
 import styles from "./styles.module.scss";
-
-// import libraries
 import { Link } from "react-router-dom";
-
-// import logo fethub
 import FetHubLogo from "assets/img/logo-min.png";
-
-// import material
 import { Container, Avatar, IconButton, Tooltip } from "@material-ui/core";
 import { Notifications, Assignment } from "@material-ui/icons";
-
-// import avatar default
 import AvtDefault from "assets/img/avt-default-2.png";
-
-// import components
 import Search from "components/Search";
 import AccountSetting from "components/AccountSetting";
 
-const Header = () => {
+const Header = props => {
   return (
     <header className={styles.Header}>
       <Container>
@@ -56,7 +46,7 @@ const Header = () => {
                 alt="Avatar mặc định"
               />
               <div className={styles.AccountSetting}>
-                <AccountSetting />
+                <AccountSetting redirectTo={props.redirectTo} />
               </div>
             </div>
           </div>

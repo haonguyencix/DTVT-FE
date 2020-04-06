@@ -69,6 +69,8 @@
         @include flex();
         .Textarea {
           padding: 10px;
+          height: 400px;
+          overflow-y: auto;
           resize: none;
           outline: none;
           border: none;
@@ -140,6 +142,10 @@
       &:hover {
         color: $color-default-lightest;
         background-color: $primary-classic-blue;
+      }
+      &:disabled {
+        color: $color-default;
+        background-color: $color-default-lighter;
       }
     }
   }

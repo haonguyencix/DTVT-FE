@@ -35,8 +35,8 @@ const checkAuthen = authenType => {
 
 export const authGuardWithWrapper = ComponentProps => {
   return routerProps => {
-    // if (checkAuthen(ComponentProps.authen)) {
-    if (true) {
+    if (checkAuthen(ComponentProps.authen)) {
+    // if (true) {
       return (
         <Suspense fallback={<Spinner />}>
           <ComponentProps.layout>

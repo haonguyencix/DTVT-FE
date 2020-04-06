@@ -25,7 +25,7 @@ const StudentHome = props => {
 
   return (
     <React.Fragment>
-      <Header />
+      <Header redirectTo="/" />
       <Container>
         <div className={styles.Wrapper}>
           <div className={styles.Navbar}>

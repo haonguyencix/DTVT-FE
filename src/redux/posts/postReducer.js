@@ -1,8 +1,9 @@
-import { FETCH_POST_LIST, STOP_FETCH_POSTS } from "./postType";
+import { FETCH_POST_LIST, STOP_FETCH_POSTS, CHECK_SUBMIT } from "./postType";
 
 let initialState = {
   postList: [],
-  stopFetch: false
+  stopFetch: false,
+  isSubmit: false
 };
 
 const LectureReducer = (state = initialState, { type, payload }) => {
@@ -17,6 +18,9 @@ const LectureReducer = (state = initialState, { type, payload }) => {
 
     case STOP_FETCH_POSTS:
       return { ...state, stopFetch: payload };
+
+    case CHECK_SUBMIT:
+      return { ...state, isSubmit: payload };
       
     default:
       return state;

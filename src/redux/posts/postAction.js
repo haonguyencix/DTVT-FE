@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import { FETCH_POST_LIST, STOP_FETCH_POSTS } from "./postType";
+import { FETCH_POST_LIST, STOP_FETCH_POSTS, CHECK_SUBMIT } from "./postType";
 import { actCheckLoading } from "components/FabProgress/action";
 import socket from "services/socket";
 import PostService from "./postService";
@@ -31,6 +31,8 @@ export const createPost = (formData, credential, closeBtn, textarea) => {
     PostService.createPost(formData)
       .then((res) => {
         dispatch(actCheckLoading("SUCCESS"));
+
+        dispatch(actCheckSubmit(true));
 
         dispatch(getPosts(false, { page: 1, limit: 5 }));
 
@@ -90,5 +92,10 @@ export const actFetchPostList = (condition, postList) => ({
 
 export const actStopFetch = (status) => ({
   type: STOP_FETCH_POSTS,
+  payload: status,
+});
+
+export const actCheckSubmit = (status) => ({
+  type: CHECK_SUBMIT,
   payload: status,
 });

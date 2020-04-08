@@ -15,6 +15,17 @@
   &:hover .Overlay {
     @include opacity(1);
   }
+  .Position {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    @include box-square(20px);
+    @include border-radius(4px);
+    @include font-size($fs-small);
+    color: $color-default-lightest;
+    background-color: $color-default-darkest;
+    z-index: 1;
+  }
   .Overlay {
     position: absolute;
     @include background-opacity($color-default-darkest, 0.3);

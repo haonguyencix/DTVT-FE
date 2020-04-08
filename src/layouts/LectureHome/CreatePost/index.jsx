@@ -13,7 +13,7 @@ import {
   FormControlLabel
 } from "@material-ui/core";
 import { Image, Close } from "@material-ui/icons";
-import { createPost } from "redux/posts/postAction";
+import { createPost, actCheckSubmit } from "redux/posts/postAction";
 import ImageItem from "./ImageItem";
 import { SOCKET } from "services/const";
 import socket from "services/socket";
@@ -22,6 +22,7 @@ const CreatePost = () => {
   const dispatch = useDispatch();
 
   const credential = useSelector(state => state.accountData.credential);
+  const isSubmit = useSelector(state => state.postData.isSubmit);
 
   const imageUpload = useRef(null);
   const closeBtn = useRef(null);
@@ -84,6 +85,13 @@ const CreatePost = () => {
   };
 
   useEffect(() => {
+    if(isSubmit) {
+      setImgUploadArr([])
+      dispatch(actCheckSubmit(false));
+    }
+  }, [isSubmit, dispatch])
+
+  useEffect(() => {
     socket.on(SOCKET.CREATE_POST_NOTI, notiObj => {
       console.log(notiObj);
     });
@@ -139,6 +147,7 @@ const CreatePost = () => {
                     key={index + item.id}
                     id={item.id}
                     url={item.url}
+                    position={index + 1}
                     deleteImageItem={deleteImageItem}
                   />
                 ))}

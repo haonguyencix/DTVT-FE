@@ -4,7 +4,7 @@ import { Close } from "@material-ui/icons";
 
 const ImageItem = props => {
   return (
-    <div className={styles.ImageItems}>
+    <div>
       <div
         className={styles.ImageItem}
         style={{ backgroundImage: `url(${props.url})` }}

@@ -1,0 +1,27 @@
+@import "styles/variables";
+@import "styles/mixin";
+
+.Container {
+    @include flex();
+    align-items: center;
+    padding: 8px;
+    .Avt {
+        width: 50px;
+        height: 50px;
+        margin-right: 16px;
+        background-color: $primary-classic-blue;
+        @include font-size($fs-max);
+    }
+    .Body {
+        color: $color-default-darkest;
+        @include font-size($fs-regular);
+        .CreatedBy {
+            font-weight: $fw-bold;
+        }
+        .CreateAt {
+            color: #207BF2;
+            font-weight: $fw-bold;
+            @include font-size($fs-small);
+        }
+    }
+}

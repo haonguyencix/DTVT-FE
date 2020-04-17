@@ -15,13 +15,10 @@ import {
 import { Image, Close } from "@material-ui/icons";
 import { createPost, actCheckSubmit } from "redux/posts/postAction";
 import ImageItem from "./ImageItem";
-import { SOCKET } from "services/const";
-import socket from "services/socket";
 
 const CreatePost = () => {
   const dispatch = useDispatch();
 
-  const credential = useSelector(state => state.accountData.credential);
   const isSubmit = useSelector(state => state.postData.isSubmit);
 
   const imageUpload = useRef(null);
@@ -78,9 +75,7 @@ const CreatePost = () => {
     // formData.append("postCategoryId", values.radio);
 
     if(values.textarea.length > 0) {
-      dispatch(
-        createPost(formData, credential, closeBtn.current, textarea.current)
-      );
+      dispatch(createPost(formData, closeBtn.current, textarea.current));
     }
   };
 
@@ -90,12 +85,6 @@ const CreatePost = () => {
       dispatch(actCheckSubmit(false));
     }
   }, [isSubmit, dispatch])
-
-  useEffect(() => {
-    socket.on(SOCKET.CREATE_POST_NOTI, notiObj => {
-      console.log(notiObj);
-    });
-  }, []);
 
   return (
     <Fragment>

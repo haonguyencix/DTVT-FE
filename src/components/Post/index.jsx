@@ -1,9 +1,7 @@
 import React, { useState, useRef, Fragment } from "react";
 import styles from "./styles.module.scss";
 import { Avatar } from "@material-ui/core";
-import { parseISO, formatDistanceToNow } from "date-fns";
-import vietnamese from "date-fns/locale/vi";
-import { stringShortcut } from "services/common";
+import { stringShortcut, formatDistance } from "services/common";
 import Interact from "./Interact";
 import MoreHorizon from "./MoreHorizon";
 import Gallery from "./Gallery";
@@ -43,11 +41,6 @@ const Post = (props) => {
         {item} {arr.length - 1 !== index && <br />}
       </Fragment>
     ));
-  };
-
-  const formatDistance = (UTC) => {
-    const formated = formatDistanceToNow(parseISO(UTC), { locale: vietnamese });
-    return formated.charAt(0).toUpperCase() + formated.slice(1);
   };
 
   return (

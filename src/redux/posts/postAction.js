@@ -1,5 +1,11 @@
 import { toast } from "react-toastify";
-import { FETCH_POST_LIST, STOP_FETCH_POSTS, CHECK_SUBMIT } from "./postType";
+import {
+  FETCH_POST_LIST,
+  STOP_FETCH_POSTS,
+  CHECK_SUBMIT,
+  FETCH_NOTI_LIST,
+  ADJUST_NUM_NOTI,
+} from "./postType";
 import { actCheckLoading } from "components/FabProgress/action";
 import socket from "services/socket";
 import PostService from "./postService";
@@ -24,26 +30,21 @@ export const getPosts = (condition, pagination) => {
   };
 };
 
-export const createPost = (formData, credential, closeBtn, textarea) => {
+export const createPost = (formData, closeBtn, textarea) => {
   return (dispatch) => {
     dispatch(actCheckLoading("REQUEST"));
 
     PostService.createPost(formData)
       .then((res) => {
         dispatch(actCheckLoading("SUCCESS"));
-
         dispatch(actCheckSubmit(true));
-
         dispatch(getPosts(false, { page: 1, limit: 5 }));
+
+        socket.emit(SOCKET.CREATE_POST_NOTI, res.data);
 
         closeBtn.click();
         textarea.value = "";
         textarea.style.height = "37px";
-
-        const createdBy = credential.firstName + " " + credential.lastName;
-        const noti = { ...res.data, createdBy };
-
-        socket.emit(SOCKET.CREATE_POST_NOTI, noti);
       })
       .catch((err) => {
         dispatch(actCheckLoading("FAILURE"));
@@ -59,8 +60,6 @@ export const deletePost = (delObj, horizBtn) => {
   return (dispatch) => {
     PostService.deletePost(delObj)
       .then((res) => {
-        console.log(res);
-
         dispatch(getPosts(false, { page: 1, limit: 5 }));
 
         horizBtn.click();
@@ -98,4 +97,14 @@ export const actStopFetch = (status) => ({
 export const actCheckSubmit = (status) => ({
   type: CHECK_SUBMIT,
   payload: status,
+});
+
+export const actFetchNotiList = (noti) => ({
+  type: FETCH_NOTI_LIST,
+  payload: noti,
+});
+
+export const actAdjustNumNoti = (direction) => ({
+  type: ADJUST_NUM_NOTI,
+  payload: direction,
 });

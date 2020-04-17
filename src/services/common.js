@@ -1,4 +1,6 @@
 import { restConnector } from "./axios";
+import { parseISO, formatDistanceToNow } from "date-fns";
+import vietnamese from "date-fns/locale/vi";
 
 // async call API
 export const asyncCall = timer => {
@@ -41,4 +43,9 @@ export const getFirstLetter = (str, isInverse, index) => {
     return strSplitted[strSplitted.length - (1 + index)].slice(0, 1);
   }
   return strSplitted[index].slice(0, 1);
+};
+
+export const formatDistance = (UTC) => {
+  const formated = formatDistanceToNow(parseISO(UTC), { locale: vietnamese });
+  return formated.charAt(0).toUpperCase() + formated.slice(1);
 };

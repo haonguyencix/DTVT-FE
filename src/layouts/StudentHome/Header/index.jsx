@@ -7,8 +7,9 @@ import { Notifications, Assignment } from "@material-ui/icons";
 import AvtDefault from "assets/img/avt-default-2.png";
 import Search from "components/Search";
 import AccountSetting from "components/AccountSetting";
+import NotiBadge from "../NotiBadge";
 
-const Header = props => {
+const Header = (props) => {
   return (
     <header className={styles.Header}>
       <Container>
@@ -36,7 +37,9 @@ const Header = props => {
             </Tooltip>
             <Tooltip title="Thông báo" arrow>
               <IconButton className={styles.IconButton}>
-                <Notifications className={styles.Icon} />
+                <NotiBadge>
+                  <Notifications className={styles.Icon} />
+                </NotiBadge>
               </IconButton>
             </Tooltip>
             <div className={styles.Avatar}>

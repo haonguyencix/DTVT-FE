@@ -12,6 +12,7 @@ import { resetPassword } from "redux/accounts/accountAction";
 import { TOKEN } from "services/const";
 import { sendAccessToken, getLocalStorage } from "services/common";
 import { actSendResetPasswordToken } from "redux/otp/otpAction";
+import { PATH } from "routes/const";
 
 const ResetPassScreen = () => {
   const history = useHistory();
@@ -31,7 +32,7 @@ const ResetPassScreen = () => {
     <React.Fragment>
       <FabProgress
         className={styles.FabProgress}
-        slug="/"
+        slug={PATH["STUDENT_LOGIN"]}
         icon={Autorenew}
         title="Trở về trang chủ"
       />

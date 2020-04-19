@@ -1,0 +1,1 @@
+export const FETCH_CLASSROOM_LIST = "classrooms -> FETCH_CLASSROOM_LIST";

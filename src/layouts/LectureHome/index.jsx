@@ -9,9 +9,15 @@ import Header from "layouts/StudentHome/Header";
 import Clock from "components/Clock";
 import { actSendLoginToken } from "redux/accounts/accountAction";
 import { getCredential } from "redux/accounts/accountAction";
+import { PATH } from "routes/const";
 
 const LectureHome = props => {
   const dispatch = useDispatch();
+
+  const redirectTo = {
+    loginpage: PATH["LECTURE_LOGIN"],
+    homepage: PATH["LECTURE_HOME"],
+  };
 
   useEffect(() => {
     const lectureLoginToken = getLocalStorage(TOKEN.LECTURE_LOGIN);
@@ -25,7 +31,7 @@ const LectureHome = props => {
 
   return (
     <React.Fragment>
-      <Header redirectTo="/lecture" />
+      <Header redirectTo={redirectTo} />
       <Container>
         <div className={styles.Wrapper}>
           <div className={styles.Navbar}>

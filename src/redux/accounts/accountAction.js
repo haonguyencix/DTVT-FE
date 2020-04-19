@@ -9,6 +9,7 @@ import {
 } from "./accountType";
 import { actCheckLoading } from "components/FabProgress/action";
 import AccountService from "./accountService";
+import { PATH } from "routes/const";
 
 const checkWho = { lecture: true, student: false }
 
@@ -35,7 +36,7 @@ export const signUp = (values, push, role) => {
 
         toast.success("Đăng ký thành công!");
 
-        push(`/${role}-verify`);
+        push(checkWho[role] ? PATH["LECTURE_VERIFY"] : PATH["STUDENT_VERIFY"]);
       })
       .catch(err => {
         dispatch(actCheckLoading("FAILURE"));
@@ -63,7 +64,7 @@ export const login = (values, push, role) => {
 
         sendAccessToken(token);
 
-        push(`/${role}-home`);
+        push(checkWho[role] ? PATH["LECTURE_HOME"] : PATH["STUDENT_HOME"]);
       })
       .catch(err => {
         dispatch(actCheckLoading("FAILURE"));
@@ -81,8 +82,6 @@ export const getCredential = () => {
   return dispatch => {
     AccountService.getCredential()
       .then(res => {
-        toast.success(`Chào mừng ${res.data.lastName} đến với FEThub!`);
-
         dispatch(actSetCredential(res.data));
       })
       .catch(err => {
@@ -106,7 +105,7 @@ export const resetPassword = (values, push) => {
 
         localStorage.clear();
 
-        push("/");
+        push(PATH["STUDENT_LOGIN"]);
       })
       .catch(err => {
         dispatch(actCheckLoading("FAILURE"));

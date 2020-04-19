@@ -11,7 +11,7 @@ class AccountService {
 
   login(account) {
     return restConnector({
-      url: 'accounts/login',
+      url: 'auth/login',
       method: "POST",
       data: account
     });

@@ -1,28 +1,30 @@
 import React from "react";
 import styles from "./styles.module.scss";
-
-// import libraries
 import { NavLink } from "react-router-dom";
-
-// import material UI
-import { Avatar, Tooltip } from "@material-ui/core";
-import { Home, Face, Flag } from "@material-ui/icons";
-
-// import services
-import { stringShortcut, getFirstLetter } from "services/common";
-
-const menuArr = [
-  { name: "Bảng tin", slug: "/home", icon: Home },
-  { name: "Đoàn - Hội", slug: "/uiz", icon: Flag },
-  { name: "Diễn đàn sinh viên", slug: "/hello", icon: Face }
-];
-
-const clubArr = [
-  { name: "EET - Clb Học thuật", slug: "/hello" },
-  { name: "ETEC - Clb Tiếng anh", slug: "/hello" }
-];
+import {
+  Home,
+  Description,
+  AssignmentInd,
+  Assignment,
+  Timeline,
+  FormatListNumbered,
+} from "@material-ui/icons";
+import { useSelector } from "react-redux";
+import { PATH } from "routes/const";
 
 const Navbar = () => {
+  const credential = useSelector((state) => state.accountData.credential);
+  const classId = credential ? "Lớp " + credential.classId : "";
+
+  const menuArr = [
+    { name: "Bảng tin", slug: PATH["STUDENT_HOME"], icon: Home },
+    { name: "Quản lý học phần", slug: PATH["TREE_SUBJECT"], icon: Assignment },
+    { name: classId, slug: "/hello", icon: AssignmentInd },
+    { name: "Tài liệu", slug: "/uiz", icon: Description },
+    { name: "Bài tập", slug: "/uiz", icon: FormatListNumbered },
+    { name: "Điểm số", slug: "/ui1z", icon: Timeline },
+  ];
+
   const renderMenuItems = menuArr.map((item, index) => (
     <li key={index} className={styles.LinkItem}>
       <NavLink
@@ -36,29 +38,7 @@ const Navbar = () => {
     </li>
   ));
 
-  const renderClubs = clubArr.map((item, index) => (
-    <li key={index}>
-      <Tooltip title={item.name.length > 20 ? item.name : ""}>
-        <NavLink
-          className={styles.NavLink}
-          activeClassName={styles.NavLinkActive}
-          to={item.slug}
-        >
-          <Avatar className={styles.Avt}>{getFirstLetter(item.name, false, 0)}</Avatar>
-          {stringShortcut(item.name, 20)}
-        </NavLink>
-      </Tooltip>
-    </li>
-  ));
-
-  return (
-    <ul className={styles.Container}>
-      {renderMenuItems}
-      <h3 className={styles.Subheader}>CÂU LẠC BỘ</h3>
-      {renderClubs}
-      {/* API GET club list */}
-    </ul>
-  );
+  return <ul className={styles.Container}>{renderMenuItems}</ul>;
 };
 
 export default Navbar;

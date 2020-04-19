@@ -18,6 +18,7 @@ import { actCheckSendOtp } from "redux/otp/otpAction";
 import Timer from "components/Timer";
 
 import FabProgress from "components/FabProgress";
+import { PATH } from "routes/const";
 
 const VerifyScreen = props => {
   const dispatch = useDispatch();
@@ -35,7 +36,7 @@ const VerifyScreen = props => {
         <div className={styles.FormWrapper}>
           <FabProgress
             className={styles.FabProgress}
-            slug="/lecture"
+            slug={PATH["LECTURE_LOGIN"]}
             icon={MailOutline}
             title="Trở về trang chủ"
           />

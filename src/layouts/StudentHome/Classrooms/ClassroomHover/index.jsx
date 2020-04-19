@@ -3,22 +3,38 @@ import styles from "./styles.module.scss";
 import { Avatar } from "@material-ui/core";
 import LectureAvt from "assets/img/avt-default-2.png";
 import { stringShortcut, getFirstLetter } from "services/common";
-import { WatchLater, Room, VpnKey, GroupWork } from "@material-ui/icons";
+import {
+  WatchLater,
+  VpnKey,
+  GroupWork,
+  CollectionsBookmark,
+} from "@material-ui/icons";
 
 const ClassroomHover = (props) => {
-  const { time, name, lecture } = props.item;
+  const {
+    subjectId,
+    theory,
+    practice,
+    times,
+    subjectName,
+    firstName,
+    lastName,
+    credits,
+  } = props.item;
+  const clonePractice = practice ? ` - Thực hành ${practice}` : "";
+  const lecture = firstName + " " + lastName;
 
-  const renderTime = time.map((item, index) => (
-    <span key={index}>
-      {index > 0 && ";"} Thứ {item.day}: tiết {item.start}-{item.start + item.count}
-    </span>
+  const renderTime = times.map((item, index) => (
+    <div key={index}>
+      Thứ {item.day}: tiết {item.start}-{item.start + (item.count - 1)} - phòng: {item.room}.
+    </div>
   ));
 
   const classroomInfoArr = [
-    { icon: VpnKey, content: "Mã 850322" },
-    { icon: GroupWork, content: "Nhóm 01 - Thực hành 02" },
-    { icon: Room, content: "Phòng C.D102" },
-    { icon: WatchLater, content: renderTime },
+    { icon: VpnKey, content: subjectId },
+    { icon: CollectionsBookmark, content: `${credits} tín chỉ` },
+    { icon: GroupWork, content: `Nhóm ${theory + clonePractice}` },
+    { icon: WatchLater, content: <div>{renderTime}</div> },
   ];
 
   const renderInfoItem = classroomInfoArr.map((item, index) => (
@@ -45,7 +61,7 @@ const ClassroomHover = (props) => {
           </Avatar>
         )}
         <div>
-          <h6>{stringShortcut(name, 40)}</h6>
+          <h6>{stringShortcut(subjectName, 40)}</h6>
           <span className={styles.Lecture}>{lecture}</span>
         </div>
       </li>

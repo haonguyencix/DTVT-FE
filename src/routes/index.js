@@ -1,4 +1,5 @@
 import React from "react";
+import { PATH } from "./const";
 import { Switch, Route } from "react-router-dom";
 
 // import routes
@@ -22,7 +23,7 @@ export const RenderRoutes = ({ routes }) => (
       <Route
         exact={true}
         key={route.key}
-        path={route.path}
+        path={PATH[route.key]}
         render={routerProps => <route.component {...routerProps} />}
       />
     ))}

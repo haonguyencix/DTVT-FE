@@ -6,6 +6,7 @@ import { SEND_OTP, CHECK_SEND, SEND_OTP_FORGOT_PASSWORD, SEND_RESET_PASSWORD_TOK
 import { actCheckLoading } from "components/FabProgress/action";
 import { actSendAccountId } from "redux/accounts/accountAction";
 import OTPService from "./otpService";
+import { PATH } from "routes/const";
 
 // async action
 export const sendOTP = values => {
@@ -46,7 +47,7 @@ export const verifyOTP = (values, push) => {
 
         localStorage.clear();
 
-        push("/");
+        push(PATH["STUDENT_HOME"]);
       })
       .catch(err => {
         dispatch(actCheckLoading("FAILURE"));
@@ -107,7 +108,7 @@ export const loginResetPassword = (values, push) => {
 
         toast.success("Xác thực thành công!");
 
-        push("/reset-password");
+        push(PATH["RESET_PASSWORD"]);
       })
       .catch(err => {
         dispatch(actCheckLoading("FAILURE"));

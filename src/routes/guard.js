@@ -33,18 +33,17 @@ const checkAuthen = authenType => {
   }
 };
 
-export const authGuardWithWrapper = ComponentProps => {
-  return routerProps => {
-    if (checkAuthen(ComponentProps.authen)) {
-    // if (true) {
+export const AuthGuard = Props => {
+  return routeProps => {
+    if (checkAuthen(Props.authen)) {
       return (
         <Suspense fallback={<Spinner />}>
-          <ComponentProps.layout>
-            <ComponentProps.screen {...routerProps} />
-          </ComponentProps.layout>
+          <Props.layout>
+            <Props.screen {...routeProps} />
+          </Props.layout>
         </Suspense>
       );
     }
-    return <Redirect to={ComponentProps.redirect} />;
+    return <Redirect to={Props.redirect} />;
   };
 };

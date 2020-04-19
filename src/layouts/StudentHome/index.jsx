@@ -14,9 +14,16 @@ import Navbar from "./Navbar";
 import Classrooms from "./Classrooms";
 import Notification from "./Notification";
 import { actAdjustNumNoti } from "redux/posts/postAction";
+import { getClassrooms } from "redux/classrooms/classroomAction";
+import { PATH } from "routes/const";
 
 const StudentHome = (props) => {
   const dispatch = useDispatch();
+
+  const redirectTo = {
+    loginpage: PATH["STUDENT_LOGIN"],
+    homepage: PATH["STUDENT_HOME"],
+  };
 
   useEffect(() => {
     const studentLoginToken = getLocalStorage(TOKEN.STUDENT_LOGIN);
@@ -25,14 +32,16 @@ const StudentHome = (props) => {
       dispatch(actSendLoginToken(studentLoginToken));
       sendAccessToken(studentLoginToken);
       dispatch(getCredential());
+      dispatch(getClassrooms());
     }
   }, [dispatch]);
 
   useEffect(() => {
     socket.on(SOCKET.CREATE_POST_NOTI, (payload) => {
       toast(<Notification payload={payload} />, {
-        autoClose: 20000,
-        position: toast.POSITION.BOTTOM_LEFT
+        autoClose: false,
+        closeOnClick: false,
+        position: toast.POSITION.BOTTOM_LEFT,
       });
       dispatch(actAdjustNumNoti(+1));
     });
@@ -40,7 +49,7 @@ const StudentHome = (props) => {
 
   return (
     <Fragment>
-      <Header redirectTo="/" />
+      <Header redirectTo={redirectTo} />
       <Container>
         <div className={styles.Wrapper}>
           <div className={styles.Navbar}>

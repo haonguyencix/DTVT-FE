@@ -13,6 +13,7 @@ import ClassroomHover from "../ClassroomHover";
 
 const Classroom = props => {
   const { item } = props;
+  const lecture = item.firstName + " " + item.lastName;
 
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const ClassItems = useRef(null);
@@ -34,11 +35,11 @@ const Classroom = props => {
     >
       <div className={styles.Wrapper}>
         <Tooltip
-          title={item.name.length > 36 ? item.name : ""}
+          title={item.subjectName.length > 36 ? item.subjectName : ""}
           placement="top"
           arrow
         >
-          <h6 className={styles.ClassName}>{stringShortcut(item.name, 36)}</h6>
+          <h6 className={styles.ClassName}>{stringShortcut(item.subjectName, 36)}</h6>
         </Tooltip>
         {false ? (
           <Avatar
@@ -48,11 +49,11 @@ const Classroom = props => {
           />
         ) : (
           <Avatar className={styles.LectureAvt}>
-            {getFirstLetter(item.lecture, true, 0)}
+            {getFirstLetter(lecture, true, 0)}
           </Avatar>
         )}
       </div>
-      <p className={styles.LectureName}>{item.lecture}</p>
+      <p className={styles.LectureName}>{lecture}</p>
       <span
         className={styles.Hover}
         style={{ top: `${mousePosition.y}px`, left: `${mousePosition.x}px` }}

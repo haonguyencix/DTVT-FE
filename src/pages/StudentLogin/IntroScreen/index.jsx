@@ -1,21 +1,18 @@
 import React from "react";
 import styles from "./styles.module.scss";
 import { Link } from "react-router-dom";
-
-// import Material UI
 import { Typography, Button } from "@material-ui/core";
 import { Lock } from "@material-ui/icons";
-
-// import logo fethub
 import FetHubLogo from "assets/img/fethub_logo.png";
 import FabProgress from "components/FabProgress";
+import { PATH } from "routes/const";
 
 const IntroScreen = () => {
   return (
     <React.Fragment>
       <FabProgress
         className={styles.FabProgress}
-        slug="/"
+        slug={PATH["STUDENT_LOGIN"]}
         icon={Lock}
         title="Đăng nhập để mở khóa"
       />
@@ -31,7 +28,7 @@ const IntroScreen = () => {
           <Button className={styles.BtnSignIn} variant="contained">
             Đăng nhập
           </Button>
-          <Link to="/student-signup" className={styles.BtnSignUp}>
+          <Link to={PATH["STUDENT_SIGNUP"]} className={styles.BtnSignUp}>
             <Button variant="contained" fullWidth>
               Đăng ký
             </Button>

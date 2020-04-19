@@ -8,6 +8,7 @@ import { Lock, PersonAdd } from "@material-ui/icons";
 import InputPassword from "components/InputPassword";
 import FabProgress from "components/FabProgress";
 import { login, signUp } from "redux/accounts/accountAction";
+import { PATH } from "routes/const";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ const Login = () => {
       <div className={styles.FormWrapper}>
         <FabProgress
           className={styles.FabProgress}
-          slug="/"
+          slug={PATH["STUDENT_LOGIN"]}
           icon={hadAccount ? Lock : PersonAdd}
           title="Trở về trang chủ"
         />

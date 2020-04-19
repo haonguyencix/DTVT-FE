@@ -3,7 +3,7 @@ import styles from "./styles.module.scss";
 import { Link } from "react-router-dom";
 import FetHubLogo from "assets/img/logo-min.png";
 import { Container, Avatar, IconButton, Tooltip } from "@material-ui/core";
-import { Notifications, Assignment } from "@material-ui/icons";
+import { Notifications } from "@material-ui/icons";
 import AvtDefault from "assets/img/avt-default-2.png";
 import Search from "components/Search";
 import AccountSetting from "components/AccountSetting";
@@ -15,7 +15,7 @@ const Header = (props) => {
       <Container>
         <div className={styles.Rows}>
           <div className={styles.Left}>
-            <Link to="/home" className={styles.Logo}>
+            <Link to={props.redirectTo.homepage} className={styles.Logo}>
               <img
                 className={styles.LogoImg}
                 src={FetHubLogo}
@@ -28,13 +28,6 @@ const Header = (props) => {
             <Search />
           </div>
           <div className={styles.Right}>
-            <Tooltip title="Lên kế hoạch" arrow>
-              <Link to="/tasks">
-                <IconButton className={styles.IconButton}>
-                  <Assignment className={styles.Icon} />
-                </IconButton>
-              </Link>
-            </Tooltip>
             <Tooltip title="Thông báo" arrow>
               <IconButton className={styles.IconButton}>
                 <NotiBadge>
@@ -49,7 +42,7 @@ const Header = (props) => {
                 alt="Avatar mặc định"
               />
               <div className={styles.AccountSetting}>
-                <AccountSetting redirectTo={props.redirectTo} />
+                <AccountSetting redirectTo={props.redirectTo.loginpage} />
               </div>
             </div>
           </div>

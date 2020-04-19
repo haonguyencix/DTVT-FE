@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
-// import Material UI
 import {
   IconButton,
   FormControl,
@@ -11,6 +9,7 @@ import {
   FormHelperText
 } from "@material-ui/core";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
+import { PATH } from "routes/const";
 
 const InputPassword = props => {
   const [showPassword, setShowPassword] = useState(false);
@@ -60,7 +59,7 @@ const InputPassword = props => {
       />
       {props.id === "signInPassword" && (
         <FormHelperText>
-          <Link to="/forgot-password">Quên mật khẩu?</Link>
+          <Link to={PATH["FORGOT_PASSWORD"]}>Quên mật khẩu?</Link>
         </FormHelperText>
       )}
       {isTrueSet(props.error) && (

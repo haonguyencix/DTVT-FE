@@ -1,11 +1,7 @@
 import React from "react";
 import styles from "./styles.module.scss";
-
-// import libraries
 import { Formik, Form } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-
-// import Material UI
 import {
   Button,
   TextField,
@@ -18,22 +14,15 @@ import {
   FormHelperText
 } from "@material-ui/core";
 import { ContactSupport, Send, ArrowForward } from "@material-ui/icons";
-
-// import action
 import {
   sendOtpForgotPassword,
   loginResetPassword
 } from "redux/otp/otpAction";
-
-// import const
 import { CHECK_SEND } from "redux/otp/otpType";
-
-// import components
 import Timer from "components/Timer";
 import FabProgress from "components/FabProgress";
-
-// import logo fethub
 import FetHubLogo from "assets/img/fethub_logo.png";
+import { PATH } from "routes/const";
 
 const ForgotPassScreen = props => {
   const dispatch = useDispatch();
@@ -45,7 +34,7 @@ const ForgotPassScreen = props => {
     <React.Fragment>
       <FabProgress
         className={styles.FabProgress}
-        slug="/"
+        slug={PATH["STUDENT_LOGIN"]}
         icon={ContactSupport}
         title="Trở về trang chủ"
       />

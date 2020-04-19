@@ -1,5 +1,5 @@
-import { authGuardWithWrapper } from "routes/guard";
-import { AUTHEN } from "routes/const";
+import { AuthGuard } from "routes/guard";
+import { PATH, AUTHEN } from "routes/const";
 import StudentLogin from "layouts/StudentLogin";
 import VerifyScreen from "./VerifyScreen";
 import SignUpScreen from "./SignUpScreen";
@@ -9,53 +9,48 @@ import ResetPassScreen from "./ResetPassScreen";
 
 const StudentLoginRoutes = [
   {
-    path: "/",
     key: "STUDENT_LOGIN",
-    component: authGuardWithWrapper({
+    component: AuthGuard({
       authen: AUTHEN.STUDENT_LOGIN,
       layout: StudentLogin,
       screen: IntroScreen,
-      redirect: "/student-home"
+      redirect: PATH["STUDENT_HOME"]
     })
   },
   {
-    path: "/student-verify",
     key: "STUDENT_VERIFY",
-    component: authGuardWithWrapper({
+    component: AuthGuard({
       authen: AUTHEN.STUDENT_VERIFY,
       layout: StudentLogin,
       screen: VerifyScreen,
-      redirect: "/student-home"
+      redirect: PATH["STUDENT_HOME"]
     })
   },
   {
-    path: "/student-signup",
     key: "STUDENT_SIGNUP",
-    component: authGuardWithWrapper({
+    component: AuthGuard({
       authen: AUTHEN.STUDENT_LOGIN,
       layout: StudentLogin,
       screen: SignUpScreen,
-      redirect: "/student-home"
+      redirect: PATH["STUDENT_HOME"]
     })
   },
   {
-    path: "/forgot-password",
     key: "FORGOT_PASSWORD",
-    component: authGuardWithWrapper({
+    component: AuthGuard({
       authen: AUTHEN.STUDENT_LOGIN,
       layout: StudentLogin,
       screen: ForgotPassScreen,
-      redirect: "/student-home"
+      redirect: PATH["STUDENT_HOME"]
     })
   },
   {
-    path: "/reset-password",
     key: "RESET_PASSWORD",
-    component: authGuardWithWrapper({
+    component: AuthGuard({
       authen: AUTHEN.RESET_PASSWORD,
       layout: StudentLogin,
       screen: ResetPassScreen,
-      redirect: "/student-home"
+      redirect: PATH["STUDENT_HOME"]
     })
   }
 ];

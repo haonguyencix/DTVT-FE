@@ -1,11 +1,7 @@
 import React from "react";
 import styles from "./styles.module.scss";
-
-// import libraries
 import { Formik, Form } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-
-// import Material UI
 import {
   Button,
   TextField,
@@ -18,19 +14,12 @@ import {
   FormHelperText
 } from "@material-ui/core";
 import { MailOutline, Send } from "@material-ui/icons";
-
-// import action
 import { sendOTP, verifyOTP } from "redux/otp/otpAction";
-
-// import action
 import { actCheckSendOtp } from "redux/otp/otpAction";
-
-// import components
 import Timer from "components/Timer";
-
-// import logo fethub
 import FetHubLogo from "assets/img/fethub_logo.png";
 import FabProgress from "components/FabProgress";
+import { PATH } from "routes/const";
 
 const VerifyScreen = props => {
   const dispatch = useDispatch();
@@ -42,7 +31,7 @@ const VerifyScreen = props => {
     <React.Fragment>
       <FabProgress
         className={styles.FabProgress}
-        slug="/"
+        slug={PATH["STUDENT_LOGIN"]}
         icon={MailOutline}
         title="Đăng nhập để mở khóa"
       />

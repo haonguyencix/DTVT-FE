@@ -1,26 +1,19 @@
 import React from "react";
 import styles from "./styles.module.scss";
-
-// import libraries
 import { Formik, Form } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import DateFnsUtils from "@date-io/date-fns";
-
-// import Material UI
 import { TextField, Button, Typography } from "@material-ui/core";
 import { PersonAdd } from "@material-ui/icons";
 import {
   KeyboardDatePicker,
   MuiPickersUtilsProvider
 } from "@material-ui/pickers";
-
-// import action and schema
 import { signUp } from "redux/accounts/accountAction";
 import { AccountSchema } from "redux/accounts/account";
-
-// import components
 import InputPassword from "components/InputPassword";
 import FabProgress from "components/FabProgress";
+import { PATH } from "routes/const";
 
 const SignUpScreen = props => {
   const dispatch = useDispatch();
@@ -30,7 +23,7 @@ const SignUpScreen = props => {
     <React.Fragment>
       <FabProgress
         className={styles.FabProgress}
-        slug="/"
+        slug={PATH["STUDENT_LOGIN"]}
         icon={PersonAdd}
         title="Trở về trang chủ"
       />

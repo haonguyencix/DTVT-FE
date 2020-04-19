@@ -1,22 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-
-// Styles
 import "./main.scss";
 import CssBaseline from "@material-ui/core/CssBaseline";
-
-// Toastify
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-
-// Routes
 import { BrowserRouter as Router } from "react-router-dom";
 import ROUTES, { RenderRoutes } from "routes";
-
-// Service Worker
 import * as serviceWorker from "services/worker";
-
-// Setup Redux
 import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "redux/root";
@@ -29,7 +19,6 @@ const composeEnhancers =
 
 const enhancer = composeEnhancers(
   applyMiddleware(thunk)
-  // other store enhancers if any
 );
 
 const store = createStore(rootReducer, enhancer);

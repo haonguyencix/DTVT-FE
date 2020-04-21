@@ -7,11 +7,12 @@ import { Button, Typography } from "@material-ui/core";
 import { Autorenew } from "@material-ui/icons";
 import { resetPassword } from "core/store/accounts/accountAction";
 import { TOKEN, PATH } from "shared/constants";
-import { sendAccessToken, getLocalStorage } from "core/services/utils";
+import { sendAccessToken } from "core/services/utils";
 import { actSendResetPasswordToken } from "core/store/otp/otpAction";
 import InputPassword from "shared/components/InputPassword";
 import FabProgress from "shared/components/FabProgress";
 import FetHubLogo from "assets/img/fethub_logo.png";
+import * as Cookies from "js-cookie";
 
 const ResetPassword = () => {
   const history = useHistory();
@@ -20,7 +21,7 @@ const ResetPassword = () => {
   const isLoading = useSelector(state => state.isLoading);
 
   useEffect(() => {
-    const token = getLocalStorage(TOKEN["RESET_PASSWORD"]);
+    const token = Cookies.get(TOKEN["RESET_PASSWORD"]);
     if (token) {
       dispatch(actSendResetPasswordToken(token));
       sendAccessToken(token);

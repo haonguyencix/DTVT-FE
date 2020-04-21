@@ -1,23 +1,24 @@
 import React, { useEffect } from "react";
 import styles from "./styles.module.scss";
 import { useDispatch } from "react-redux";
-import { getLocalStorage, sendAccessToken } from "core/services/utils";
+import { sendAccessToken } from "core/services/utils";
 import { Container } from "@material-ui/core";
 import { actSendLoginToken } from "core/store/accounts/accountAction";
 import { getCredential } from "core/store/accounts/accountAction";
 import { TOKEN } from "shared/constants";
 import CreatePost from "modules/LectureHome/components/CreatePost";
 import Clock from "shared/components/Clock";
+import * as Cookies from "js-cookie";
 
 const NewsFeed = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const lectureLoginToken = getLocalStorage(TOKEN["LECTURE"]);
+    const token = Cookies.get(TOKEN["LECTURE"]);
 
-    if (lectureLoginToken) {
-      dispatch(actSendLoginToken(lectureLoginToken));
-      sendAccessToken(lectureLoginToken);
+    if (token) {
+      dispatch(actSendLoginToken(token));
+      sendAccessToken(token);
       dispatch(getCredential());
     }
   }, [dispatch]);

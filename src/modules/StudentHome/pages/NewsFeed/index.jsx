@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import styles from "./styles.module.scss";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
-import { getLocalStorage, sendAccessToken } from "core/services/utils";
+import { sendAccessToken } from "core/services/utils";
 import { SOCKET, TOKEN } from "shared/constants";
 import { Container } from "@material-ui/core";
 import { actSendLoginToken } from "core/store/accounts/accountAction";
@@ -13,16 +13,17 @@ import socket from "core/services/socket";
 import Navbar from "modules/StudentHome/components/Navbar";
 import Classrooms from "modules/StudentHome/components/Classrooms";
 import Notification from "modules/StudentHome/components/Notification";
+import * as Cookies from "js-cookie";
 
 const NewsFeed = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const studentLoginToken = getLocalStorage(TOKEN["STUDENT"]);
+    const token = Cookies.get(TOKEN["STUDENT"]);
 
-    if (studentLoginToken) {
-      dispatch(actSendLoginToken(studentLoginToken));
-      sendAccessToken(studentLoginToken);
+    if (token) {
+      dispatch(actSendLoginToken(token));
+      sendAccessToken(token);
       dispatch(getCredential());
       dispatch(getClassrooms());
     }

@@ -10,6 +10,7 @@ import {
 import { actCheckFabProgress } from "../loading/loadingAction";
 import AccountService from "./accountService";
 import { TOKEN, ACCOUNT_ID, PATH } from "shared/constants";
+import * as Cookies from "js-cookie";
 
 const checkWho = { lecture: true, student: false };
 
@@ -60,10 +61,7 @@ export const login = (values, push, role) => {
 
         dispatch(actSendLoginToken(token));
 
-        setLocalStorage(
-          checkWho[role] ? TOKEN["LECTURE"] : TOKEN["STUDENT"],
-          token
-        );
+        Cookies.set(checkWho[role] ? TOKEN["LECTURE"] : TOKEN["STUDENT"], token, { expires: 1 });
 
         sendAccessToken(token);
 

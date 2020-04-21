@@ -11,6 +11,7 @@ import {
 import { actCheckFabProgress } from "../loading/loadingAction";
 import { actSendAccountId } from "core/store/accounts/accountAction";
 import OTPService from "./otpService";
+import * as Cookies from "js-cookie";
 
 // async action
 export const sendOTP = (values) => {
@@ -81,6 +82,7 @@ export const sendOtpForgotPassword = (values) => {
         );
 
         setLocalStorage(ACCOUNT_ID, res.data.id);
+        Cookies.set(ACCOUNT_ID, res.data.id, )
 
         toast.success("Kiểm tra email để lấy mã xác thực nhé!");
       })
@@ -106,7 +108,7 @@ export const loginResetPassword = (values, push) => {
 
         dispatch(actSendResetPasswordToken(token));
 
-        setLocalStorage(TOKEN["RESET_PASSWORD"], token);
+        Cookies.set(TOKEN["RESET_PASSWORD"], token, { expires: 1 })
 
         sendAccessToken(token);
 

@@ -1,11 +1,11 @@
 import React, { Fragment } from "react";
 import Header from "shared/components/Header";
-import { getLocalStorage } from "core/services/utils";
 import { TOKEN, PATH } from "shared/constants";
 import { Redirect } from "react-router-dom";
+import * as Cookies from "js-cookie";
 
 const LectureHomeGuard = (props) => {
-  if (!getLocalStorage(TOKEN["LECTURE"])) {
+  if (!Cookies.get(TOKEN["LECTURE"])) {
     return <Redirect to={PATH["LECTURE_LOGIN"]} />;
   }
 

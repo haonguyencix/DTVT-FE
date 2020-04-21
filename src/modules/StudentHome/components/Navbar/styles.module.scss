@@ -1,0 +1,66 @@
+@import "assets/scss/variables";
+@import "assets/scss/mixins";
+
+.Container {
+  width: 231px;
+  position: fixed;
+  list-style: none;
+  background-color: $color-default-lightest;
+  border: 1px solid $color-default-lighter;
+  @include border-radius(8px);
+  z-index: 3;
+  padding: 10px 0;
+  .Subheader {
+    padding-left: 25px;
+    color: $color-default-darker;
+  }
+  .NavLink {
+    @include flex();
+    align-items: center;
+    cursor: pointer;
+    padding: 10px 25px;
+    color: $color-default-darkest;
+    .Icon {
+      margin-right: 8px;
+      color: $dark-grayish-blue;
+    }
+    .Avt {
+      width: 24px;
+      height: 24px;
+      margin-right: 8px;
+      background-color: $primary-classic-blue;
+      @include font-size($fs-regular);
+    }
+    &:hover {
+      color: $color-default-darkest;
+    }
+    &:hover .Icon {
+      color: $color-default-darkest;
+    }
+  }
+  .NavLinkActive {
+    position: relative;
+    font-weight: $fw-bold;
+    color: $color-default-darkest;
+    background-color: $color-default;
+    .Icon {
+      color: $color-default-darkest;
+    }
+    &:hover {
+      color: $color-default-darkest;
+    }
+    &:hover .Icon {
+      color: $color-default-darkest;
+    }
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 4px;
+      background-color: $color-default-darkest;
+      @include border-radius(8px);
+    }
+  }
+}

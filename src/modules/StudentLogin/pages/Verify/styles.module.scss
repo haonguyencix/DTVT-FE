@@ -1,0 +1,44 @@
+@import "assets/scss/variables";
+@import "assets/scss/mixins";
+
+.FabProgress {
+  @include center-inside-element();
+}
+.Container {
+  margin-top: 58px;
+  .Logo {
+    width: 200px;
+  }
+  .Title {
+    margin-top: 20px;
+    font-weight: $fw-medium;
+  }
+  .Text {
+    margin: 20px 0;
+  }
+  .Submit {
+    padding: 6px 12px;
+    margin-top: 20px;
+    color: $color-default-lightest;
+    background-color: $color-default-darkest;
+    border: 2px solid $color-default-darkest;
+    @include border-radius(20px);
+    &:hover {
+      color: $color-default-lightest;
+      background-color: $color-default-darkest;
+    }
+  }
+  .FormControl {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .Container {
+    margin-top: 36px;
+    width: 100%;
+    .Logo {
+      width: 140px;
+    }
+  }
+}

@@ -1,0 +1,151 @@
+@import "assets/scss/variables";
+@import "assets/scss/mixins";
+
+.ShowOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    @include background-opacity($color-default-darkest, 0.7);
+    @include opacity(1);
+    visibility: visible;
+    @include transition($duration $ease-in);
+    z-index: 4;
+}
+.HideOverlay {
+    @include opacity(0);
+    visibility: hidden;
+    @include transition($duration $ease-out);
+}
+.Bubble {
+    position: relative;
+    width: 63vw;
+    background-color: $color-default-darkest;
+    @include border-radius(8px);
+    margin-left: -10vw;
+    z-index: 5;
+}
+.Container {
+    .ImgSlides {
+        position: relative;
+        @include flex();
+        justify-content: center;
+        align-items: center;
+        .BgBlur {
+            @include overlay-full(absolute);
+            @include background-size(cover);
+            @include background-blur(8px);
+            background-position: center;
+            background-repeat: no-repeat;
+            display: none;
+            &::after {
+                content: "";
+                @include overlay-full(absolute);
+                @include background-opacity($color-default-darkest, 0.65);
+            }
+        }
+        .Img {
+            position: relative;
+            cursor: pointer;
+            max-width: 100%;
+            max-height: 100%;
+            @include border-radius(5px);
+            display: none;
+        }
+        .ImgActive {
+            display: block;
+        }
+        .Nav {
+            @include vertical-align(absolute);
+            background-color: $color-default;
+            @include box-shadow();
+            padding: 6px;
+            z-index: 2;
+            --gap: -70px;
+            .Icon {
+                @include font-size(30px);
+                color: $color-default-darkest;
+            }
+        }
+        .Prev {
+            left: var(--gap);
+        }
+        .Next {
+            right: var(--gap);
+        }
+        .Close {
+            right: var(--gap);
+            top: 5%;
+        }
+        .ZoomIn {
+            right: var(--gap);
+            top: 13%;
+        }
+        .ZoomOut {
+            right: var(--gap);
+            top: 21%;
+        }
+    }
+    .ImgSlidesShow {
+        height: 90vh;
+    }
+    .Thumnail {
+        width: 100%;
+        @include flex();
+        padding: 8px;
+        overflow-x: auto;
+        .ThumnailOverlay {
+            position: relative;
+            cursor: pointer;
+            width: 60px;
+            height: 60px;
+            overflow: hidden;
+            margin-right: 8px;
+            @include border-radius(3px);
+            &::after {
+                content: "";
+                @include overlay-full(absolute);
+                @include background-opacity($color-default-darkest, 0.5);
+            }
+            &:last-child {
+                margin-right: 0;
+            }
+            > span {
+                position: absolute;
+                top: 2px;
+                left: 2px;
+                @include box-square(20px);
+                @include border-radius(2px);
+                @include font-size($fs-small);
+                color: $color-default-lightest;
+                background-color: $color-default-darkest;
+                z-index: 1;
+            }
+            > img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+        .ThumnailActive::after {
+            content: "";
+            @include background-opacity($color-default-darkest, 0);
+        }
+    }
+    .MoreImgBtn {
+        transition: unset;
+        background-color: $color-default;
+        margin-top: 10px;
+        margin-bottom: 2px;
+        &:hover {
+            color: $color-default-lightest;
+            background-color: $primary-classic-blue;
+        }
+    }
+}
+
+.BodyStyles {
+    overflow: hidden;
+    padding-right: 15px;
+}

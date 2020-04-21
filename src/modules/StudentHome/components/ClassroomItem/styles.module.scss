@@ -1,0 +1,48 @@
+@import "assets/scss/variables";
+@import "assets/scss/mixins";
+
+.ClassItems {
+  width: 48%;
+  padding: 3px;
+  cursor: pointer;
+  position: relative;
+  margin-bottom: 16px;
+  background-color: $color-default-lightest;
+  border: 1px solid $color-default-lighter;
+  @include border-radius(8px);
+  .Wrapper {
+    position: relative;
+    height: 56px;
+    width: 100%;
+    padding: 8px 6px;
+    background-color: $color-default;
+    @include border-radius(6px);;
+    .ClassName {
+      letter-spacing: -0.3px;
+      text-transform: uppercase;
+      @include font-size($fs-regular);
+    }
+    .LectureAvt {
+      position: absolute;
+      height: 30px;
+      width: 30px;
+      bottom: -16px;
+      right: 8px;
+      border: 3px solid $color-default-lightest;
+      background-color: $primary-classic-blue;
+      @include font-size($fs-semi);
+    }
+  }
+  .LectureName {
+    padding: 8px 6px;
+    letter-spacing: -0.3px;
+  }
+  .Hover {
+    display: none;
+    position: absolute;
+    z-index: 2;
+  }
+  &:hover .Hover {
+    display: block;
+  }
+}

@@ -1,0 +1,17 @@
+@import "assets/scss/variables";
+@import "assets/scss/mixins";
+
+.Wrapper {
+  margin-top: calc(64px + 25px);
+  @include flex();
+  .Navbar {
+    width: 19%;
+  }
+  .Children {
+    width: 50%;
+    padding: 0 32px;
+  }
+  .Classrooms {
+    width: 31%;
+  }
+}

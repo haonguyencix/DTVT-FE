@@ -1,0 +1,8 @@
+@import "assets/scss/variables";
+@import "assets/scss/mixins";
+
+.Container {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  @include flex();
+}

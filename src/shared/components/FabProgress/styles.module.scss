@@ -1,0 +1,23 @@
+@import "assets/scss/variables";
+@import "assets/scss/mixins";
+
+.Wrapper {
+  position: relative;
+  padding: 7px;
+  background-color: $color-default-lightest;
+  @include border-radius(50%);
+  &:focus {
+    outline: none;
+  }
+  .FabIcon {
+    @include background-linear-gradient(-135deg, $color-red-400, $color-red-900);
+    color: $color-default-lightest;
+  }
+  .FabProgress {
+    color: $color-default-darkest;
+    position: absolute;
+    top: 1.5px;
+    left: 1.5px;
+    z-index: 1;
+  }
+}

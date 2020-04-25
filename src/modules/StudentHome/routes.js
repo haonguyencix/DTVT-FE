@@ -7,6 +7,7 @@ import NewsFeed from "./pages/NewsFeed";
 
 const StudentHomeGuard = lazy(() => import("./guard"));
 const TreeSubject = lazy(() => import("./pages/TreeSubject"));
+const StudentList = lazy(() => import("shared/components/StudentList"));
 const PostDetail = lazy(() => import("shared/components/PostDetail"));
 
 const StudentHomeWrapper = ({ routes }) => (
@@ -43,6 +44,12 @@ const StudentHomeRoutes = {
           path: PATH["STUDENT_HOME"],
           exact: true,
           component: () => <PostList role="STUDENT" />,
+        },
+        {
+          key: "STUDENT_LIST_IN_CLASSROOM",
+          path: PATH["STUDENT_LIST_IN_CLASSROOM"] + "/:classroomId",
+          exact: true,
+          component: StudentList,
         },
         {
           key: "STUDENT_POST_DETAIL",

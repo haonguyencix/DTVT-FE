@@ -27,7 +27,7 @@
     }
     .Lecture {
       color: $color-default-darker;
-      @include font-size($fs-min);
+      @include font-size($fs-small + 1);
     }
   }
   .InfoItem {

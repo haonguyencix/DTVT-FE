@@ -1,0 +1,12 @@
+@import "assets/scss/variables";
+@import "assets/scss/mixins";
+
+.Container {
+    background-color: $color-default-lightest;
+    border: 1px solid $color-default-lighter;
+    margin-bottom: 25px;
+    @include border-radius(8px);
+    .Fullname {
+        text-transform: capitalize;
+    }
+}

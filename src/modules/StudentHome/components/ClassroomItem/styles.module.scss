@@ -1,7 +1,7 @@
 @import "assets/scss/variables";
 @import "assets/scss/mixins";
 
-.ClassItems {
+.ClassItem {
   width: 48%;
   padding: 3px;
   cursor: pointer;
@@ -10,13 +10,14 @@
   background-color: $color-default-lightest;
   border: 1px solid $color-default-lighter;
   @include border-radius(8px);
+  @include transition();
   .Wrapper {
     position: relative;
     height: 56px;
     width: 100%;
     padding: 8px 6px;
     background-color: $color-default;
-    @include border-radius(6px);;
+    @include border-radius(6px);
     .ClassName {
       letter-spacing: -0.3px;
       text-transform: uppercase;
@@ -33,16 +34,24 @@
       @include font-size($fs-semi);
     }
   }
-  .LectureName {
-    padding: 8px 6px;
-    letter-spacing: -0.3px;
-  }
   .Hover {
     display: none;
     position: absolute;
     z-index: 2;
   }
-  &:hover .Hover {
-    display: block;
+  .LectureName {
+    padding: 8px 6px;
+    letter-spacing: -0.3px;
   }
+  &:hover {
+    border: 1px solid $dark-grayish-blue;
+    @include box-shadow();
+    .Hover {
+      display: block;
+    }
+  }
+}
+
+.ClassItemExpand {
+  width: 100%;
 }

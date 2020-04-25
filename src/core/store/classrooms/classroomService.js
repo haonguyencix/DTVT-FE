@@ -10,7 +10,7 @@ class ClassroomService {
 
   getStudentList(classroomId) {
     return restConnector({
-      url: `classrooms?classroomId=${classroomId}`,
+      url: `classrooms/students?classroomId=${classroomId}`,
       method: "GET",
     });
   }

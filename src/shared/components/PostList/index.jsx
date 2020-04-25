@@ -20,7 +20,7 @@ const PostList = (props) => {
 
     if (token) {
       sendAccessToken(token);
-      dispatch(getPosts(true, pagination));
+      dispatch(getPosts(page > 1, pagination));
     }
   }, [dispatch, page, props.role]);
 

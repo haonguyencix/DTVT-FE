@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { IconButton, ClickAwayListener } from "@material-ui/core";
 import { MoreHoriz, HighlightOff } from "@material-ui/icons";
 import { deletePost } from "core/store/posts/postAction";
+import Menu from "shared/components/Menu";
 
 const MoreHorizon = props => {
   const { postId, haveImgs, haveInteract } = props;
@@ -19,22 +20,17 @@ const MoreHorizon = props => {
     dispatch(deletePost(delObj, horizBtn.current));
   };
 
+  const menuList = [
+    { icon: HighlightOff, content: "Xóa bài đăng", event: delPost }
+  ]
+
   return (
     <ClickAwayListener onClickAway={() => setOpen(false)}>
       <div className={styles.Container}>
         <IconButton ref={horizBtn} onClick={() => setOpen(!open)}>
           <MoreHoriz />
         </IconButton>
-        {open && (
-          <ul className={styles.Menu}>
-            <li className={styles.MenuItem}>
-              <span className={styles.Item} onClick={() => delPost()}>
-                <HighlightOff className={styles.Icon} />
-                Xóa bài đăng
-              </span>
-            </li>
-          </ul>
-        )}
+        {open && <Menu menuList={menuList} position="bottom" />}
       </div>
     </ClickAwayListener>
   );

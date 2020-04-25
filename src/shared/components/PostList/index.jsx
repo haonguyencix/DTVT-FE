@@ -3,8 +3,9 @@ import Post from "shared/components/Post";
 import useLazyScroll from "shared/hooks/useLazyScroll";
 import { getPosts } from "core/store/posts/postAction";
 import { useDispatch, useSelector } from "react-redux";
-import { getLocalStorage, sendAccessToken } from "core/services/utils";
+import { sendAccessToken } from "core/services/utils";
 import { TOKEN } from "shared/constants";
+import * as Cookies from "js-cookie";
 
 const PostList = (props) => {
   const dispatch = useDispatch();
@@ -14,12 +15,12 @@ const PostList = (props) => {
   const page = useLazyScroll();
 
   useEffect(() => {
-    const token = getLocalStorage(TOKEN[props.role]);
+    const token = Cookies.get(TOKEN[props.role]);
     const pagination = { page, limit: 5 };
 
     if (token) {
       sendAccessToken(token);
-      dispatch(getPosts(true, pagination));
+      dispatch(getPosts(page > 1, pagination));
     }
   }, [dispatch, page, props.role]);
 

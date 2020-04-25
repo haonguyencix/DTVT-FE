@@ -1,0 +1,73 @@
+@import "assets/scss/variables";
+@import "assets/scss/mixins";
+
+.bottom {
+    right: 0;
+    margin-top: 6px;
+    &::before {
+        border-left: 1px solid $color-default-lighter;
+        border-top: 1px solid $color-default-lighter;
+        top: -6px;
+        right: 18px;
+    }
+}
+.left {
+    top: -1px;
+    left: -198px;
+    &::before {
+        border-top: 1px solid $color-default-lighter;
+        border-right: 1px solid $color-default-lighter;
+        top: 18px;
+        right: -6px;
+    }
+}
+.right {
+    top: -1px;
+    right: -198px;
+    &::before {
+        border-bottom: 1px solid $color-default-lighter;
+        border-left: 1px solid $color-default-lighter;
+        top: 18px;
+        left: -6px;
+    }
+}
+.Menu {
+    position: absolute;
+    list-style: none;
+    width: 182px;
+    z-index: 3;
+    background-color: $color-default-lightest;
+    border: 1px solid $color-default-lighter;
+    @include border-radius(8px);
+    @include box-shadow();
+    &::before {
+        content: "";
+        position: absolute;
+        background-color: $color-default-lightest;
+        transform: rotate(45deg);
+        width: 10px;
+        height: 10px;
+    }
+    .MenuItem {
+        position: relative;
+        overflow: hidden;
+        margin: 3px;
+        z-index: 4;
+        @include border-radius(5px);
+        .Item {
+            @include flex();
+            align-items: center;
+            cursor: pointer;
+            padding: 5px 16px;
+            color: $color-default-darkest;
+            &:hover {
+                background-color: $primary-classic-blue;
+                color: $color-default-lightest;
+            }
+            .Icon {
+                margin-right: 8px;
+            }
+        }
+    }
+    
+}

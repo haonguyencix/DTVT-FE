@@ -3,11 +3,11 @@ import styles from "./styles.module.scss";
 import Slogans from "./components/Slogans";
 import Login from "./components/Login";
 import { PATH, TOKEN } from "shared/constants";
-import { getLocalStorage } from "core/services/utils";
 import { Redirect } from "react-router-dom";
+import * as Cookies from "js-cookie";
 
 const StudentLoginGuard = props => {
-  if (getLocalStorage(TOKEN["STUDENT"])) {
+  if (Cookies.get(TOKEN["STUDENT"])) {
     return <Redirect to={PATH["STUDENT_HOME"]} />;
   }
 

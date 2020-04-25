@@ -36,6 +36,15 @@ export const stringShortcut = (str, limit) => {
   return str;
 };
 
+// capitalize first letter each word
+export const capitalizeFirstLetterEachWord = (str) => {
+  let splitStr = str.toLowerCase().split(' ');
+  for (var i in splitStr) {
+      splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);     
+  }
+  return splitStr.join(' '); 
+}
+
 // get the first letter of the any index string item
 export const getFirstLetter = (str, isInverse, index) => {
   const strSplitted = str.split(" ");

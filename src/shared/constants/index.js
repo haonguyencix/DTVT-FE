@@ -16,6 +16,7 @@ export const PATH = {
   TREE_SUBJECT: "/student-home/tree-subject",
   STUDENT_PROFILE: "/student-home/student-profile",
   STUDENT_POST_DETAIL: "/student-home/post-detail",
+  STUDENT_LIST_IN_CLASSROOM: "/student-home/student-list",
 
   // lecture login
   LECTURE_VERIFY: "/lecture/lecture-verify",

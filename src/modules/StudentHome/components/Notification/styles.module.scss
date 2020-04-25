@@ -19,7 +19,7 @@
             font-weight: $fw-bold;
         }
         .CreateAt {
-            color: #207BF2;
+            color: $vivid-blue;
             font-weight: $fw-bold;
             @include font-size($fs-small);
         }

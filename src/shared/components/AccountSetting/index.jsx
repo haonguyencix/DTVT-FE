@@ -7,7 +7,8 @@ import { ExitToApp, PersonOutline } from "@material-ui/icons";
 import { actClearStore } from "core/store/accounts/accountAction";
 import { stringShortcut } from "core/services/utils";
 import AvtDefaut from "assets/img/avt-default-2.png";
-import { PATH } from "shared/constants";
+import { PATH, TOKEN } from "shared/constants";
+import * as Cookies from "js-cookie";
 
 const AccountSetting = props => {
   const { credential } = props;
@@ -18,6 +19,8 @@ const AccountSetting = props => {
     localStorage.clear();
     dispatch(actClearStore());
     history.push(props.backLogin);
+    const role = credential ? credential.role.toUpperCase() : '';
+    if(role) Cookies.remove(TOKEN[role]);
   };
 
   return (

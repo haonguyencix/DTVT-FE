@@ -2,7 +2,26 @@
 @import "assets/scss/mixins";
 
 .Container {
-  flex-wrap: wrap;
-  justify-content: space-between;
-  @include flex();
+  .Selects {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    @include flex();
+    > .FormControl {
+      &:nth-child(1) {
+        flex-grow: 8;
+        margin-right: 16px;
+      }
+      &:nth-child(2) {
+        flex-grow: 1;
+      }
+    }
+    > .Shrink {
+      margin-right: 0!important;
+    }
+  }
+  .Classrooms {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    @include flex();
+  }
 }

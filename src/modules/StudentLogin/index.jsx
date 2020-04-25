@@ -2,15 +2,8 @@ import React from "react";
 import styles from "./styles.module.scss";
 import Slogans from "./components/Slogans";
 import Login from "./components/Login";
-import { PATH, TOKEN } from "shared/constants";
-import { Redirect } from "react-router-dom";
-import * as Cookies from "js-cookie";
 
-const StudentLoginGuard = props => {
-  if (Cookies.get(TOKEN["STUDENT"])) {
-    return <Redirect to={PATH["STUDENT_HOME"]} />;
-  }
-
+const StudentLoginLayout = props => {
   return (
     <div className={styles.Container}>
       <div className={styles.Left}>
@@ -26,4 +19,4 @@ const StudentLoginGuard = props => {
   );
 };
 
-export default StudentLoginGuard;
+export default StudentLoginLayout;

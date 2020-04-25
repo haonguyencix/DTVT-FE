@@ -1,23 +1,34 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { RenderRoutes } from "core/routes";
-import { PATH } from "shared/constants";
-import StudentLoginGuard from "./guard";
+import { Redirect } from "react-router-dom";
+import { PATH, TOKEN } from "shared/constants";
+import Spinner from "shared/components/Spinner";
 import Introduction from "./pages/Introduction";
-import SignUp from "./pages/SignUp";
-import Verify from "./pages/Verify";
-import ForgotPassword from "./pages/ForgotPassword";
-import ResetPassword from "./pages/ResetPassword";
+import * as Cookies from "js-cookie";
 
-const StudentLoginWrapper = ({ routes }) => (
-  <StudentLoginGuard>
-    <RenderRoutes routes={routes} />
-  </StudentLoginGuard>
-);
+const StudentLoginLayout = lazy(() => import("."));
+const SignUp = lazy(() => import("./pages/SignUp"));
+const Verify = lazy(() => import("./pages/Verify"));
+const ForgotPassword = lazy(() => import("./pages/ForgotPassword"));
+const ResetPassword = lazy(() => import("./pages/ResetPassword"));
+
+const StudentLoginGuard = ({ routes }) => {
+  if (Cookies.get(TOKEN["STUDENT"])) {
+    return <Redirect to={PATH["STUDENT_HOME"]} />;
+  }
+  return (
+    <Suspense fallback={<Spinner />}>
+      <StudentLoginLayout>
+        <RenderRoutes routes={routes} />
+      </StudentLoginLayout>
+    </Suspense>
+  );
+};
 
 const StudentLoginRoutes = {
   key: "STUDENT_LOGIN",
   path: PATH["STUDENT_LOGIN"],
-  component: StudentLoginWrapper,
+  component: StudentLoginGuard,
   routes: [
     {
       key: "INTRODUCTION",

@@ -3,9 +3,9 @@ import { FETCH_CLASSROOM_LIST, FETCH_STUDENT_LIST } from "./classroomType";
 import ClassroomService from "./classroomService";
 
 // async action
-export const getClassrooms = () => {
+export const getClassrooms = (filter) => {
   return (dispatch) => {
-    ClassroomService.getClassrooms()
+    ClassroomService.getClassrooms(filter)
       .then((res) => {
         dispatch(actFetchClassroomList(res.data));
       })

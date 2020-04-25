@@ -1,20 +1,27 @@
 import React, { lazy, Suspense } from "react";
 import { RenderRoutes } from "core/routes";
-import { PATH } from "shared/constants";
+import { Redirect } from "react-router-dom";
+import { TOKEN, PATH } from "shared/constants";
 import Spinner from "shared/components/Spinner";
 import PostList from "shared/components/PostList";
 import NewsFeed from "./pages/NewsFeed";
+import * as Cookies from "js-cookie";
 
-const LectureHomeGuard = lazy(() => import("./guard"));
+const LectureHomeLayout = lazy(() => import("."));
 const PostDetail = lazy(() => import("shared/components/PostDetail"));
 
-const LectureHomeWrapper = ({ routes }) => (
-  <Suspense fallback={<Spinner />}>
-    <LectureHomeGuard>
-      <RenderRoutes routes={routes} />
-    </LectureHomeGuard>
-  </Suspense>
-);
+const LectureHomeGuard = ({ routes }) => {
+  if (!Cookies.get(TOKEN["LECTURE"])) {
+    return <Redirect to={PATH["LECTURE_LOGIN"]} />;
+  }
+  return (
+    <Suspense fallback={<Spinner />}>
+      <LectureHomeLayout>
+        <RenderRoutes routes={routes} />
+      </LectureHomeLayout>
+    </Suspense>
+  );
+};
 
 const NewsFeedWrapper = ({ routes }) => (
   <NewsFeed>
@@ -25,7 +32,7 @@ const NewsFeedWrapper = ({ routes }) => (
 const LectureHomeRoutes = {
   key: "LECTURE_HOME",
   path: PATH["LECTURE_HOME"],
-  component: LectureHomeWrapper,
+  component: LectureHomeGuard,
   routes: [
     {
       key: "NEWS_FEED",

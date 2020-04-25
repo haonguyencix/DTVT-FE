@@ -1,24 +1,31 @@
 import React, { lazy, Suspense } from "react";
 import { RenderRoutes } from "core/routes";
-import { PATH } from "shared/constants";
+import { Redirect } from "react-router-dom";
+import { TOKEN, PATH } from "shared/constants";
 import Spinner from "shared/components/Spinner";
 import Login from "./pages/Login";
+import * as Cookies from "js-cookie";
 
-const LectureLoginGuard = lazy(() => import("./guard"));
+const LectureLoginLayout = lazy(() => import("."));
 const Verify = lazy(() => import("./pages/Verify"));
 
-const LectureLoginWrapper = ({ routes }) => (
-  <Suspense fallback={<Spinner />}>
-    <LectureLoginGuard>
-      <RenderRoutes routes={routes} />
-    </LectureLoginGuard>
-  </Suspense>
-);
+const LectureLoginGuard = ({ routes }) => {
+  if (Cookies.get(TOKEN["LECTURE"])) {
+    return <Redirect to={PATH["LECTURE_HOME"]} />;
+  }
+  return (
+    <Suspense fallback={<Spinner />}>
+      <LectureLoginLayout>
+        <RenderRoutes routes={routes} />
+      </LectureLoginLayout>
+    </Suspense>
+  );
+};
 
 const LectureLoginRoutes = {
   key: "LECTURE_LOGIN",
   path: PATH["LECTURE_LOGIN"],
-  component: LectureLoginWrapper,
+  component: LectureLoginGuard,
   routes: [
     {
       key: "LOGIN_PAGE",

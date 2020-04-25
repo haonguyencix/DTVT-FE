@@ -1,22 +1,29 @@
 import React, { lazy, Suspense } from "react";
 import { RenderRoutes } from "core/routes";
-import { PATH } from "shared/constants";
+import { Redirect } from "react-router-dom";
+import { PATH, TOKEN } from "shared/constants";
 import Spinner from "shared/components/Spinner";
 import PostList from "shared/components/PostList";
 import NewsFeed from "./pages/NewsFeed";
+import * as Cookies from "js-cookie";
 
-const StudentHomeGuard = lazy(() => import("./guard"));
+const StudentHomeLayout = lazy(() => import("."));
 const TreeSubject = lazy(() => import("./pages/TreeSubject"));
 const StudentList = lazy(() => import("shared/components/StudentList"));
 const PostDetail = lazy(() => import("shared/components/PostDetail"));
 
-const StudentHomeWrapper = ({ routes }) => (
-  <Suspense fallback={<Spinner />}>
-    <StudentHomeGuard>
-      <RenderRoutes routes={routes} />
-    </StudentHomeGuard>
-  </Suspense>
-);
+const StudentHomeGuard = ({ routes }) => {
+  if (!Cookies.get(TOKEN["STUDENT"])) {
+    return <Redirect to={PATH["STUDENT_LOGIN"]} />;
+  }
+  return (
+    <Suspense fallback={<Spinner />}>
+      <StudentHomeLayout>
+        <RenderRoutes routes={routes} />
+      </StudentHomeLayout>
+    </Suspense>
+  );
+};
 
 const NewsFeedWrapper = ({ routes }) => (
   <NewsFeed>
@@ -27,7 +34,7 @@ const NewsFeedWrapper = ({ routes }) => (
 const StudentHomeRoutes = {
   key: "STUDENT_HOME",
   path: PATH["STUDENT_HOME"],
-  component: StudentHomeWrapper,
+  component: StudentHomeGuard,
   routes: [
     {
       key: "TREE_SUBJECT",

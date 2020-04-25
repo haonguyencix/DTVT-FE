@@ -3,33 +3,17 @@ import clsx from "clsx";
 import styles from "./styles.module.scss";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { sendAccessToken } from "core/services/utils";
-import { SOCKET, TOKEN } from "shared/constants";
+import { SOCKET } from "shared/constants";
 import { Container } from "@material-ui/core";
-import { actSendLoginToken } from "core/store/accounts/accountAction";
-import { getCredential } from "core/store/accounts/accountAction";
 import { actAdjustNumNoti } from "core/store/posts/postAction";
-import { getClassrooms } from "core/store/classrooms/classroomAction";
 import socket from "core/services/socket";
 import Navbar from "modules/StudentHome/components/Navbar";
 import Classrooms from "modules/StudentHome/components/Classrooms";
 import Notification from "modules/StudentHome/components/Notification";
-import * as Cookies from "js-cookie";
 
 const NewsFeed = (props) => {
   const dispatch = useDispatch();
   const isFetchStudentList = useSelector(state => state.classroomData.isFetchStudentList)
-
-  useEffect(() => {
-    const token = Cookies.get(TOKEN["STUDENT"]);
-
-    if (token) {
-      dispatch(actSendLoginToken(token));
-      sendAccessToken(token);
-      dispatch(getCredential());
-      dispatch(getClassrooms());
-    }
-  }, [dispatch]);
 
   useEffect(() => {
     socket.on(SOCKET.CREATE_POST_NOTI, (payload) => {
@@ -40,6 +24,7 @@ const NewsFeed = (props) => {
       });
       dispatch(actAdjustNumNoti(+1));
     });
+    return () => socket.close();
   }, [dispatch]);
 
   return (

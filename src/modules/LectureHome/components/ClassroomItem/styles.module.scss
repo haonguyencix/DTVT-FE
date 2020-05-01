@@ -1,0 +1,93 @@
+@import "assets/scss/variables";
+@import "assets/scss/mixins";
+
+.Container {
+    position: relative;
+    @include flex();
+    align-items: center;
+    margin-bottom: 10px;
+    .Content {
+        cursor: pointer;
+        &:hover {
+            color: $vivid-blue;
+            + .Hover {
+                display: block;
+            }
+        }
+    }
+    .Active {
+        color: $vivid-blue;
+        font-weight: $fw-bold;
+    }
+    .Hover {
+        display: none;
+        @include vertical-align(absolute);
+        right: -61px;
+        width: 310px;
+        z-index: 3;
+        background-color: $color-default-lightest;
+        border: 1px dotted $color-default-darkest;
+        padding: 8px;
+        @include border-radius(8px);
+        @include box-shadow();
+        > div {
+            @include flex();
+            align-items: center;
+            &::before {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: -11px;
+                background-color: $color-default-darkest;
+                width: 8px;
+                height: 8px;
+                @include transform(translateY(-50%) rotate(45deg));
+            }
+            .Icon {
+                @include vertical-align(absolute);
+                color: $color-default-darkest;
+                left: -11px;
+                z-index: 3;
+            }
+            > ul {
+                padding-left: 16px;
+                list-style: none;
+                > li {
+                    margin-bottom: 8px;
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
+    }
+    &::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        margin-right: 8px;
+        margin-left: 34px;
+        display: block;
+        background-color: $color-default-darkest;
+        @include border-radius(50%);
+        z-index: 2;
+    }
+    .Line {
+        position: absolute;
+        top: -28px;
+        left: 17.5px;
+        display: block;
+        width: 1.5px;
+        height: 28px;
+        background-color: $color-default-darkest;
+        &::after {
+            content: "";
+            position: absolute;
+            top: 52px;
+            left: -5px;
+            width: 20px;
+            border-bottom: 1.5px solid $color-default-darkest;
+            @include transform(translateY(-20px) translateX(5px) rotate(27deg));
+        }
+    }
+}

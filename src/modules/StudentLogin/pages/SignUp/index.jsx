@@ -17,7 +17,7 @@ import FabProgress from "shared/components/FabProgress";
 
 const SignUp = props => {
   const dispatch = useDispatch();
-  const isLoading = useSelector(state => state.isLoading);
+  const isLoading = useSelector(state => state.isLoading.fabProgess);
 
   return (
     <React.Fragment>

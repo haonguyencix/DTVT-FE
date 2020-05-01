@@ -22,7 +22,7 @@ import { PATH } from "shared/constants";
 const Verify = props => {
   const dispatch = useDispatch();
   const lectureId = useSelector(state => state.accountData.accountId);
-  const isLoading = useSelector(state => state.isLoading);
+  const isLoading = useSelector(state => state.isLoading.fabProgess);
   const otpData = useSelector(state => state.otpData);
 
   return (

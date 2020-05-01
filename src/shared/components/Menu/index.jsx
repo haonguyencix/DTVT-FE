@@ -3,17 +3,22 @@ import styles from "./styles.module.scss";
 import clsx from "clsx";
 
 const Menu = (props) => {
-  const { menuList, position } = props;
+  const { menuList, arrow } = props;
+  const { top, right, bottom, left } = props.position;
 
   return (
     <ul
       className={clsx(styles.Menu, {
-        [styles[position]]: true,
+        [styles[arrow]]: true,
       })}
+      style={{ top, bottom, left, right }}
     >
       {menuList &&
         menuList.map((item, index) => (
-          <li key={index} className={styles.MenuItem}>
+          <li
+            key={index}
+            className={styles.MenuItem}
+          >
             <span
               className={styles.Item}
               onClick={() => (item.event ? item.event() : {})}

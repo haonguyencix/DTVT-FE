@@ -18,7 +18,7 @@ const ResetPassword = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const studentId = useSelector(state => state.accountData.accountId);
-  const isLoading = useSelector(state => state.isLoading);
+  const isLoading = useSelector(state => state.isLoading.fabProgess);
 
   useEffect(() => {
     const token = Cookies.get(TOKEN["RESET_PASSWORD"]);

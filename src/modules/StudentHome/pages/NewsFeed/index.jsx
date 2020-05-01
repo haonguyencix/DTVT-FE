@@ -8,12 +8,12 @@ import { Container } from "@material-ui/core";
 import { actAdjustNumNoti } from "core/store/posts/postAction";
 import socket from "core/services/socket";
 import Navbar from "modules/StudentHome/components/Navbar";
-import Classrooms from "modules/StudentHome/components/Classrooms";
 import Notification from "modules/StudentHome/components/Notification";
+import Sidebar from "modules/StudentHome/components/Sidebar";
 
 const NewsFeed = (props) => {
   const dispatch = useDispatch();
-  const isFetchStudentList = useSelector(state => state.classroomData.isFetchStudentList)
+  const change = useSelector((state) => state.classroomData.isFetchStudentList);
 
   useEffect(() => {
     socket.on(SOCKET.CREATE_POST_NOTI, (payload) => {
@@ -28,21 +28,27 @@ const NewsFeed = (props) => {
   }, [dispatch]);
 
   return (
-      <Container>
-        <div className={styles.Wrapper}>
-          <div className={styles.Navbar}>
-            <Navbar />
-          </div>
-          <div className={clsx(styles.Children, {
-            [styles.ChildrenExpand]: isFetchStudentList
-          })}>{props.children}</div>
-          <div className={clsx(styles.Classrooms, {
-            [styles.ClassroomsShrink]: isFetchStudentList
-          })}>
-            <Classrooms />
-          </div>
+    <Container>
+      <div className={styles.Wrapper}>
+        <div className={styles.Navbar}>
+          <Navbar />
         </div>
-      </Container>
+        <div
+          className={clsx(styles.Children, {
+            [styles.ChildrenExpand]: change,
+          })}
+        >
+          {props.children}
+        </div>
+        <div
+          className={clsx(styles.Classrooms, {
+            [styles.ClassroomsShrink]: change,
+          })}
+        >
+          <Sidebar />
+        </div>
+      </div>
+    </Container>
   );
 };
 

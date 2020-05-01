@@ -2,7 +2,7 @@ import React, { lazy, Suspense } from "react";
 import { RenderRoutes } from "core/routes";
 import { Redirect } from "react-router-dom";
 import { PATH, TOKEN } from "shared/constants";
-import Spinner from "shared/components/Spinner";
+import LazyloadPage from "shared/components/LazyloadPage";
 import PostList from "shared/components/PostList";
 import NewsFeed from "./pages/NewsFeed";
 import * as Cookies from "js-cookie";
@@ -17,7 +17,7 @@ const StudentHomeGuard = ({ routes }) => {
     return <Redirect to={PATH["STUDENT_LOGIN"]} />;
   }
   return (
-    <Suspense fallback={<Spinner />}>
+    <Suspense fallback={<LazyloadPage />}>
       <StudentHomeLayout>
         <RenderRoutes routes={routes} />
       </StudentHomeLayout>

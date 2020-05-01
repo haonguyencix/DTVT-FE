@@ -1,15 +1,11 @@
 import React from "react";
 import styles from "./styles.module.scss";
-
-// import libraries
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-
-// import Material UI
 import { Fab, Tooltip, CircularProgress } from "@material-ui/core";
 
 const FabProgress = props => {
-  const isLoading = useSelector(state => state.isLoading);
+  const isLoading = useSelector(state => state.isLoading.fabProgess);
 
   return (
     <div className={props.className}>

@@ -9,19 +9,27 @@ import {
 import socket from "core/services/socket";
 import PostService from "./postService";
 import { SOCKET } from "shared/constants";
+import { actFetchPostsLoad } from "../loading/loadingAction";
 
 // async action
 export const getPosts = (condition, pagination) => {
   return (dispatch) => {
+    dispatch(actFetchPostsLoad("REQUEST"));
+
     PostService.getPosts(pagination)
       .then((res) => {
         if (res.data.length === 0) {
           dispatch(actStopFetch(true));
+          dispatch(actFetchPostsLoad("FAILURE"));
           return;
         }
+        dispatch(actFetchPostsLoad("SUCCESS"));
+
         dispatch(actFetchPostList(condition, res.data));
       })
       .catch((err) => {
+        dispatch(actFetchPostsLoad("FAILURE"));
+
         if (err.response) {
           toast.error(err.response.data.message);
         }

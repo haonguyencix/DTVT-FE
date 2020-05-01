@@ -1,35 +1,29 @@
 @import "assets/scss/variables";
 @import "assets/scss/mixins";
 
-.bottom {
-    right: 0;
-    margin-top: 6px;
-    &::before {
-        border-left: 1px solid $color-default-lighter;
-        border-top: 1px solid $color-default-lighter;
-        top: -6px;
-        right: 18px;
-    }
+.top::before {
+    border-top: 1px solid $color-default-lighter;
+    border-left: 1px solid $color-default-lighter;
+    top: -6px;
+    right: 18px;
 }
-.left {
-    top: -1px;
-    left: -198px;
-    &::before {
-        border-top: 1px solid $color-default-lighter;
-        border-right: 1px solid $color-default-lighter;
-        top: 18px;
-        right: -6px;
-    }
+.right::before {
+    border-right: 1px solid $color-default-lighter;
+    border-top: 1px solid $color-default-lighter;
+    top: 18px;
+    right: -6px;
 }
-.right {
-    top: -1px;
-    right: -198px;
-    &::before {
-        border-bottom: 1px solid $color-default-lighter;
-        border-left: 1px solid $color-default-lighter;
-        top: 18px;
-        left: -6px;
-    }
+.bottom::before {
+    border-bottom: 1px solid $color-default-lighter;
+    border-right: 1px solid $color-default-lighter;
+    bottom: -6px;
+    right: 18px;
+}
+.left::before {
+    border-left: 1px solid $color-default-lighter;
+    border-bottom: 1px solid $color-default-lighter;
+    top: 18px;
+    left: -6px;
 }
 .Menu {
     position: absolute;
@@ -69,5 +63,4 @@
             }
         }
     }
-    
 }

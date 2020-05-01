@@ -21,19 +21,34 @@ const ClassroomHover = (props) => {
     lastName,
     credits,
   } = props.item;
-  const clonePractice = practice ? ` - Thực hành ${practice}` : "";
+  const cloneTheory = theory
+  ? `Nhóm ${theory < 10 ? "0" + theory : theory}`
+  : "";
+  const clonePractice = practice
+  ? ` - Thực hành ${practice < 10 ? "0" + practice : practice}`
+  : "";
   const lecture = firstName + " " + lastName;
 
-  const renderTime = times.map((item, index) => (
-    <div key={index}>
-      Thứ {item.day}: tiết {item.start}-{item.start + (item.count - 1)} - phòng: {item.room}.
-    </div>
-  ));
+  const renderTime = times.map((item, index) => {
+    const { day, start, count, room } = item;
+
+    const session = () => {
+      if(1 <= start <= 5 ) return "Sáng";
+      if(6 <= start <= 10) return "Chiều";
+      if(11 <= start <= 13) return "Tối";
+    };
+
+    return (
+      <div key={index}>
+       {session()} thứ {day}: tiết {start}-{start + (count - 1)} - phòng: {room}.
+      </div>
+    );
+  });
 
   const classroomInfoArr = [
     { icon: VpnKey, content: subjectId },
     { icon: CollectionsBookmark, content: `${credits} tín chỉ` },
-    { icon: GroupWork, content: `Nhóm ${theory + clonePractice}` },
+    { icon: GroupWork, content: `${cloneTheory + clonePractice}` },
     { icon: WatchLater, content: <div>{renderTime}</div> },
   ];
 

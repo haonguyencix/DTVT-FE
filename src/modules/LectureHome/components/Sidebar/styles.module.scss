@@ -1,0 +1,18 @@
+@import "assets/scss/variables";
+@import "assets/scss/mixins";
+
+.Control {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    @include flex();
+    .Category {
+        width: 100%;
+    }
+    .SchoolYear {
+        flex-grow: 8;
+        margin-right: 16px;
+    }
+    .Semester {
+        flex-grow: 1;
+    }
+}

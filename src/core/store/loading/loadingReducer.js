@@ -1,21 +1,67 @@
-import { CHECK_FAB_PROGRESS } from "./loadingType";
+import {
+  CHECK_FAB_PROGRESS,
+  CHECK_FETCH_CLASSROOMS,
+  CHECK_FETCH_POSTS,
+  CHECK_FETCH_STUDENT_LIST,
+} from "./loadingType";
 
-let initialState = false;
+let initialState = {
+  fabProgess: false,
+  fetchClassroomsLoad: false,
+  fetchPostsLoad: false,
+  getStudentsLoad: false,
+};
 
 const LoadingReducer = (state = initialState, action) => {
   switch (action.type) {
     case CHECK_FAB_PROGRESS["REQUEST"]: {
-      return true;
+      return { ...state, fabProgess: true };
     }
 
     case CHECK_FAB_PROGRESS["SUCCESS"]: {
-      return false;
+      return { ...state, fabProgess: false };
     }
 
     case CHECK_FAB_PROGRESS["FAILURE"]: {
-      return false;
+      return { ...state, fabProgess: false };
     }
 
+    case CHECK_FETCH_CLASSROOMS["REQUEST"]: {
+      return { ...state, fetchClassroomsLoad: true };
+    }
+
+    case CHECK_FETCH_CLASSROOMS["SUCCESS"]: {
+      return { ...state, fetchClassroomsLoad: false };
+    }
+
+    case CHECK_FETCH_CLASSROOMS["FAILURE"]: {
+      return { ...state, fetchClassroomsLoad: false };
+    }
+ 
+    case CHECK_FETCH_POSTS["REQUEST"]: {
+      return { ...state, fetchPostsLoad: true };
+    }
+
+    case CHECK_FETCH_POSTS["SUCCESS"]: {
+      return { ...state, fetchPostsLoad: false };
+    }
+
+    case CHECK_FETCH_POSTS["FAILURE"]: {
+      return { ...state, fetchPostsLoad: false };
+    }
+ 
+    case CHECK_FETCH_STUDENT_LIST["REQUEST"]: {
+      return { ...state, getStudentsLoad: true };
+    }
+
+    case CHECK_FETCH_STUDENT_LIST["SUCCESS"]: {
+      return { ...state, getStudentsLoad: false };
+    }
+
+    case CHECK_FETCH_STUDENT_LIST["FAILURE"]: {
+      return { ...state, getStudentsLoad: false };
+    }
+ 
     default:
       return state;
   }

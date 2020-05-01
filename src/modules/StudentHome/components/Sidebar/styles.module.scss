@@ -1,27 +1,21 @@
 @import "assets/scss/variables";
 @import "assets/scss/mixins";
 
-.Container {
-  .Selects {
+.Control {
     flex-wrap: wrap;
     justify-content: space-between;
     @include flex();
-    > .FormControl {
-      &:nth-child(1) {
+    .SchoolYear {
         flex-grow: 8;
         margin-right: 16px;
-      }
-      &:nth-child(2) {
+    }
+    .Semester {
         flex-grow: 1;
-      }
     }
-    > .Shrink {
-      margin-right: 0!important;
-    }
-  }
-  .Classrooms {
+}
+
+.Classrooms {
     flex-wrap: wrap;
     justify-content: space-between;
     @include flex();
-  }
 }

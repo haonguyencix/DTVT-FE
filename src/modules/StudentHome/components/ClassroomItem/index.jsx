@@ -42,6 +42,8 @@ const ClassroomItem = (props) => {
     { icon: Timeline, content: "Điểm số" },
   ];
 
+  const position = { top: -1, left: -198 };
+
   const handleMouseMove = (event) => {
     const left = event.pageX - ClassItem.current.offsetLeft;
     const top = event.pageY - ClassItem.current.offsetTop;
@@ -85,7 +87,7 @@ const ClassroomItem = (props) => {
         </div>
         <p className={styles.LectureName}>{lecture}</p>
         {open ? (
-          <Menu menuList={menuList} position="left" />
+          <Menu menuList={menuList} position={position} arrow="right" />
         ) : (
           <span
             className={styles.Hover}

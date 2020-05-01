@@ -1,9 +1,8 @@
 import React, { useEffect, useCallback, useReducer } from 'react';
 import classes from './style.module.scss';
-import Spinner from 'shared/components/Spinner';
+import DispatchActLoad from 'shared/components/DispatchActLoad';
 import TreeSubjectService from 'core/store/treesubject/treesubjectService';
 import TreeList from 'modules/StudentHome/components/TreeList';
-
 
 const subjectReducer = (currentTree, action) => {
     switch (action.type) {
@@ -62,7 +61,7 @@ const httpReducer = (curHttpState, action) => {
         onFetchSubjects();
     }, [onFetchSubjects]);
 
-    return httpState.loading ? <Spinner /> : (
+    return httpState.loading ? <DispatchActLoad height="100vh" /> : (
         <div className={classes.TreeScreen}>
             <h5>HK1 - ({tree[1].allNum} TC)</h5>
             <TreeList subjects = {tree[1].subjects} />

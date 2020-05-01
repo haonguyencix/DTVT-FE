@@ -31,7 +31,9 @@ const CreatePost = () => {
 
   const radioArr = [
     { value: "news", label: "Bảng tin" },
-    { value: "classrooms", label: "Chọn theo nhóm lớp" }
+    { value: "classrooms", label: "Các lớp đang giảng dạy" },
+    { value: "class", label: "Các lớp đang chủ nhiệm" },
+    { value: "grade", label: "Các khóa sinh viên" },
   ];
 
   const renderRadios = radioArr.map((item, index) => (

@@ -1,9 +1,9 @@
 import { restConnector } from "core/services/axios";
 
 class ClassroomService {
-  getClassrooms(filter) {
+  getClassrooms(filter, role) {
     return restConnector({
-      url: `classrooms?schoolYear=${filter.schoolYear}&semester=${filter.semester}`,
+      url: `classrooms/${role}?schoolYear=${filter.schoolYear}&semester=${filter.semester}`,
       method: "GET",
     });
   }

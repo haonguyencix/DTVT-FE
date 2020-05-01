@@ -24,13 +24,15 @@ const MoreHorizon = props => {
     { icon: HighlightOff, content: "Xóa bài đăng", event: delPost }
   ]
 
+  const position = { top: 55, right: 0 };
+
   return (
     <ClickAwayListener onClickAway={() => setOpen(false)}>
       <div className={styles.Container}>
         <IconButton ref={horizBtn} onClick={() => setOpen(!open)}>
           <MoreHoriz />
         </IconButton>
-        {open && <Menu menuList={menuList} position="bottom" />}
+        {open && <Menu menuList={menuList} position={position} arrow="top" />}
       </div>
     </ClickAwayListener>
   );

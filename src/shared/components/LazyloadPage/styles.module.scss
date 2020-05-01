@@ -5,7 +5,7 @@
   z-index: 5;
   @include center-inside-element();
   @include font-size(100px);
-  .SugarcubeSpinner {
+  .SugarcubeLazyloadPage {
     position: relative;
     &:before {
       content: "";

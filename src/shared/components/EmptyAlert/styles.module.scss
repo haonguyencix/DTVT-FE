@@ -1,0 +1,16 @@
+@import "assets/scss/variables";
+@import "assets/scss/mixins";
+
+.Container {
+    color: $very-dark-red;
+    border: 1px solid $color-default-lighter;
+    background-color: $light-grayish-red;
+    margin-bottom: 16px;
+    @include border-radius(8px);
+    @include flex();
+    align-items: center;
+    justify-content: center;
+    @include font-size($fs-default);
+    width: 100%;
+    height: 100px; // default
+}

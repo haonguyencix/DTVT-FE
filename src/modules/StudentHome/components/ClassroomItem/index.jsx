@@ -30,9 +30,9 @@ const ClassroomItem = (props) => {
   const [open, setOpen] = useState(false);
 
   const routeStudentListPage = () => {
-    history.push(PATH["STUDENT_LIST_IN_CLASSROOM"] + `/${item.id}`);
+    history.push(PATH["STUDENT_LIST"] + `/${item.id}`);
   }
-
+  
   const menuList = [
     { icon: Home, content: "Bảng tin lớp" },
     { icon: AssignmentInd, content: "Danh sách lớp", event: routeStudentListPage },

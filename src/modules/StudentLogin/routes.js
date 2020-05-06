@@ -44,18 +44,18 @@ const StudentLoginRoutes = {
     },
     {
       key: "STUDENT_VERIFY",
-      path: PATH["STUDENT_VERIFY"],
+      path: PATH["VERIFY"],
       exact: true,
       component: Verify,
     },
     {
-      key: "FORGOT_PASSWORD",
+      key: "STUDENT_FORGOT_PASSWORD",
       path: PATH["FORGOT_PASSWORD"],
       exact: true,
       component: ForgotPassword,
     },
     {
-      key: "RESET_PASSWORD",
+      key: "STUDENT_RESET_PASSWORD",
       path: PATH["RESET_PASSWORD"],
       exact: true,
       component: ResetPassword,

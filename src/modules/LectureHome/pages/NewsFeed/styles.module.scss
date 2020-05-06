@@ -6,15 +6,18 @@
     @include flex();
     .Navbar {
         width: 19%;
-        .Clock {
-            position: fixed;
-        }
     }
     .Children {
         width: 50%;
         padding: 0 32px;
     }
+    .ChildrenExpand {
+        width: 63%;
+    }
     .Sidebar {
         width: 31%;
+    }
+    .SidebarShrink {
+        width: 18%;
     }
 }

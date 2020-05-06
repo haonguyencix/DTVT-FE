@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
 
-const useLazyScroll = () => {
-  const stopFetch = useSelector(state => state.postData.stopFetch);
-
+const useLazyScroll = (stopFetch) => {
   const [page, setPage] = useState(1);
   const [isFetching, setIsFetching] = useState(false);
 

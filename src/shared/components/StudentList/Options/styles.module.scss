@@ -1,0 +1,17 @@
+@import "assets/scss/variables";
+@import "assets/scss/mixins";
+
+.Container {
+    position: relative;
+    .IconButton {
+        background-color: transparent;
+        @include box-shadow();
+        &:hover {
+            background-color: $color-default-lightest;
+        }
+    }
+}
+
+.Active {
+    visibility: visible;
+}

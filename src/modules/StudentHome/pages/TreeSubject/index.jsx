@@ -29,7 +29,6 @@ const httpReducer = (curHttpState, action) => {
 };
 
  const TreeSubject = () => {
-
     const [tree, dispatchTree] = useReducer(subjectReducer, {
         1:{subjects:[], allNum:0},
         2:{subjects:[], allNum:0},

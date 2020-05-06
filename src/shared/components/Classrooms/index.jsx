@@ -5,6 +5,7 @@ import { sendAccessToken } from "core/services/utils";
 import { getClassrooms } from "core/store/classrooms/classroomAction";
 import * as Cookies from "js-cookie";
 import DispatchActLoad from "../DispatchActLoad";
+import EmptyAlert from "../EmptyAlert";
 
 const Classrooms = (props) => {
   const { className, role, render, value } = props;
@@ -28,7 +29,13 @@ const Classrooms = (props) => {
 
   return (
     <div className={className}>
-      {isLoading ? <DispatchActLoad height={280} /> : renderClassrooms}
+      {isLoading ? (
+        <DispatchActLoad height={280} />
+      ) : classrooms.length ? (
+        renderClassrooms
+      ) : (
+        <EmptyAlert msg="Không có kết quả" />
+      )}
     </div>
   );
 };

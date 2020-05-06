@@ -3,11 +3,12 @@ import { RenderRoutes } from "core/routes";
 import { Redirect } from "react-router-dom";
 import { TOKEN, PATH } from "shared/constants";
 import LazyloadPage from "shared/components/LazyloadPage";
-import PostList from "shared/components/PostList";
 import NewsFeed from "./pages/NewsFeed";
 import * as Cookies from "js-cookie";
+import PostsArea from "./pages/PostsArea";
 
 const LectureHomeLayout = lazy(() => import("."));
+const StudentList = lazy(() => import("shared/components/StudentList"));
 const PostDetail = lazy(() => import("shared/components/PostDetail"));
 
 const LectureHomeGuard = ({ routes }) => {
@@ -43,7 +44,13 @@ const LectureHomeRoutes = {
           key: "LECTURE_POST_LIST",
           path: PATH["LECTURE_HOME"],
           exact: true,
-          component: () => <PostList role="LECTURE" />,
+          component: PostsArea,
+        },
+        {
+          key: "LECTURE_STUDENT_LIST",
+          path: PATH["LECTURE_STUDENT_LIST"] + "/:classroomId",
+          exact: true,
+          component: () => <StudentList role="LECTURE" />,
         },
         {
           key: "LECTURE_POST_DETAIL",

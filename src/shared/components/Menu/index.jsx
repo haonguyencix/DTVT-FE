@@ -3,7 +3,7 @@ import styles from "./styles.module.scss";
 import clsx from "clsx";
 
 const Menu = (props) => {
-  const { menuList, arrow } = props;
+  const { menuList, arrow, width } = props;
   const { top, right, bottom, left } = props.position;
 
   return (
@@ -11,7 +11,7 @@ const Menu = (props) => {
       className={clsx(styles.Menu, {
         [styles[arrow]]: true,
       })}
-      style={{ top, bottom, left, right }}
+      style={{ top, bottom, left, right, width }}
     >
       {menuList &&
         menuList.map((item, index) => (

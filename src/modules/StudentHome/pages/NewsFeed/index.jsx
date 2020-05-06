@@ -41,8 +41,8 @@ const NewsFeed = (props) => {
           {props.children}
         </div>
         <div
-          className={clsx(styles.Classrooms, {
-            [styles.ClassroomsShrink]: change,
+          className={clsx(styles.Sidebar, {
+            [styles.SidebarShrink]: change,
           })}
         >
           <Sidebar />

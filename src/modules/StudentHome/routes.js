@@ -53,10 +53,10 @@ const StudentHomeRoutes = {
           component: () => <PostList role="STUDENT" />,
         },
         {
-          key: "STUDENT_LIST_IN_CLASSROOM",
-          path: PATH["STUDENT_LIST_IN_CLASSROOM"] + "/:classroomId",
+          key: "STUDENT_LIST",
+          path: PATH["STUDENT_LIST"] + "/:classroomId",
           exact: true,
-          component: StudentList,
+          component: () => <StudentList role="STUDENT" />
         },
         {
           key: "STUDENT_POST_DETAIL",

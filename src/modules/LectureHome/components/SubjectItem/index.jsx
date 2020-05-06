@@ -3,11 +3,14 @@ import styles from "./styles.module.scss";
 import { stringShortcut } from "core/services/utils";
 import { Tooltip } from "@material-ui/core";
 import ClassroomItem from "../ClassroomItem";
+import { useSelector } from "react-redux";
 
 const SubjectItem = (props) => {
   const { subjectName, classrooms } = props.item;
 
-  const [open, setOpen] = useState(false);
+  const change = useSelector((state) => state.classroomData.isFetchStudentList);
+
+  const [open, setOpen] = useState(true);
 
   return (
     <div className={styles.Container}>
@@ -17,12 +20,13 @@ const SubjectItem = (props) => {
         arrow
       >
         <div className={styles.SubjectName} onClick={() => setOpen(!open)}>
-          {stringShortcut(subjectName, 36)}
+          {stringShortcut(subjectName, !change ? 36 : 18)}
         </div>
       </Tooltip>
-      {open && classrooms.map((item, index) => (
-        <ClassroomItem key={index} item={item} />
-      ))}
+      {open &&
+        classrooms.map((item, index) => (
+          <ClassroomItem key={index} item={item} />
+        ))}
     </div>
   );
 };

@@ -14,6 +14,14 @@ class ClassroomService {
       method: "GET",
     });
   }
+
+  appointLead(studentId, classroomId, status) {
+    return restConnector({
+      url: `/classrooms/lead/${status}`,
+      method: "PUT",
+      data: { studentId, classroomId }
+    });
+  }
 }
 
 export default new ClassroomService();

@@ -7,15 +7,17 @@ import { sendAccessToken } from "core/services/utils";
 import { TOKEN } from "shared/constants";
 import * as Cookies from "js-cookie";
 import DispatchActLoad from "../DispatchActLoad";
+import EmptyAlert from "../EmptyAlert";
 
 const PostList = (props) => {
   const dispatch = useDispatch();
 
   const postList = useSelector((state) => state.postData.postList);
+  const stopFetch = useSelector((state) => state.postData.stopFetch);
   const isLoading = useSelector((state) => state.isLoading.fetchPostsLoad);
 
-  const page = useLazyScroll();
-
+  const page = useLazyScroll(stopFetch);
+  
   useEffect(() => {
     const token = Cookies.get(TOKEN[props.role]);
     const pagination = { page, limit: 5 };
@@ -30,7 +32,16 @@ const PostList = (props) => {
     <Post key={item.id} item={item} />
   ));
 
-  return <Fragment>{isLoading ? <DispatchActLoad height={400} /> : renderPosts}</Fragment>;
+  return (
+    <Fragment>
+      {isLoading ? <DispatchActLoad height={400} /> : renderPosts}
+      {!stopFetch ? (
+        <DispatchActLoad height={500} />
+      ) : (
+        <EmptyAlert msg="Không còn bài đăng nào" />
+      )}
+    </Fragment>
+  );
 };
 
 export default PostList;

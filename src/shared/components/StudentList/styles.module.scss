@@ -3,13 +3,27 @@
 
 .Container {
     position: relative;
+    .Title {
+        padding: 8px 16px;
+        font-weight: $fw-bold;
+        @include font-size($fs-medium);
+    }
     .TableContainer {
         background-color: $color-default-lightest;
         border: 1px solid $color-default-lighter;
         margin-bottom: 25px;
         @include border-radius(8px);
-        .Fullname {
-            text-transform: capitalize;
+        .TableRow {
+            &:hover {
+                background-color: $color-standard;
+                .Options {
+                    visibility: visible;
+                }
+            }
         }
     }
+}
+
+.Options {
+    visibility: hidden;
 }

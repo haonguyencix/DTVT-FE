@@ -12,15 +12,14 @@ import { SOCKET } from "shared/constants";
 import { actFetchPostsLoad } from "../loading/loadingAction";
 
 // async action
-export const getPosts = (condition, pagination) => {
+export const getPosts = (condition = false, pagination = { page: 1, limit: 5 }) => {
   return (dispatch) => {
-    dispatch(actFetchPostsLoad("REQUEST"));
+    !condition && dispatch(actFetchPostsLoad("REQUEST"));
 
     PostService.getPosts(pagination)
       .then((res) => {
         if (res.data.length === 0) {
           dispatch(actStopFetch(true));
-          dispatch(actFetchPostsLoad("FAILURE"));
           return;
         }
         dispatch(actFetchPostsLoad("SUCCESS"));
@@ -42,7 +41,7 @@ export const createPost = (formData, closeBtn, textarea) => {
     PostService.createPost(formData)
       .then((res) => {
         dispatch(actCheckSubmit(true));
-        dispatch(getPosts(false, { page: 1, limit: 5 }));
+        dispatch(getPosts());
 
         socket.emit(SOCKET.CREATE_POST_NOTI, res.data);
 
@@ -62,7 +61,7 @@ export const deletePost = (delObj, horizBtn) => {
   return (dispatch) => {
     PostService.deletePost(delObj)
       .then((res) => {
-        dispatch(getPosts(false, { page: 1, limit: 5 }));
+        dispatch(getPosts());
 
         horizBtn.click();
       })

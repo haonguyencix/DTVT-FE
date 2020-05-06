@@ -44,6 +44,26 @@ export const getStudentList = (classroomId) => {
   };
 };
 
+export const appointLead = (studentId, classroomId, status, horizBtn) => {
+  return (dispatch) => {
+    ClassroomService.appointLead(studentId, classroomId, status)
+      .then((res) => {
+        const { status, fullname } = res.data;
+
+        dispatch(getStudentList(classroomId));
+
+        horizBtn.click();
+
+        toast.info(`Bạn đã ${status.toLowerCase()} ${fullname} làm QTV`);
+      })
+      .catch((err) => {
+        if (err.response) {
+          toast.error(err.response.data.message);
+        }
+      });
+  };
+}
+
 // action creator
 export const actFetchClassroomList = (classrooms) => ({
   type: FETCH_CLASSROOM_LIST,

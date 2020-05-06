@@ -1,5 +1,6 @@
 import React, { useState, Fragment } from "react";
 import styles from "./styles.module.scss";
+import clsx from "clsx";
 import { useSelector } from "react-redux";
 import Classrooms from "shared/components/Classrooms";
 import ClassroomItem from "../ClassroomItem";
@@ -7,6 +8,7 @@ import Control from "shared/components/Control";
 
 const Sidebar = () => {
   const credential = useSelector((state) => state.accountData.credential);
+  const change = useSelector((state) => state.classroomData.isFetchStudentList);
   const now = new Date();
 
   const curSchoolYear = () => {
@@ -49,7 +51,7 @@ const Sidebar = () => {
       name: "schoolYear",
       content: "Niên khóa",
       options: mappingSchoolYear(),
-      styles: styles.SchoolYear,
+      styles: clsx(styles.SchoolYear, { [styles.NoMargin]: change }),
     },
     {
       name: "semester",

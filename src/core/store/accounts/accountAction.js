@@ -37,7 +37,7 @@ export const signUp = (values, push, role) => {
 
         toast.success("Đăng ký thành công!");
 
-        push(checkWho[role] ? PATH["LECTURE_VERIFY"] : PATH["STUDENT_VERIFY"]);
+        push(checkWho[role] ? PATH["LECTURE_VERIFY"] : PATH["VERIFY"]);
       })
       .catch((err) => {
         dispatch(actCheckFabProgress("FAILURE"));

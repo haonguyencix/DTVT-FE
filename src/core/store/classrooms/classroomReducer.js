@@ -2,7 +2,7 @@ import { FETCH_CLASSROOM_LIST, FETCH_STUDENT_LIST } from "./classroomType";
 
 let initialState = {
   classroomList: [],
-  studentList: [],
+  studentList: {},
   isFetchStudentList: false,
 };
 

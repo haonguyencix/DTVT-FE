@@ -32,7 +32,7 @@ const Options = (props) => {
     },
   ];
 
-  const position = { top: 40, right: 0 };
+  const position = { top: 37, right: 0 };
 
   return (
     <ClickAwayListener onClickAway={() => setOpen(false)}>

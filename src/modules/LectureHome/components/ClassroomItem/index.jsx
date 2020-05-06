@@ -41,7 +41,7 @@ const routeStudentListPage = () => {
     { icon: Timeline, content: "Điểm số" },
   ];
 
-  const position = { top: -14, right: 61 };
+  const position = { top: -14, left: -152 };
 
   const renderTime = times.map((item, index) => {
     const { day, start, count, room } = item;
@@ -74,7 +74,7 @@ const routeStudentListPage = () => {
           {cloneTheory + clonePractice}
         </span>
         {open ? (
-          <Menu menuList={menuList} position={position} arrow="left" />
+          <Menu menuList={menuList} position={position} arrow="right" />
         ) : (
           <div className={styles.Hover}>
             <div>

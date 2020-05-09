@@ -9,7 +9,7 @@ import Sidebar from "modules/LectureHome/components/Sidebar";
 import Navbar from "shared/components/Navbar";
 
 const NewsFeed = (props) => {
-  const change = useSelector((state) => state.classroomData.isFetchStudentList);
+  const change = useSelector((state) => state.classroomData.isFetchClassroom);
 
   const menuList = [
     { name: "Bảng tin", slug: PATH["LECTURE_HOME"], icon: Home },

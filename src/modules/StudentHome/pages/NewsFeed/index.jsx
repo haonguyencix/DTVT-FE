@@ -10,18 +10,11 @@ import socket from "core/services/socket";
 import Navbar from "shared/components/Navbar";
 import Notification from "modules/StudentHome/components/Notification";
 import Sidebar from "modules/StudentHome/components/Sidebar";
-import {
-  Home,
-  Description,
-  AssignmentInd,
-  Timeline,
-  FormatListNumbered,
-  Stars,
-} from "@material-ui/icons";
+import { Home, AssignmentInd, Stars } from "@material-ui/icons";
 
 const NewsFeed = (props) => {
   const dispatch = useDispatch();
-  const change = useSelector((state) => state.classroomData.isFetchStudentList);
+  const change = useSelector((state) => state.classroomData.isFetchClassroom);
   const credential = useSelector((state) => state.accountData.credential);
   const classId = credential ? "Lớp " + credential.classId : "";
 
@@ -40,9 +33,6 @@ const NewsFeed = (props) => {
   const menuList = [
     { name: "Bảng tin", slug: PATH["STUDENT_HOME"], icon: Home },
     { name: classId, slug: "/hello", icon: AssignmentInd },
-    { name: "Tài liệu", slug: "/uiz", icon: Description },
-    { name: "Bài tập", slug: "/uiz", icon: FormatListNumbered },
-    { name: "Điểm số", slug: "/ui1z", icon: Timeline },
     { name: "Đã thích", slug: "/ui1z", icon: Stars },
   ];
 

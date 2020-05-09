@@ -8,7 +8,7 @@ const CustomSelect = withStyles((theme) => ({
   },
   input: {
     borderRadius: 8,
-    fontSize: 16,
+    fontSize: 14,
     backgroundColor: theme.palette.background.paper,
     border: "1px solid #c1c1c1",
     padding: "10px 26px 10px 12px",

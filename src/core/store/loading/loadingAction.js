@@ -3,6 +3,7 @@ import {
   CHECK_FETCH_CLASSROOMS,
   CHECK_FETCH_POSTS,
   CHECK_FETCH_STUDENT_LIST,
+  CHECK_FETCH_CLASSROOM_INFO
 } from "./loadingType";
 
 // action creator
@@ -21,3 +22,7 @@ export const actFetchPostsLoad = (status) => ({
 export const actGetStudentListLoad = (status) => ({
   type: CHECK_FETCH_STUDENT_LIST[status],
 });
+
+export const actFetchClassroomInfoLoad = (status) => ({
+  type: CHECK_FETCH_CLASSROOM_INFO[status],
+})

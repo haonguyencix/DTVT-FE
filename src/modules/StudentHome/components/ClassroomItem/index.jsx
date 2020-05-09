@@ -24,7 +24,7 @@ const ClassroomItem = (props) => {
 
   const history = useHistory();
   const ClassItem = useRef(null);
-  const isFetchStudentList = useSelector(state => state.classroomData.isFetchStudentList)
+  const isFetchClassroom = useSelector(state => state.classroomData.isFetchClassroom)
 
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [open, setOpen] = useState(false);
@@ -58,7 +58,7 @@ const ClassroomItem = (props) => {
       <div
         ref={ClassItem}
         className={clsx(styles.ClassItem, {
-          [styles.ClassItemExpand]: isFetchStudentList
+          [styles.ClassItemExpand]: isFetchClassroom
         })}
         onMouseMove={handleMouseMove}
         onClick={() => setOpen(!open)}

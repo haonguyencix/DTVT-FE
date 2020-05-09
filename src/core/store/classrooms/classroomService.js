@@ -22,6 +22,13 @@ class ClassroomService {
       data: { studentId, classroomId }
     });
   }
+
+  getClassroomInfo(classroomId) {
+    return restConnector({
+      url: `classrooms/info?classroomId=${classroomId}`,
+      method: "GET",
+    });
+  }
 }
 
 export default new ClassroomService();

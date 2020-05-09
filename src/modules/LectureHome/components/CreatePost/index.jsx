@@ -10,16 +10,23 @@ import {
   Button,
   Radio,
   RadioGroup,
-  FormControlLabel
+  FormControlLabel,
 } from "@material-ui/core";
 import { Image, Close } from "@material-ui/icons";
-import { createPost, actCheckSubmit } from "core/store/posts/postAction";
+import {
+  createPost,
+  actCheckSubmit,
+  actSetBubble,
+} from "core/store/posts/postAction";
 import ImageItem from "../ImageItem";
 
 const CreatePost = () => {
   const dispatch = useDispatch();
 
-  const isSubmit = useSelector(state => state.postData.isSubmit);
+  const isSubmit = useSelector((state) => state.postData.isSubmit);
+  const classroomSelecteds = useSelector(
+    (state) => state.classroomData.classroomSelecteds
+  );
 
   const imageUpload = useRef(null);
   const closeBtn = useRef(null);
@@ -30,39 +37,35 @@ const CreatePost = () => {
   const [imgUploadArr, setImgUploadArr] = useState([]);
 
   const radioArr = [
-    { value: "news", label: "Bảng tin" },
-    { value: "classrooms", label: "Các lớp đang giảng dạy" },
-    { value: "class", label: "Các lớp đang chủ nhiệm" },
-    { value: "grade", label: "Các khóa sinh viên" },
+    { value: "newsfeed", label: "Bảng tin" },
+    { value: "groups", label: "Đăng tin theo nhóm" },
   ];
 
   const renderRadios = radioArr.map((item, index) => (
     <FormControlLabel
       key={index}
+      label={item.label}
       value={item.value}
       control={<Radio className={styles.Radio} />}
-      label={item.label}
     />
   ));
 
-  const uploadImagesChangedHandler = event => {
+  const uploadImagesChangedHandler = (event) => {
     let cloneImgArr = [...imgUploadArr];
 
     for (const file of event.target.files) {
-      const id = Math.random()
-        .toString(36)
-        .substr(2, 9);
+      const id = Math.random().toString(36).substr(2, 9);
       cloneImgArr.push({ id, file, url: URL.createObjectURL(file) });
     }
 
     setImgUploadArr(cloneImgArr);
   };
 
-  const deleteImageItem = id => {
-    setImgUploadArr(imgUploadArr.filter(item => item.id !== id));
+  const deleteImageItem = (id) => {
+    setImgUploadArr(imgUploadArr.filter((item) => item.id !== id));
   };
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     setValues({ ...values, [event.target.name]: event.target.value });
   };
 
@@ -74,31 +77,48 @@ const CreatePost = () => {
     }
 
     formData.append("postContent", values.textarea);
-    // formData.append("postCategoryId", values.radio);
 
-    if(values.textarea.length > 0) {
+    const reducer = (acc, cur) => acc.concat(cur);
+    const selecteds = Object.values(classroomSelecteds).reduce(reducer, []);
+
+    if (values.radio === "groups") {
+      formData.append("destination", selecteds.join(','));
+    }
+
+    if (values.textarea.length > 0) {
       dispatch(createPost(formData, closeBtn.current, textarea.current));
     }
   };
 
   useEffect(() => {
-    if(isSubmit) {
-      setImgUploadArr([])
+    if (isSubmit) {
+      setImgUploadArr([]);
       dispatch(actCheckSubmit(false));
     }
-  }, [isSubmit, dispatch])
+  }, [isSubmit, dispatch]);
+
+  useEffect(() => {
+    if (values.radio === "groups") {
+      dispatch(actSetBubble(true));
+    } else {
+      dispatch(actSetBubble(false));
+    }
+    if (isActive === false) {
+      dispatch(actSetBubble(false));
+    }
+  }, [isActive, dispatch, values.radio]);
 
   return (
     <Fragment>
       <div
         onClick={() => setIsActive(false)}
         className={clsx(styles.ShowOverlay, {
-          [styles.HideOverlay]: !isActive
+          [styles.HideOverlay]: !isActive,
         })}
       ></div>
       <div
         className={clsx(styles.Container, {
-          [styles.Bubble]: isActive
+          [styles.Bubble]: isActive,
         })}
       >
         <div className={styles.Header}>
@@ -127,8 +147,15 @@ const CreatePost = () => {
                 ref={textarea}
                 name="textarea"
                 className={styles.Textarea}
-                placeholder={isActive ? "Bạn viết gì đó đi..." : "Nội dung bạn muốn chia sẻ là gì?"}
                 onChange={handleChange}
+                autoComplete="off"
+                autoCorrect="off"
+                spellCheck="false"
+                placeholder={
+                  isActive
+                    ? "Bạn viết gì đó đi..."
+                    : "Nội dung bạn muốn chia sẻ là gì?"
+                }
               ></TextareaAutosize>
             </div>
             {isActive && (

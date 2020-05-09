@@ -15,33 +15,27 @@
             }
         }
     }
-    .Active {
-        color: $vivid-blue;
-        font-weight: $fw-bold;
-    }
     .Hover {
         display: none;
         position: absolute;
-        left: -4px;
-        top: 22px;
+        left: -1px;
+        top: 27px;
         width: 340px;
         z-index: 3;
         background-color: $color-default-lightest;
-        border: 1px dotted $color-default-darkest;
         padding: 8px;
         @include border-radius(8px);
         @include box-shadow();
         > div {
             @include flex();
             align-items: center;
-            > ul {
-                padding-left: 16px;
-                list-style: none;
-                > li {
-                    margin-bottom: 8px;
-                    &:last-child {
-                        margin-bottom: 0;
-                    }
+            .Icon {
+                margin-right: 19px;
+            }
+            > ul > li {
+                margin-bottom: 8px;
+                &:last-child {
+                    margin-bottom: 0;
                 }
             }
         }
@@ -74,5 +68,21 @@
             border-bottom: 1.5px solid $color-default-darkest;
             @include transform(translateY(-20px) translateX(5px) rotate(27deg));
         }
+    }
+}
+
+.Active {
+    > span.Line {
+        background-color: $vivid-blue;
+        &::after {
+            border-color: $vivid-blue;
+        }
+    }
+    > span.Content {
+        color: $vivid-blue;
+        font-weight: $fw-bold;
+    }
+    &::before {
+        background-color: $vivid-blue;
     }
 }

@@ -1,21 +1,55 @@
 @import "assets/scss/variables";
 @import "assets/scss/mixins";
 
-.Control {
-    flex-wrap: wrap;
-    justify-content: space-between;
-    @include flex();
-    .Category {
-        width: 100%;
+.Container {
+    @include transition();
+    .CreateClassBtn {
+        text-align: left;
+        padding: 8px 14px;
+        margin-bottom: 18px;
+        color: $color-default-lightest;
+        background-color: $color-default-darkest;
+        @include border-radius(8px);
+        > span {
+            justify-content: unset;
+        }
+        &:hover {
+            color: $color-default-lightest;
+            background-color: $color-default-darkest;
+        }
     }
-    .SchoolYear {
-        flex-grow: 8;
-        margin-right: 16px;
+    button.BtnDisabled {
+        color: $color-default-darkest;
     }
-    .NoMargin {
-        margin-right: 0;
+    .Control {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        @include flex();
+        .Category {
+            width: 100%;
+        }
+        .SchoolYear {
+            flex-grow: 8;
+            margin-right: 16px;
+        }
+        .Semester {
+            flex-grow: 1;
+        }
     }
-    .Semester {
-        flex-grow: 1;
+}
+
+.SidebarFixed {
+    position: fixed;
+    width: 243px;
+}
+
+.Bubble {
+    padding: 8px;
+    z-index: 4;
+    position: relative;
+    background-color: $color-standard;
+    @include border-radius(8px);
+    button.CreateClassBtn {
+        @include border-radius(5px);
     }
 }

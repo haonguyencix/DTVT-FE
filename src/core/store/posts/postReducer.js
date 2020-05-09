@@ -1,11 +1,12 @@
-import { FETCH_POST_LIST, STOP_FETCH_POSTS, CHECK_SUBMIT, FETCH_NOTI_LIST, ADJUST_NUM_NOTI } from "./postType";
+import { FETCH_POST_LIST, STOP_FETCH_POSTS, CHECK_SUBMIT, FETCH_NOTI_LIST, ADJUST_NUM_NOTI, CHECK_BUBBLE_CREATE_POST } from "./postType";
 
 let initialState = {
   postList: [],
   stopFetch: false,
   isSubmit: false,
   notiList: [],
-  numNoti: 0
+  numNoti: 0,
+  isBubble: false,
 };
 
 const PostReducer = (state = initialState, { type, payload }) => {
@@ -29,6 +30,9 @@ const PostReducer = (state = initialState, { type, payload }) => {
 
     case ADJUST_NUM_NOTI:
       return { ...state, numNoti: state.numNoti + payload }
+
+    case CHECK_BUBBLE_CREATE_POST:
+      return { ...state, isBubble: payload }
       
     default:
       return state;

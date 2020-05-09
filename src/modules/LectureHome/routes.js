@@ -4,8 +4,9 @@ import { Redirect } from "react-router-dom";
 import { TOKEN, PATH } from "shared/constants";
 import LazyloadPage from "shared/components/LazyloadPage";
 import NewsFeed from "./pages/NewsFeed";
+import PostsArea from "./components/PostsArea";
+import ClassroomDetail from "./pages/ClassroomDetail";
 import * as Cookies from "js-cookie";
-import PostsArea from "./pages/PostsArea";
 
 const LectureHomeLayout = lazy(() => import("."));
 const StudentList = lazy(() => import("shared/components/StudentList"));
@@ -30,6 +31,12 @@ const NewsFeedWrapper = ({ routes }) => (
   </NewsFeed>
 );
 
+const ClassroomDetailWrapper = ({ routes }) => (
+  <ClassroomDetail role="LECTURE">
+    <RenderRoutes routes={routes} />
+  </ClassroomDetail>
+);
+
 const LectureHomeRoutes = {
   key: "LECTURE_HOME",
   path: PATH["LECTURE_HOME"],
@@ -41,16 +48,23 @@ const LectureHomeRoutes = {
       component: NewsFeedWrapper,
       routes: [
         {
+          key: "LECTURE_CLASSROOM",
+          path: PATH["LECTURE_CLASSROOM"](PATH["CLASSROOM_ID"]),
+          component: ClassroomDetailWrapper,
+          routes: [
+            {
+              key: "LECTURE_STUDENT_LIST",
+              path: PATH["LECTURE_STUDENT_LIST"](PATH["CLASSROOM_ID"]),
+              exact: true,
+              component: () => <StudentList role="LECTURE" />,
+            },
+          ]
+        },
+        {
           key: "LECTURE_POST_LIST",
           path: PATH["LECTURE_HOME"],
           exact: true,
           component: PostsArea,
-        },
-        {
-          key: "LECTURE_STUDENT_LIST",
-          path: PATH["LECTURE_STUDENT_LIST"] + "/:classroomId",
-          exact: true,
-          component: () => <StudentList role="LECTURE" />,
         },
         {
           key: "LECTURE_POST_DETAIL",

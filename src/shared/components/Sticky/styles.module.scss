@@ -1,0 +1,7 @@
+.Wrapper {
+    position: relative;
+}
+.IsSticky > .Inner {
+    position: fixed;
+    z-index: 1;
+}

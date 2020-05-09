@@ -12,8 +12,11 @@
         overflow: visible;
         background-color: $color-default-lightest;
         border: 1px solid $color-default-lighter;
-        margin-bottom: 55px;
+        margin-bottom: 20px;
         @include border-radius(8px);
+        &:last-child {
+            margin-bottom: 60px;
+        }
         .TableRow {
             &:hover {
                 background-color: $color-standard;

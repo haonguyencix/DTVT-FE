@@ -1,6 +1,5 @@
 import React, { useState, Fragment } from "react";
 import styles from "./styles.module.scss";
-import clsx from "clsx";
 import { useSelector } from "react-redux";
 import Classrooms from "shared/components/Classrooms";
 import ClassroomItem from "../ClassroomItem";
@@ -8,7 +7,7 @@ import Control from "shared/components/Control";
 
 const Sidebar = () => {
   const credential = useSelector((state) => state.accountData.credential);
-  const change = useSelector((state) => state.classroomData.isFetchStudentList);
+  const change = useSelector((state) => state.classroomData.isFetchClassroom);
   const now = new Date();
 
   const curSchoolYear = () => {
@@ -35,27 +34,23 @@ const Sidebar = () => {
   };
 
   const mappingSchoolYear = () => {
-    let mapping = [];
     const curYear = now.getFullYear();
     const curGrade = credential ? credential.classId.slice(4, 6) : "";
     const yearIn = ("20" + curGrade) * 1;
     const mod = curGrade ? curYear - yearIn : 0;
-    Array.from({ length: mod }, (v, i) =>
-      mapping.push(`${yearIn + i}-${yearIn + i + 1}`)
-    );
-    return mapping;
+    return Array.from({ length: mod }, (v, i) => `${yearIn + i}-${yearIn + i + 1}`);
   };
 
   const selectList = [
     {
       name: "schoolYear",
-      content: "Niên khóa",
+      content: change ? "NK" : "Niên khóa",
       options: mappingSchoolYear(),
-      styles: clsx(styles.SchoolYear, { [styles.NoMargin]: change }),
+      styles: styles.SchoolYear,
     },
     {
       name: "semester",
-      content: "Học kỳ",
+      content: change ? "HK" : "Học kỳ",
       options: ["I", "II", "hè"],
       styles: styles.Semester,
     },

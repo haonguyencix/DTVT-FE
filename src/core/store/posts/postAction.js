@@ -5,6 +5,7 @@ import {
   CHECK_SUBMIT,
   FETCH_NOTI_LIST,
   ADJUST_NUM_NOTI,
+  CHECK_BUBBLE_CREATE_POST,
 } from "./postType";
 import socket from "core/services/socket";
 import PostService from "./postService";
@@ -109,3 +110,8 @@ export const actAdjustNumNoti = (direction) => ({
   type: ADJUST_NUM_NOTI,
   payload: direction,
 });
+
+export const actSetBubble = (status) => ({
+  type: CHECK_BUBBLE_CREATE_POST,
+  payload: status
+})

@@ -3,6 +3,7 @@ import {
   CHECK_FETCH_CLASSROOMS,
   CHECK_FETCH_POSTS,
   CHECK_FETCH_STUDENT_LIST,
+  CHECK_FETCH_CLASSROOM_INFO
 } from "./loadingType";
 
 let initialState = {
@@ -10,6 +11,7 @@ let initialState = {
   fetchClassroomsLoad: false,
   fetchPostsLoad: false,
   getStudentsLoad: false,
+  fetchClassroomInfoLoad: false,
 };
 
 const LoadingReducer = (state = initialState, action) => {
@@ -60,6 +62,18 @@ const LoadingReducer = (state = initialState, action) => {
 
     case CHECK_FETCH_STUDENT_LIST["FAILURE"]: {
       return { ...state, getStudentsLoad: false };
+    }
+
+    case CHECK_FETCH_CLASSROOM_INFO["REQUEST"]: {
+      return { ...state, fetchClassroomInfoLoad: true };
+    }
+
+    case CHECK_FETCH_CLASSROOM_INFO["SUCCESS"]: {
+      return { ...state, fetchClassroomInfoLoad: false };
+    }
+
+    case CHECK_FETCH_CLASSROOM_INFO["FAILURE"]: {
+      return { ...state, fetchClassroomInfoLoad: false };
     }
  
     default:

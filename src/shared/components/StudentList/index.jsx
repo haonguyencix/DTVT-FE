@@ -30,8 +30,8 @@ const StudentList = (props) => {
   const { role } = props;
   const { classroomId } = useParams();
   const dispatch = useDispatch();
-  const studentList = useSelector((state) => state.classroomData.studentList);
   const isLoading = useSelector((state) => state.isLoading.getStudentsLoad);
+  const studentList = useSelector((state) => state.classroomData.studentList);
 
   const renderStudents = (arr) =>
     arr.map((item, index) => {
@@ -88,7 +88,7 @@ const StudentList = (props) => {
       dispatch(getStudentList(classroomId));
     }
 
-    return () => dispatch(actFetchStudentList([], false));
+    return () => dispatch(actFetchStudentList({}, false));
   }, [dispatch, classroomId, role]);
 
   return (

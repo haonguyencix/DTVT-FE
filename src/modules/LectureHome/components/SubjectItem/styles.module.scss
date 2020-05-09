@@ -26,4 +26,40 @@
             z-index: 2;
         }
     }
+    .Root {
+        @include flex();
+        align-items: center;
+        margin-right: 0;
+        margin-left: -2px;
+        .Label {
+            font-weight: $fw-bold;
+            text-transform: uppercase;
+            letter-spacing: -0.3px;
+            @include font-size($fs-default);
+        }
+    }
+    .ItemRoot {
+        @include flex();
+        margin-left: 27px;
+        margin-right: 0;
+        .ItemLabel {
+            @include font-size($fs-regular);
+        }
+    }
+    .CheckBox {
+        color: $color-default-darkest;
+        &:hover {
+            @include background-opacity($color-default-darkest, 0.08);
+        }
+    }
+    span.Checked {
+        color: $primary-classic-blue;
+        &:hover {
+            @include background-opacity($primary-classic-blue, 0.08);
+        }
+    }
+}
+
+.Bubble {
+    margin-bottom: 0;
 }

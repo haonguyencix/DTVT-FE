@@ -1,14 +1,17 @@
-import React, { useState, Fragment } from "react";
+import React, { useState } from "react";
 import styles from "./styles.module.scss";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
+import { Button } from "@material-ui/core";
+import { Add } from "@material-ui/icons";
 import Classrooms from "shared/components/Classrooms";
 import Control from "shared/components/Control";
 import SubjectItem from "../SubjectItem";
 
 const Sidebar = () => {
   const now = new Date();
-  const change = useSelector((state) => state.classroomData.isFetchStudentList);
+  const change = useSelector((state) => state.classroomData.isFetchClassroom);
+  const isBubble = useSelector((state) => state.postData.isBubble);
 
   const curSchoolYear = () => {
     const curMonth = now.getMonth();
@@ -53,20 +56,33 @@ const Sidebar = () => {
     },
     {
       name: "schoolYear",
-      content: "Niên khóa",
+      content: change ? "NK" : "Niên khóa",
       options: mappingSchoolYear(),
-      styles: clsx(styles.SchoolYear, { [styles.NoMargin]: change }),
+      styles: styles.SchoolYear,
     },
     {
       name: "semester",
-      content: "Học kỳ",
+      content: change ? "HK" : "Học kỳ",
       options: ["I", "II", "hè"],
       styles: styles.Semester,
     },
   ];
 
   return (
-    <Fragment>
+    <div className={clsx(styles.Container, {
+      [styles.SidebarFixed]: change,
+      [styles.Bubble]: isBubble
+    })}>
+      <Button
+        variant="contained"
+        className={styles.CreateClassBtn}
+        startIcon={<Add />}
+        disabled={isBubble}
+        classes={{ disabled: styles.BtnDisabled }}
+        fullWidth
+      >
+        {!isBubble ? "Tạo lớp mới" : "Chọn nhóm bên dưới nhé!"}
+      </Button>
       <Control
         value={value}
         selectList={selectList}
@@ -78,7 +94,7 @@ const Sidebar = () => {
         role="LECTURE"
         render={(item) => <SubjectItem item={item} />}
       />
-    </Fragment>
+    </div>
   );
 };
 

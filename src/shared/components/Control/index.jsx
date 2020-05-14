@@ -29,25 +29,29 @@ const Control = (props) => {
   return (
     <div className={className}>
       {selectList &&
-        selectList.map((item) => (
-          <FormControl
-            key={item.name}
-            className={item.styles}
-          >
-            <NativeSelect
-              input={<CustomSelect />}
-              value={value[item.name]}
-              onChange={handleChange}
-              name={item.name}
+        selectList.map((item) => {
+          const { name, common = "", options, styles, disabled = false } = item;
+          return (
+            <FormControl
+              key={name}
+              className={styles}
+              disabled={disabled}
             >
-              {item.options.map((i) => (
-                <option key={i} value={i}>
-                  {item.content} {i}
-                </option>
-              ))}
-            </NativeSelect>
-          </FormControl>
-        ))}
+              <NativeSelect
+                input={<CustomSelect />}
+                value={value[name]}
+                onChange={handleChange}
+                name={name}
+              >
+                {Object.keys(options).map((v, i) => (
+                  <option key={i} value={v}>
+                    {common} {options[v]}
+                  </option>
+                ))}
+              </NativeSelect>
+            </FormControl>
+          )
+        })}
     </div>
   );
 };

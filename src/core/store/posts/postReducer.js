@@ -1,4 +1,12 @@
-import { FETCH_POST_LIST, STOP_FETCH_POSTS, CHECK_SUBMIT, FETCH_NOTI_LIST, ADJUST_NUM_NOTI, CHECK_BUBBLE_CREATE_POST } from "./postType";
+import {
+  FETCH_POST_LIST,
+  STOP_FETCH_POSTS,
+  CHECK_SUBMIT,
+  FETCH_NOTI_LIST,
+  ADJUST_NUM_NOTI,
+  CHECK_BUBBLE_CREATE_POST,
+  SELECT_POST_TYPE,
+} from "./postType";
 
 let initialState = {
   postList: [],
@@ -7,6 +15,7 @@ let initialState = {
   notiList: [],
   numNoti: 0,
   isBubble: false,
+  typeSelected: 0,
 };
 
 const PostReducer = (state = initialState, { type, payload }) => {
@@ -16,7 +25,7 @@ const PostReducer = (state = initialState, { type, payload }) => {
         ...state,
         postList: payload.condition
           ? [...state.postList, ...payload.postList]
-          : payload.postList
+          : payload.postList,
       };
 
     case STOP_FETCH_POSTS:
@@ -26,14 +35,17 @@ const PostReducer = (state = initialState, { type, payload }) => {
       return { ...state, isSubmit: payload };
 
     case FETCH_NOTI_LIST:
-      return { ...state, notiList: payload}
+      return { ...state, notiList: payload };
 
     case ADJUST_NUM_NOTI:
-      return { ...state, numNoti: state.numNoti + payload }
+      return { ...state, numNoti: state.numNoti + payload };
 
     case CHECK_BUBBLE_CREATE_POST:
-      return { ...state, isBubble: payload }
-      
+      return { ...state, isBubble: payload };
+
+    case SELECT_POST_TYPE:
+      return { ...state, typeSelected: payload };
+
     default:
       return state;
   }

@@ -1,12 +1,21 @@
 import React, { Fragment } from "react";
 import CreatePost from "modules/LectureHome/components/CreatePost";
 import PostList from "shared/components/PostList";
+import { useParams } from "react-router-dom";
 
 const PostsArea = () => {
+  const { classroomId, postType } = useParams();
   return (
     <Fragment>
-      <CreatePost />
-      <PostList role="LECTURE" />
+      <CreatePost
+        junctionId={classroomId ? classroomId : ""}
+        type={postType ? parseInt(postType) : 0}
+      />
+      <PostList
+        role="LECTURE"
+        junctionId={classroomId ? classroomId : ""}
+        type={postType ? parseInt(postType) : 0}
+      />
     </Fragment>
   );
 };

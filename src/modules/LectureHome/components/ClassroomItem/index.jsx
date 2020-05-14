@@ -29,7 +29,7 @@ const ClassroomItem = (props) => {
 
   return (
     <NavLink
-      to={PATH["LECTURE_CLASSROOM"](id)}
+      to={PATH["LECTURE_CLASSROOM_NEWSFEED"](id, 1)}
       className={styles.Container}
       activeClassName={styles.Active}
     >

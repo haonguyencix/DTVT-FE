@@ -6,6 +6,7 @@ import {
   FETCH_NOTI_LIST,
   ADJUST_NUM_NOTI,
   CHECK_BUBBLE_CREATE_POST,
+  SELECT_POST_TYPE
 } from "./postType";
 import socket from "core/services/socket";
 import PostService from "./postService";
@@ -13,11 +14,11 @@ import { SOCKET } from "shared/constants";
 import { actFetchPostsLoad } from "../loading/loadingAction";
 
 // async action
-export const getPosts = (condition = false, pagination = { page: 1, limit: 5 }) => {
+export const getPosts = (condition = false, pagination = { page: 1, limit: 5 }, filter) => {
   return (dispatch) => {
     !condition && dispatch(actFetchPostsLoad("REQUEST"));
 
-    PostService.getPosts(pagination)
+    PostService.getPosts(pagination, filter)
       .then((res) => {
         if (res.data.length === 0) {
           dispatch(actStopFetch(true));
@@ -37,12 +38,12 @@ export const getPosts = (condition = false, pagination = { page: 1, limit: 5 }) 
   };
 };
 
-export const createPost = (formData, closeBtn, textarea) => {
+export const createPost = (formData, closeBtn, textarea, filter) => {
   return (dispatch) => {
     PostService.createPost(formData)
       .then((res) => {
         dispatch(actCheckSubmit(true));
-        dispatch(getPosts());
+        dispatch(getPosts(undefined, undefined, filter));
 
         socket.emit(SOCKET.CREATE_POST_NOTI, res.data);
 
@@ -62,7 +63,7 @@ export const deletePost = (delObj, horizBtn) => {
   return (dispatch) => {
     PostService.deletePost(delObj)
       .then((res) => {
-        dispatch(getPosts());
+        dispatch(getPosts(undefined, undefined, { type: delObj.postType, junctionId: delObj.junctionId }));
 
         horizBtn.click();
       })
@@ -114,4 +115,9 @@ export const actAdjustNumNoti = (direction) => ({
 export const actSetBubble = (status) => ({
   type: CHECK_BUBBLE_CREATE_POST,
   payload: status
+})
+
+export const actSelectPostType = (selected) => ({
+  type: SELECT_POST_TYPE,
+  payload: selected
 })

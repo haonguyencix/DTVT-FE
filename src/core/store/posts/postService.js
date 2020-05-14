@@ -17,9 +17,9 @@ class PostService {
     });
   }
   
-  getPosts(pagination) {
+  getPosts(pagination, filter) {
     return restConnector({
-      url: `posts?page=${pagination.page}&limit=${pagination.limit}`,
+      url: `posts?page=${pagination.page}&limit=${pagination.limit}&type=${filter.type}&junctionId=${filter.junctionId}`,
       method: "GET"
     });
   }

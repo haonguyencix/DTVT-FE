@@ -10,6 +10,7 @@ import DispatchActLoad from "../DispatchActLoad";
 import EmptyAlert from "../EmptyAlert";
 
 const PostList = (props) => {
+  const { role, junctionId, type } = props;
   const dispatch = useDispatch();
 
   const postList = useSelector((state) => state.postData.postList);
@@ -19,14 +20,15 @@ const PostList = (props) => {
   const page = useLazyScroll(stopFetch);
   
   useEffect(() => {
-    const token = Cookies.get(TOKEN[props.role]);
+    const token = Cookies.get(TOKEN[role]);
     const pagination = { page, limit: 5 };
+    const filter = { type, junctionId };
 
     if (token) {
       sendAccessToken(token);
-      dispatch(getPosts(page > 1, pagination));
+      dispatch(getPosts(page > 1, pagination, filter));
     }
-  }, [dispatch, page, props.role]);
+  }, [dispatch, page, role, type, junctionId]);
 
   const renderPosts = postList.map((item) => (
     <Post key={item.id} item={item} />

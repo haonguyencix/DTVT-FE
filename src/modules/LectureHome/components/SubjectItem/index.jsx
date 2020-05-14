@@ -8,7 +8,7 @@ import ClassroomItem from "../ClassroomItem";
 import { actSetClassroomSelecteds } from "core/store/classrooms/classroomAction";
 
 const SubjectItem = (props) => {
-  const { subjectId, subjectName, classrooms } = props.item;
+  const { subjectId = "", subjectName = "", classrooms = [] } = props.item;
 
   const dispatch = useDispatch();
 

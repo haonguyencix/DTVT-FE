@@ -17,13 +17,16 @@ import {
   createPost,
   actCheckSubmit,
   actSetBubble,
+  actSelectPostType,
 } from "core/store/posts/postAction";
 import ImageItem from "../ImageItem";
 
-const CreatePost = () => {
+const CreatePost = (props) => {
+  const { type, junctionId } = props;
   const dispatch = useDispatch();
 
   const isSubmit = useSelector((state) => state.postData.isSubmit);
+  const typeSelected = useSelector((state) => state.postData.typeSelected);
   const classroomSelecteds = useSelector(
     (state) => state.classroomData.classroomSelecteds
   );
@@ -32,7 +35,7 @@ const CreatePost = () => {
   const closeBtn = useRef(null);
   const textarea = useRef(null);
 
-  const [values, setValues] = useState({ textarea: "", radio: null });
+  const [values, setValues] = useState({ textarea: "", radio: "newsfeed" });
   const [isActive, setIsActive] = useState(false);
   const [imgUploadArr, setImgUploadArr] = useState([]);
 
@@ -46,7 +49,9 @@ const CreatePost = () => {
       key={index}
       label={item.label}
       value={item.value}
-      control={<Radio className={styles.Radio} />}
+      control={
+        <Radio className={styles.Radio} checked={values.radio === item.value} />
+      }
     />
   ));
 
@@ -81,13 +86,26 @@ const CreatePost = () => {
     const reducer = (acc, cur) => acc.concat(cur);
     const selecteds = Object.values(classroomSelecteds).reduce(reducer, []);
 
-    if (values.radio === "groups") {
-      formData.append("destination", selecteds.join(','));
+    formData.append("postType", typeSelected || type);
+
+    if (values.radio === "groups" && typeSelected) {
+      formData.append("destination", selecteds.join(","));
+    }
+
+    if (type !== 0) {
+      formData.append("destination", junctionId);
     }
 
     if (values.textarea.length > 0) {
-      dispatch(createPost(formData, closeBtn.current, textarea.current));
+      dispatch(createPost(formData, closeBtn.current, textarea.current, { type, junctionId }));
     }
+  };
+
+  const handleClose = () => {
+    setIsActive(false);
+    dispatch(actSetBubble(false));
+    dispatch(actSelectPostType(0));
+    setValues({ ...values, radio: "newsfeed" });
   };
 
   useEffect(() => {
@@ -100,10 +118,8 @@ const CreatePost = () => {
   useEffect(() => {
     if (values.radio === "groups") {
       dispatch(actSetBubble(true));
+      dispatch(actSelectPostType(1)); // initial category (classrooms)
     } else {
-      dispatch(actSetBubble(false));
-    }
-    if (isActive === false) {
       dispatch(actSetBubble(false));
     }
   }, [isActive, dispatch, values.radio]);
@@ -111,7 +127,7 @@ const CreatePost = () => {
   return (
     <Fragment>
       <div
-        onClick={() => setIsActive(false)}
+        onClick={() => handleClose()}
         className={clsx(styles.ShowOverlay, {
           [styles.HideOverlay]: !isActive,
         })}
@@ -127,7 +143,7 @@ const CreatePost = () => {
             <IconButton
               ref={closeBtn}
               className={styles.CloseBtn}
-              onClick={() => setIsActive(false)}
+              onClick={() => handleClose()}
             >
               <Close />
             </IconButton>
@@ -192,13 +208,15 @@ const CreatePost = () => {
         </div>
         {isActive && (
           <div className={styles.Footer}>
-            <RadioGroup
-              className={styles.RadioGroup}
-              name="radio"
-              onChange={handleChange}
-            >
-              {renderRadios}
-            </RadioGroup>
+            {type === 0 && (
+              <RadioGroup
+                className={styles.RadioGroup}
+                name="radio"
+                onChange={handleChange}
+              >
+                {renderRadios}
+              </RadioGroup>
+            )}
             <Button
               fullWidth
               onClick={handleSumit}

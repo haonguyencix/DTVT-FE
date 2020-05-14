@@ -10,12 +10,14 @@ class PATH {
   FORGOT_PASSWORD = "/forgot-password";
   RESET_PASSWORD = "/reset-password";
   #CLASSROOM = "/classroom";
+  #NEWSFEED = "/newsfeed";
   #STUDENT_LIST = "/student-list";
   #POST_DETAIL = "/post-detail";
   #PROFILE = "/profile";
 
   // params
   CLASSROOM_ID = ":classroomId";
+  POST_TYPE = ":postType";
 
   // children 1
   // student login (common)
@@ -50,6 +52,9 @@ class PATH {
   }
 
   // lecture classroom
+  LECTURE_CLASSROOM_NEWSFEED(classroomId, postType = 1) {
+    return this.LECTURE_CLASSROOM(classroomId) + this.#NEWSFEED + "/" + postType;
+  }
   LECTURE_STUDENT_LIST(classroomId) {
     return this.LECTURE_CLASSROOM(classroomId) + this.#STUDENT_LIST;
   }

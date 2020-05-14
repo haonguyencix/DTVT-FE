@@ -2,7 +2,7 @@ import React, { useEffect, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { TOKEN } from "shared/constants";
 import { sendAccessToken } from "core/services/utils";
-import { getClassrooms } from "core/store/classrooms/classroomAction";
+import { getClassrooms, actFetchClassroomList } from "core/store/classrooms/classroomAction";
 import * as Cookies from "js-cookie";
 import DispatchActLoad from "../DispatchActLoad";
 import EmptyAlert from "../EmptyAlert";
@@ -21,6 +21,8 @@ const Classrooms = (props) => {
       sendAccessToken(token);
       dispatch(getClassrooms(value, role));
     }
+
+    return () => dispatch(actFetchClassroomList([]));
   }, [dispatch, value, role]);
 
   const renderClassrooms = classrooms.map((item, index) => (

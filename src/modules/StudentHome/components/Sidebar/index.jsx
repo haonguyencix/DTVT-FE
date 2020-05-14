@@ -44,13 +44,13 @@ const Sidebar = () => {
   const selectList = [
     {
       name: "schoolYear",
-      content: change ? "NK" : "Niên khóa",
+      common: change ? "NK" : "Niên khóa",
       options: mappingSchoolYear(),
       styles: styles.SchoolYear,
     },
     {
       name: "semester",
-      content: change ? "HK" : "Học kỳ",
+      common: change ? "HK" : "Học kỳ",
       options: ["I", "II", "hè"],
       styles: styles.Semester,
     },

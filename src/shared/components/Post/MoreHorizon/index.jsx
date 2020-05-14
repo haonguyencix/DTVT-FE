@@ -1,13 +1,15 @@
 import React, { useState, useRef, memo } from "react";
 import styles from "./styles.module.scss";
 import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 import { IconButton, ClickAwayListener } from "@material-ui/core";
 import { MoreHoriz, HighlightOff } from "@material-ui/icons";
 import { deletePost } from "core/store/posts/postAction";
 import Menu from "shared/components/Menu";
 
-const MoreHorizon = props => {
-  const { postId, haveImgs, haveInteract } = props;
+const MoreHorizon = (props) => {
+  const { classroomId } = useParams();
+  const { postId, postType, haveImgs, haveInteract } = props;
 
   const dispatch = useDispatch();
 
@@ -16,13 +18,19 @@ const MoreHorizon = props => {
   const [open, setOpen] = useState(false);
 
   const delPost = () => {
-    const delObj = { postId, haveImgs, haveInteract };
+    const delObj = {
+      postId,
+      haveImgs,
+      haveInteract,
+      postType,
+      junctionId: classroomId ? classroomId : "",
+    };
     dispatch(deletePost(delObj, horizBtn.current));
   };
 
   const menuList = [
-    { icon: HighlightOff, content: "Xóa bài đăng", event: delPost }
-  ]
+    { icon: HighlightOff, content: "Xóa bài đăng", event: delPost },
+  ];
 
   const position = { top: 55, right: 0 };
 

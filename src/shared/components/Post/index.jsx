@@ -12,6 +12,7 @@ const Post = (props) => {
     avt,
     firstName,
     lastName,
+    postType,
     createdAt,
     postContent,
     firstImg,
@@ -49,13 +50,14 @@ const Post = (props) => {
         <div className={styles.Left}>
           <Avatar src={avt} className={styles.AvtImg} alt="Avatar mặc định" />
           <div>
-            <h6 className={styles.PostedBy}>{firstName + " " + lastName}</h6>
+            <h6 className={styles.PostedBy}>{firstName + " " + lastName} <span>- [Điện tử tương tự - Nhóm 2 - NK 2019-2020 - HK II]</span></h6>
             <span className={styles.PostedAt}>{formatDistance(createdAt)}</span>
           </div>
         </div>
         <div className={styles.Right}>
           <MoreHorizon
             postId={id}
+            postType={postType}
             haveImgs={firstImg || numImgs > 0 ? true : false}
             haveInteract={numInteract > 0 ? true : false}
           />

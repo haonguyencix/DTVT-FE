@@ -14,7 +14,7 @@
     padding: 0 6px;
     .Left {
       @include flex();
-      align-items: center;
+      align-items: flex-start;
       .AvtImg {
         cursor: pointer;
         margin-right: 8px;
@@ -23,6 +23,9 @@
       .PostedBy {
         cursor: pointer;
         @include font-size($fs-regular);
+        > span {
+          font-weight: $fw-regular;
+        }
       }
       .PostedAt {
         color: $color-default-darker;

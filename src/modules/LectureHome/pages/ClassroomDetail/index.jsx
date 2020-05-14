@@ -49,7 +49,7 @@ const ClassroomDetail = (props) => {
     : "";
 
   const navList = [
-    { content: "Bảng tin lớp", slug: "/asdfhwefsd/asdfqwe/fasdfasdf/as" },
+    { content: "Bảng tin lớp", slug: PATH["LECTURE_CLASSROOM_NEWSFEED"](classroomId) },
     {
       content: `Sinh viên (${studentListLength})`,
       slug: PATH["LECTURE_STUDENT_LIST"](classroomId),

@@ -45,13 +45,10 @@
                 left: -12px;
                 top: -27px;
                 height: 70px;
-                background-color: #fafafa;
+                background-color: $color-standard;
             }
             > div.Navigation {
-                width: 101%;
-                margin-left: -4px;
                 border: 1px solid transparent;
-                @include border-radius(8px);
                 .NavLink {
                     @include opacity(0.7);
                     padding: 0 16px;
@@ -63,6 +60,7 @@
                     }
                 }
                 &:hover {
+                    @include border-radius(8px);
                     border: 1px solid $color-default-lighter;
                     .NavLink {
                         @include opacity(1);

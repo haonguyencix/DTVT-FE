@@ -5,11 +5,11 @@ import { TOKEN, PATH } from "shared/constants";
 import LazyloadPage from "shared/components/LazyloadPage";
 import NewsFeed from "./pages/NewsFeed";
 import PostsArea from "./components/PostsArea";
-import ClassroomDetail from "./pages/ClassroomDetail";
+import StudentList from "shared/components/StudentList";
 import * as Cookies from "js-cookie";
 
 const LectureHomeLayout = lazy(() => import("."));
-const StudentList = lazy(() => import("shared/components/StudentList"));
+const ClassroomDetail = lazy(() => import('./pages/ClassroomDetail'));
 const PostDetail = lazy(() => import("shared/components/PostDetail"));
 
 const LectureHomeGuard = ({ routes }) => {
@@ -52,6 +52,12 @@ const LectureHomeRoutes = {
           path: PATH["LECTURE_CLASSROOM"](PATH["CLASSROOM_ID"]),
           component: ClassroomDetailWrapper,
           routes: [
+            {
+              key: "LECTURE_CLASSROOM_NEWSFEED",
+              path: PATH["LECTURE_CLASSROOM_NEWSFEED"](PATH["CLASSROOM_ID"], PATH["POST_TYPE"]),
+              exact: true,
+              component: PostsArea,
+            },
             {
               key: "LECTURE_STUDENT_LIST",
               path: PATH["LECTURE_STUDENT_LIST"](PATH["CLASSROOM_ID"]),

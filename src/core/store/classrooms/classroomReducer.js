@@ -16,7 +16,6 @@ let initialState = {
 const ClassroomReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case FETCH_CLASSROOM_LIST:
-      payload.map((v) => state.classroomSelecteds[v.subjectId] = [])
       return { ...state, classroomList: payload };
 
     case FETCH_STUDENT_LIST:

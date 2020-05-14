@@ -3,7 +3,9 @@ import { restConnector } from "core/services/axios";
 class ClassroomService {
   getClassrooms(filter, role) {
     return restConnector({
-      url: `classrooms/${role}?schoolYear=${filter.schoolYear}&semester=${filter.semester}`,
+      url: `classrooms/${role}${
+        role === "LECTURE" ? `/${filter.category}` : ""
+      }?schoolYear=${filter.schoolYear}&semester=${filter.semester}`,
       method: "GET",
     });
   }
@@ -19,13 +21,20 @@ class ClassroomService {
     return restConnector({
       url: `/classrooms/lead/${status}`,
       method: "PUT",
-      data: { studentId, classroomId }
+      data: { studentId, classroomId },
     });
   }
 
   getClassroomInfo(classroomId) {
     return restConnector({
       url: `classrooms/info?classroomId=${classroomId}`,
+      method: "GET",
+    });
+  }
+
+  getClassroomCategory() {
+    return restConnector({
+      url: `classrooms/category`,
       method: "GET",
     });
   }

@@ -11,7 +11,7 @@ const Verify = lazy(() => import("./pages/Verify"));
 
 const LectureLoginGuard = ({ routes }) => {
   if (Cookies.get(TOKEN["LECTURE"])) {
-    return <Redirect to={PATH["LECTURE_HOME"]} />;
+    return <Redirect to={PATH["LECTURE_POST_LIST"]} />;
   }
   return (
     <Suspense fallback={<LazyloadPage />}>

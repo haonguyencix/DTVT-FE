@@ -10,7 +10,8 @@ let initialState = {
   classroomInfo: {},
   studentList: {},
   isFetchClassroom: false,
-  classroomSelecteds: {}
+  classroomSelecteds: {},
+  isLead: false
 };
 
 const ClassroomReducer = (state = initialState, { type, payload }) => {
@@ -26,6 +27,7 @@ const ClassroomReducer = (state = initialState, { type, payload }) => {
         ...state,
         isFetchClassroom: payload.isFetch,
         classroomInfo: payload.classroomInfo,
+        isLead: payload.isLead
       };
 
     case SET_CLASSROOM_SELECTED:

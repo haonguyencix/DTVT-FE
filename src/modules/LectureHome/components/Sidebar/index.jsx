@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Button } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
 import ClassroomService from "core/store/classrooms/classroomService";
-import Classrooms from "shared/components/Classrooms";
+import Classrooms from "shared/hocs/Classrooms";
 import Control from "shared/components/Control";
 import SubjectItem from "../SubjectItem";
 import ConsultantItem from "../ConsultantItem";

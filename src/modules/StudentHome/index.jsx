@@ -23,7 +23,7 @@ const StudentHomeLayout = (props) => {
   return (
     <Fragment>
       <Header
-        backHome={PATH["STUDENT_HOME"]}
+        backHome={PATH["STUDENT_POST_LIST"]}
         backLogin={PATH["STUDENT_LOGIN"]}
       />
       <main>{props.children}</main>

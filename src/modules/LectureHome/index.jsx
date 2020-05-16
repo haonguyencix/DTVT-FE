@@ -24,7 +24,7 @@ const LectureHomeLayout = (props) => {
   return (
     <Fragment>
       <Header
-        backHome={PATH["LECTURE_HOME"]}
+        backHome={PATH["LECTURE_POST_LIST"]}
         backLogin={PATH["LECTURE_LOGIN"]}
       />
       <main>{props.children}</main>

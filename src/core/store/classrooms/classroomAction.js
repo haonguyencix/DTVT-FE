@@ -84,9 +84,11 @@ export const getClassroomInfo = (classroomId) => {
 
     ClassroomService.getClassroomInfo(classroomId)
       .then((res) => {
+        const { isLead, ...classroomInfo } = res.data;
+
         dispatch(actFetchClassroomInfoLoad("SUCCESS"));
 
-        dispatch(actFetchClassroomInfo(res.data, true));
+        dispatch(actFetchClassroomInfo(classroomInfo, isLead, true));
       })
       .catch((err) => {
         dispatch(actFetchClassroomInfoLoad("FAILURE"));
@@ -109,9 +111,9 @@ export const actFetchStudentList = (studentList) => ({
   payload: studentList,
 });
 
-export const actFetchClassroomInfo = (classroomInfo, isFetch) => ({
+export const actFetchClassroomInfo = (classroomInfo, isLead, isFetch) => ({
   type: FETCH_CLASSROOM_INFO,
-  payload: { classroomInfo, isFetch },
+  payload: { classroomInfo, isLead, isFetch },
 });
 
 export const actSetClassroomSelecteds = (subjectId, selecteds) => ({

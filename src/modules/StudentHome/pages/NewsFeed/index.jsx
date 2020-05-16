@@ -31,9 +31,9 @@ const NewsFeed = (props) => {
   }, [dispatch]);
 
   const menuList = [
-    { name: "Bảng tin", slug: PATH["STUDENT_HOME"], icon: Home },
+    { name: "Bảng tin", slug: PATH["STUDENT_POST_LIST"], icon: Home },
     { name: classId, slug: "/hello", icon: AssignmentInd },
-    { name: "Đã thích", slug: "/ui1z", icon: Stars },
+    { name: "Đã thích", slug: PATH["STUDENT_POST_SAVED"], icon: Stars },
   ];
 
   return (

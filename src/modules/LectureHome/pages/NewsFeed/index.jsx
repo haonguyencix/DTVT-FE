@@ -12,7 +12,7 @@ const NewsFeed = (props) => {
   const change = useSelector((state) => state.classroomData.isFetchClassroom);
 
   const menuList = [
-    { name: "Bảng tin", slug: PATH["LECTURE_HOME"], icon: Home },
+    { name: "Bảng tin", slug: PATH["LECTURE_POST_LIST"], icon: Home },
     { name: "Tài liệu", slug: "/uiz", icon: Description },
     { name: "Bài tập", slug: "/uiz", icon: FormatListNumbered },
     { name: "Điểm số", slug: "/ui1z", icon: Timeline },

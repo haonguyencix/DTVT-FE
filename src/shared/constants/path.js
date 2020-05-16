@@ -11,9 +11,11 @@ class PATH {
   RESET_PASSWORD = "/reset-password";
   #CLASSROOM = "/classroom";
   #NEWSFEED = "/newsfeed";
+  #POST_LIST = "/posts";
   #STUDENT_LIST = "/student-list";
   #POST_DETAIL = "/post-detail";
   #PROFILE = "/profile";
+  #POST_SAVED = "/posts-saved";
 
   // params
   CLASSROOM_ID = ":classroomId";
@@ -25,35 +27,41 @@ class PATH {
 
   // student home
   TREE_SUBJECT = this.STUDENT_HOME + "/tree-subject";
+  STUDENT_POST_LIST = this.STUDENT_HOME + this.#POST_LIST;
   STUDENT_PROFILE = this.STUDENT_HOME + this.#PROFILE;
   STUDENT_POST_DETAIL = this.STUDENT_HOME + this.#POST_DETAIL;
+  STUDENT_POST_SAVED = this.STUDENT_HOME + this.#POST_SAVED;
   STUDENT_CLASSROOM(classroomId) {
-    return (
-      this.STUDENT_HOME + this.#CLASSROOM + "/" + classroomId
-    );
+    return this.STUDENT_HOME + this.#CLASSROOM + "/" + classroomId;
   }
 
   // lecture login
   LECTURE_VERIFY = this.LECTURE_LOGIN + this.VERIFY;
 
   // lecture home
+  LECTURE_POST_LIST = this.LECTURE_HOME + this.#POST_LIST;
   LECTURE_PROFILE = this.LECTURE_HOME + this.#PROFILE;
   LECTURE_POST_DETAIL = this.LECTURE_HOME + this.#POST_DETAIL;
   LECTURE_CLASSROOM(classroomId) {
-    return (
-      this.LECTURE_HOME + this.#CLASSROOM + "/" + classroomId
-    );
+    return this.LECTURE_HOME + this.#CLASSROOM + "/" + classroomId;
   }
 
   // children 2
   // student classroom
+  STUDENT_CLASSROOM_NEWSFEED(classroomId, postType = 1) {
+    return (
+      this.STUDENT_CLASSROOM(classroomId) + this.#NEWSFEED + "/" + postType
+    );
+  }
   STUDENT_LIST(classroomId) {
     return this.STUDENT_CLASSROOM(classroomId) + this.#STUDENT_LIST;
   }
 
   // lecture classroom
   LECTURE_CLASSROOM_NEWSFEED(classroomId, postType = 1) {
-    return this.LECTURE_CLASSROOM(classroomId) + this.#NEWSFEED + "/" + postType;
+    return (
+      this.LECTURE_CLASSROOM(classroomId) + this.#NEWSFEED + "/" + postType
+    );
   }
   LECTURE_STUDENT_LIST(classroomId) {
     return this.LECTURE_CLASSROOM(classroomId) + this.#STUDENT_LIST;

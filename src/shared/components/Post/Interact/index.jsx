@@ -1,4 +1,4 @@
-import React, { useState, memo, Fragment } from "react";
+import React, { useState, memo, Fragment, useEffect } from "react";
 import styles from "./styles.module.scss";
 import clsx from "clsx";
 import { Button } from "@material-ui/core";
@@ -11,8 +11,8 @@ let timeout;
 const Interact = props => {
   const { postId, isLike, numInteract } = props;
 
-  const [interact, setInteract] = useState(isLike);
-  const [countLike, setCountLike] = useState(numInteract);
+  const [interact, setInteract] = useState(false);
+  const [countLike, setCountLike] = useState(0);
 
   const handleInteract = () => {
     setInteract(!interact);
@@ -26,6 +26,11 @@ const Interact = props => {
 
     timeout();
   };
+
+  useEffect(() => {
+    setInteract(isLike);
+    setCountLike(numInteract);
+  }, [isLike, numInteract]);
 
   return (
     <Fragment>

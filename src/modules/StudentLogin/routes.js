@@ -14,7 +14,7 @@ const ResetPassword = lazy(() => import("./pages/ResetPassword"));
 
 const StudentLoginGuard = ({ routes }) => {
   if (Cookies.get(TOKEN["STUDENT"])) {
-    return <Redirect to={PATH["STUDENT_HOME"]} />;
+    return <Redirect to={PATH["STUDENT_POST_LIST"]} />;
   }
   return (
     <Suspense fallback={<LazyloadPage />}>

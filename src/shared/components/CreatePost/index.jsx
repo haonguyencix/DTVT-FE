@@ -19,17 +19,15 @@ import {
   actSetBubble,
   actSelectPostType,
 } from "core/store/posts/postAction";
-import ImageItem from "../ImageItem";
+import ImageItem from "./ImageItem";
 
 const CreatePost = (props) => {
-  const { type, junctionId } = props;
+  const { junctionId, type } = props;
   const dispatch = useDispatch();
 
   const isSubmit = useSelector((state) => state.postData.isSubmit);
   const typeSelected = useSelector((state) => state.postData.typeSelected);
-  const classroomSelecteds = useSelector(
-    (state) => state.classroomData.classroomSelecteds
-  );
+  const classroomSelecteds = useSelector((state) => state.classroomData.classroomSelecteds);
 
   const imageUpload = useRef(null);
   const closeBtn = useRef(null);

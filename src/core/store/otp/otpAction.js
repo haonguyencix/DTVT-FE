@@ -52,7 +52,7 @@ export const verifyOTP = (values, push) => {
 
         localStorage.clear();
 
-        push(PATH["STUDENT_HOME"]);
+        push(PATH["STUDENT_POST_LIST"]);
       })
       .catch((err) => {
         dispatch(actCheckFabProgress("FAILURE"));

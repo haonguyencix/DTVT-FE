@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from "react";
 import styles from "./styles.module.scss";
 import { useSelector } from "react-redux";
-import Classrooms from "shared/components/Classrooms";
+import Classrooms from "shared/hocs/Classrooms";
 import ClassroomItem from "../ClassroomItem";
 import Control from "shared/components/Control";
 
@@ -19,9 +19,9 @@ const Sidebar = () => {
 
   const initialSemester = () => {
     const curMonth = now.getMonth();
-    if (1 < curMonth < 6) return "II";
-    if (6 < curMonth < 9) return "hè";
-    if (9 < curMonth < 12) return "I";
+    if (1 < curMonth < 6) return 2;
+    if (6 < curMonth < 9) return 3;
+    if (9 < curMonth < 12) return 1;
   };
 
   const [value, setValue] = useState({
@@ -34,11 +34,16 @@ const Sidebar = () => {
   };
 
   const mappingSchoolYear = () => {
+    let mapping = {};
     const curYear = now.getFullYear();
     const curGrade = credential ? credential.classId.slice(4, 6) : "";
     const yearIn = ("20" + curGrade) * 1;
-    const mod = curGrade ? curYear - yearIn : 0;
-    return Array.from({ length: mod }, (v, i) => `${yearIn + i}-${yearIn + i + 1}`);
+    const howLong = curGrade ? curYear - yearIn : 0;
+    Array.from({ length: howLong }, (v, i) => {
+      const value = `${curYear - i - 1}-${curYear - i}`;
+      return (mapping[value] = value);
+    });
+    return mapping;
   };
 
   const selectList = [
@@ -51,7 +56,7 @@ const Sidebar = () => {
     {
       name: "semester",
       common: change ? "HK" : "Học kỳ",
-      options: ["I", "II", "hè"],
+      options: { 1: "I", 2: "II", 3: "hè" },
       styles: styles.Semester,
     },
   ];

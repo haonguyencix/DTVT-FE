@@ -4,8 +4,8 @@ import { TOKEN } from "shared/constants";
 import { sendAccessToken } from "core/services/utils";
 import { getClassrooms, actFetchClassroomList } from "core/store/classrooms/classroomAction";
 import * as Cookies from "js-cookie";
-import DispatchActLoad from "../DispatchActLoad";
-import EmptyAlert from "../EmptyAlert";
+import DispatchActLoad from "shared/components/DispatchActLoad";
+import EmptyAlert from "shared/components/EmptyAlert";
 
 const Classrooms = (props) => {
   const { className, role, render, value } = props;

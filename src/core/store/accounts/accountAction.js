@@ -65,7 +65,7 @@ export const login = (values, push, role) => {
 
         sendAccessToken(token);
 
-        push(checkWho[role] ? PATH["LECTURE_HOME"] : PATH["STUDENT_HOME"]);
+        push(checkWho[role] ? PATH["LECTURE_POST_LIST"] : PATH["STUDENT_POST_LIST"]);
       })
       .catch((err) => {
         dispatch(actCheckFabProgress("FAILURE"));

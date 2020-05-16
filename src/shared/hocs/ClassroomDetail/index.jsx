@@ -11,7 +11,7 @@ import { sendAccessToken } from "core/services/utils";
 import BgClassroom from "assets/img/bg-classroom.png";
 import * as Cookies from "js-cookie";
 import DispatchActLoad from "shared/components/DispatchActLoad";
-import Sticky from "shared/components/Sticky";
+import Sticky from "shared/hocs/Sticky";
 
 const ClassroomDetail = (props) => {
   const { role } = props;
@@ -40,19 +40,19 @@ const ClassroomDetail = (props) => {
 
   // const lecture = firstName && lastName ? firstName + " " + lastName : "";
 
-  const cloneTheory = theory
-    ? `Nhóm ${theory < 10 ? "0" + theory : theory}`
-    : "";
+  const leadZero = (value) => {
+    if (value < 10) return "0" + value;
+    return value;
+  };
 
-  const clonePractice = practice
-    ? ` - Thực hành ${practice < 10 ? "0" + practice : practice}`
-    : "";
+  const temp = practice ? " - Thực hành" + leadZero(practice) : "";
+  const groupName = "Nhóm " + leadZero(theory) + temp;
 
   const navList = [
-    { content: "Bảng tin lớp", slug: PATH["LECTURE_CLASSROOM_NEWSFEED"](classroomId) },
+    { content: "Bảng tin lớp", slug: PATH[`${role}_CLASSROOM_NEWSFEED`](classroomId) },
     {
       content: `Sinh viên (${studentListLength})`,
-      slug: PATH["LECTURE_STUDENT_LIST"](classroomId),
+      slug: PATH[`${role === "LECTURE" ? "LECTURE_" : ''}STUDENT_LIST`](classroomId),
     },
     { content: "Tài liệu", slug: "/asdfhwefsd/asdfqwe/fasdfasdf/as" },
     { content: "Bài tập", slug: "/asdfhwefsd/asdfqwe/fasdfasdf/as" },
@@ -93,7 +93,7 @@ const ClassroomDetail = (props) => {
           ></div>
           <div className={styles.InfoContent}>
             <h1>{subjectName && subjectName.toUpperCase()}</h1>
-            <p>{cloneTheory + clonePractice + " - " + classroomId}</p>
+            <p>{groupName}</p>
           </div>
           <Sticky
             className={styles.Sticky}

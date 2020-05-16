@@ -20,13 +20,16 @@ const ClassroomHover = (props) => {
     firstName,
     lastName,
     credits,
-  } = props.item;
-  const cloneTheory = theory
-  ? `Nhóm ${theory < 10 ? "0" + theory : theory}`
-  : "";
-  const clonePractice = practice
-  ? ` - Thực hành ${practice < 10 ? "0" + practice : practice}`
-  : "";
+  } = props.classroom;
+
+  const leadZero = (value) => {
+    if (value < 10) return "0" + value;
+    return value;
+  };
+
+  const temp = practice ? " - Thực hành" + leadZero(practice) : "";
+  const groupName = "Nhóm " + leadZero(theory) + temp;
+
   const lecture = firstName + " " + lastName;
 
   const renderTime = times.map((item, index) => {
@@ -48,7 +51,7 @@ const ClassroomHover = (props) => {
   const classroomInfoArr = [
     { icon: VpnKey, content: subjectId },
     { icon: CollectionsBookmark, content: `${credits} tín chỉ` },
-    { icon: GroupWork, content: `${cloneTheory + clonePractice}` },
+    { icon: GroupWork, content: `${groupName}` },
     { icon: WatchLater, content: <div>{renderTime}</div> },
   ];
 

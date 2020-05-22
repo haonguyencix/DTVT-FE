@@ -10,24 +10,24 @@ class ClassroomService {
     });
   }
 
-  getStudentList(classroomId) {
+  getStudentList(classroomId, postType) {
     return restConnector({
-      url: `classrooms/students?classroomId=${classroomId}`,
+      url: `classrooms/students?classroomId=${classroomId}&type=${postType}`,
       method: "GET",
     });
   }
 
-  appointLead(studentId, classroomId, status) {
+  appointLead(studentId, classroomId, status, postType) {
     return restConnector({
       url: `/classrooms/lead/${status}`,
       method: "PUT",
-      data: { studentId, classroomId },
+      data: { studentId, classroomId, type: postType },
     });
   }
 
-  getClassroomInfo(classroomId) {
+  getClassroomInfo(classroomId, postType) {
     return restConnector({
-      url: `classrooms/info?classroomId=${classroomId}`,
+      url: `classrooms/info?classroomId=${classroomId}&type=${postType}`,
       method: "GET",
     });
   }

@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useRef, useState } from "react";
 import { Tooltip } from "@material-ui/core";
 
 const CopyText = (props) => {
-  const { value, children } = props;
+  const { value = '', children } = props;
 
   const textAreaRef = useRef(null);
   const [isCopy, setIsCopy] = useState(false);
@@ -35,8 +35,8 @@ const CopyText = (props) => {
       <textarea
         readOnly
         ref={textAreaRef}
-        value={value}
-        style={{ position: "relative", zIndex: -1 }}
+        value={value ?  value : ''}
+        style={{ position: "absolute", top: 0, left: 0, opacity: 0, zIndex: -1 }}
       />
     </Fragment>
   );

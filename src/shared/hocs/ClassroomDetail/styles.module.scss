@@ -28,13 +28,14 @@
             position: relative;
             width: 60%;
             height: 19.5vh;
-            padding: 20px 16px;
+            padding: 16px;
             color: $color-default-lightest;
             > h1 {
                 margin-bottom: 5px;
                 @include font-size($fs-bigger);
             }
             > p {
+                margin-bottom: 5px;
                 @include font-size($fs-semi);
             }
         }

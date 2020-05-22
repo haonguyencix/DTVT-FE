@@ -42,7 +42,7 @@ const Sidebar = () => {
 
   const handleChange = (event) => {
     setValue({ ...value, [event.target.name]: event.target.value });
-    if (isBubble && event.target.name === "category") {
+    if (event.target.name === "category") {
       dispatch(actSelectPostType(cateIds[event.target.value]));
     }
   };

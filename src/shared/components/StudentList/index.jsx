@@ -10,8 +10,7 @@ import * as Cookies from "js-cookie";
 import { TOKEN } from "shared/constants";
 import {
   sendAccessToken,
-  capitalizeFirstLetterEachWord,
-  stringShortcut,
+  capitalizeFirstLetterEachWord
 } from "core/services/utils";
 import {
   Paper,
@@ -25,10 +24,11 @@ import {
 import DispatchActLoad from "../DispatchActLoad";
 import EmptyAlert from "../EmptyAlert";
 import Options from "./Options";
+import CopyText from "shared/hocs/CopyText";
 
 const StudentList = (props) => {
   const { role } = props;
-  const { classroomId } = useParams();
+  const { classroomId, postType } = useParams();
   const dispatch = useDispatch();
   const isLoading = useSelector((state) => state.isLoading.getStudentsLoad);
   const studentList = useSelector((state) => state.classroomData.studentList);
@@ -36,7 +36,7 @@ const StudentList = (props) => {
   const renderStudents = (arr) =>
     arr.map((item, index) => {
       const { studentId, firstName, lastName, classId, email, isLead } = item;
-      const optionProps = { studentId, classroomId, isLead };
+      const optionProps = { studentId, classroomId, isLead, postType };
       return (
         <TableRow key={studentId + index} className={styles.TableRow}>
           <TableCell>{index + 1}</TableCell>
@@ -44,8 +44,12 @@ const StudentList = (props) => {
           <TableCell>
             {capitalizeFirstLetterEachWord(firstName + " " + lastName)}
           </TableCell>
-          <TableCell>{classId.toUpperCase()}</TableCell>
-          <TableCell>{email ? stringShortcut(email, 26) : ""}</TableCell>
+          {parseInt(postType) === 1 && <TableCell>{classId.toUpperCase()}</TableCell>}
+          <TableCell>
+            <CopyText value={email}>
+              <span>{email ? "[Đã ẩn đi]" : ""}</span>
+            </CopyText>
+          </TableCell>
           {role === "LECTURE" && (
             <TableCell>
               <Options className={styles.Options} data={optionProps} />
@@ -66,7 +70,7 @@ const StudentList = (props) => {
                 <TableCell>STT</TableCell>
                 <TableCell>Mã sinh viên</TableCell>
                 <TableCell>Họ và tên</TableCell>
-                <TableCell>Lớp</TableCell>
+                {parseInt(postType) === 1 && <TableCell>Lớp</TableCell>}
                 <TableCell>Email</TableCell>
                 {role === "LECTURE" && <TableCell></TableCell>}
               </TableRow>
@@ -85,16 +89,16 @@ const StudentList = (props) => {
 
     if (token) {
       sendAccessToken(token);
-      dispatch(getStudentList(classroomId));
+      dispatch(getStudentList(classroomId, postType));
     }
 
     return () => dispatch(actFetchStudentList({}, false));
-  }, [dispatch, classroomId, role]);
+  }, [dispatch, classroomId, postType, role]);
 
   return (
     <div className={styles.Container}>
       {renderTables}
-      {isLoading && <DispatchActLoad height={200} />}
+      {isLoading && <DispatchActLoad height="60vh" />}
     </div>
   );
 };

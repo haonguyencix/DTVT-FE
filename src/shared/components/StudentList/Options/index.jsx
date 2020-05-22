@@ -8,7 +8,7 @@ import { appointLead } from "core/store/classrooms/classroomAction";
 import Menu from "shared/components/Menu";
 
 const Options = (props) => {
-  const { studentId, classroomId, isLead } = props.data;
+  const { studentId, classroomId, isLead, postType } = props.data;
   const dispatch = useDispatch();
   const horizBtn = useRef(null);
   const [open, setOpen] = useState(false);
@@ -19,7 +19,8 @@ const Options = (props) => {
         studentId,
         classroomId,
         isLead ? "dismiss" : "appoint",
-        horizBtn.current
+        horizBtn.current,
+        postType
       )
     );
   };

@@ -33,11 +33,11 @@ export const getClassrooms = (filter, role) => {
   };
 };
 
-export const getStudentList = (classroomId) => {
+export const getStudentList = (classroomId, postType) => {
   return (dispatch) => {
     dispatch(actGetStudentListLoad("REQUEST"));
 
-    ClassroomService.getStudentList(classroomId)
+    ClassroomService.getStudentList(classroomId, postType)
       .then((res) => {
         dispatch(actGetStudentListLoad("SUCCESS"));
 
@@ -53,13 +53,13 @@ export const getStudentList = (classroomId) => {
   };
 };
 
-export const appointLead = (studentId, classroomId, status, horizBtn) => {
+export const appointLead = (studentId, classroomId, status, horizBtn, postType) => {
   return (dispatch) => {
-    ClassroomService.appointLead(studentId, classroomId, status)
+    ClassroomService.appointLead(studentId, classroomId, status, postType)
       .then((res) => {
         const { status, fullname } = res.data;
 
-        dispatch(getStudentList(classroomId));
+        dispatch(getStudentList(classroomId, postType));
 
         horizBtn.click();
 
@@ -78,11 +78,11 @@ export const appointLead = (studentId, classroomId, status, horizBtn) => {
   };
 };
 
-export const getClassroomInfo = (classroomId) => {
+export const getClassroomInfo = (classroomId, postType) => {
   return (dispatch) => {
     dispatch(actFetchClassroomInfoLoad("REQUEST"));
 
-    ClassroomService.getClassroomInfo(classroomId)
+    ClassroomService.getClassroomInfo(classroomId, postType)
       .then((res) => {
         const { isLead, ...classroomInfo } = res.data;
 

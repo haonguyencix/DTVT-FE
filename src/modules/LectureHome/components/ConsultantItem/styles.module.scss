@@ -1,0 +1,59 @@
+@import "assets/scss/variables";
+@import "assets/scss/mixins";
+
+.Container {
+    .Links {
+        cursor: pointer;
+        font-weight: $fw-bold;
+        text-transform: uppercase;
+        letter-spacing: -0.3px;
+        @include flex();
+        align-items: center;
+        margin-bottom: 16px;
+        @include font-size($fs-default);
+        &::before {
+            content: "";
+            position: relative;
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+            margin-left: 10.2px;
+            display: block;
+            border: 4px solid $color-default-darkest;
+            background-color: $color-default-lightest;
+            @include border-radius(50%);
+            z-index: 2;
+        }
+    }
+    .LinkActive {
+        color: $vivid-blue;
+        &::before {
+            border-color: $vivid-blue;
+        }
+        &:hover {
+            color: $vivid-blue;
+            &::before {
+                border-color: $vivid-blue;
+            }
+        }
+    }
+    .ItemRoot {
+        @include flex();
+        margin: 0;
+        .ItemLabel {
+            @include font-size($fs-regular);
+        }
+    }
+    .CheckBox {
+        color: $color-default-darkest;
+        &:hover {
+            @include background-opacity($color-default-darkest, 0.08);
+        }
+    }
+    span.Checked {
+        color: $primary-classic-blue;
+        &:hover {
+            @include background-opacity($primary-classic-blue, 0.08);
+        }
+    }
+}

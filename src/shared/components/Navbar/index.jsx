@@ -1,26 +1,48 @@
-import React from "react";
+import React, { Fragment } from "react";
 import styles from "./styles.module.scss";
 import { NavLink } from "react-router-dom";
+import { getFirstLetter, stringShortcut } from "core/services/utils";
+import { Avatar } from "@material-ui/core";
 
 const Navbar = (props) => {
-  const { menuList } = props;
+  const { navList } = props;
 
-  return (
-    <ul className={styles.Container}>
-      {menuList.map((item, index) => (
+  const renderLinks = (arr) =>
+    arr.map((item, index) => {
+      const { name, slug, Icon } = item;
+      return (
         <li key={index} className={styles.LinkItem}>
           <NavLink
             className={styles.NavLink}
             activeClassName={styles.NavLinkActive}
-            to={item.slug}
+            to={slug}
           >
-            <item.icon className={styles.Icon} />
-            {item.name}
+            {Icon ? (
+              <Fragment>
+                <Icon className={styles.Icon} />
+                {name}
+              </Fragment>
+            ) : (
+              <Fragment>
+                <Avatar className={styles.Avt}>
+                  {getFirstLetter(name, false, 0)}
+                </Avatar>
+                {stringShortcut(name, 20)}
+              </Fragment>
+            )}
           </NavLink>
         </li>
-      ))}
-    </ul>
-  );
+      );
+    });
+
+  const renderNavList = Object.keys(navList).map((key, index) => (
+      <Fragment key={index}>
+        {key && <h6 className={styles.Title}>{key}</h6>}
+        <ul className={styles.Links}>{renderLinks(navList[key])}</ul>
+      </Fragment>
+  ));
+
+  return <div className={styles.Container}>{renderNavList}</div>;
 };
 
 export default Navbar;

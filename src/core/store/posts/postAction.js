@@ -22,6 +22,7 @@ export const getPosts = (condition = false, pagination = { page: 1, limit: 5 }, 
       .then((res) => {
         if (res.data.length === 0) {
           dispatch(actStopFetch(true));
+          dispatch(actFetchPostsLoad("FAILURE"));
           return;
         }
         dispatch(actFetchPostsLoad("SUCCESS"));

@@ -6,7 +6,6 @@ import AvtDefaut from "assets/img/avt-default-2.png";
 
 const Notification = (props) => {
   const { createdBy, createdAt, numImgs } = props.payload;
-  console.log(props.payload);
 
   return (
     <div className={styles.Container}>

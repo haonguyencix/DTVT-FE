@@ -7,12 +7,12 @@ import NewsFeed from "./pages/NewsFeed";
 import ClassroomDetail from "shared/hocs/ClassroomDetail";
 import PostsArea from "./components/PostsArea";
 import PostList from "shared/components/PostList";
+import StudentList from "shared/components/StudentList";
 import * as Cookies from "js-cookie";
 
 const StudentHomeLayout = lazy(() => import("."));
 const TreeSubject = lazy(() => import("./pages/TreeSubject"));
 const PostDetail = lazy(() => import("shared/components/PostDetail"));
-const StudentList = lazy(() => import("shared/components/StudentList"));
 
 const StudentHomeGuard = ({ routes }) => {
   if (!Cookies.get(TOKEN["STUDENT"])) {
@@ -45,7 +45,7 @@ const StudentHomeRoutes = {
   path: PATH["STUDENT_HOME"],
   component: StudentHomeGuard,
   routes: [
-    // children cấp này không phân biệt active 
+    // children cấp này không phân biệt active
     {
       key: "TREE_SUBJECT",
       path: PATH["TREE_SUBJECT"],
@@ -77,7 +77,10 @@ const StudentHomeRoutes = {
         },
         {
           key: "STUDENT_CLASSROOM",
-          path: PATH["STUDENT_CLASSROOM"](PATH["CLASSROOM_ID"]),
+          path: PATH["STUDENT_CLASSROOM"](
+            PATH["CLASSROOM_ID"],
+            PATH["POST_TYPE"]
+          ),
           component: ClassroomDetailWrapper,
           routes: [
             // children 2
@@ -92,7 +95,10 @@ const StudentHomeRoutes = {
             },
             {
               key: "STUDENT_LIST",
-              path: PATH["STUDENT_LIST"](PATH["CLASSROOM_ID"]),
+              path: PATH["STUDENT_LIST"](
+                PATH["CLASSROOM_ID"],
+                PATH["POST_TYPE"]
+              ),
               exact: true,
               component: () => <StudentList role="STUDENT" />,
             },

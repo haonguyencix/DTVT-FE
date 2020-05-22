@@ -116,7 +116,6 @@ const CreatePost = (props) => {
   useEffect(() => {
     if (values.radio === "groups") {
       dispatch(actSetBubble(true));
-      dispatch(actSelectPostType(1)); // initial category (classrooms)
     } else {
       dispatch(actSetBubble(false));
     }

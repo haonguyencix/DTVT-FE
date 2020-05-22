@@ -11,18 +11,20 @@ import Navbar from "shared/components/Navbar";
 const NewsFeed = (props) => {
   const change = useSelector((state) => state.classroomData.isFetchClassroom);
 
-  const menuList = [
-    { name: "Bảng tin", slug: PATH["LECTURE_POST_LIST"], icon: Home },
-    { name: "Tài liệu", slug: "/uiz", icon: Description },
-    { name: "Bài tập", slug: "/uiz", icon: FormatListNumbered },
-    { name: "Điểm số", slug: "/ui1z", icon: Timeline },
-  ];
+  const navList = {
+    "": [
+      { name: "Bảng tin", slug: PATH["LECTURE_POST_LIST"], Icon: Home },
+      { name: "Tài liệu", slug: "/uiz", Icon: Description },
+      { name: "Bài tập", slug: "/uiz", Icon: FormatListNumbered },
+      { name: "Điểm số", slug: "/ui1z", Icon: Timeline },
+    ]
+  }
 
   return (
     <Container>
       <div className={styles.Wrapper}>
         <div className={styles.Navbar}>
-          <Navbar menuList={menuList} />
+          <Navbar navList={navList} />
         </div>
         <div
           className={clsx(styles.Children, {

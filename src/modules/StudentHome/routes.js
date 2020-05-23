@@ -65,7 +65,7 @@ const StudentHomeRoutes = {
         },
         {
           key: "STUDENT_POST_DETAIL",
-          path: PATH["STUDENT_POST_DETAIL"],
+          path: PATH["STUDENT_POST_DETAIL"](PATH["POST_ID"]),
           exact: true,
           component: PostDetail,
         },

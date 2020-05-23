@@ -2,13 +2,15 @@ import React from "react";
 import styles from "./styles.module.scss";
 import { getFirstLetter, formatDistance } from "core/services/utils";
 import { Avatar } from "@material-ui/core";
+import { Link } from "react-router-dom";
+import { PATH } from "shared/constants";
 import AvtDefaut from "assets/img/avt-default-2.png";
 
 const Notification = (props) => {
-  const { createdBy, createdAt, numImgs } = props.payload;
+  const { postId, createdBy, createdAt, numImgs } = props.payload;
 
   return (
-    <div className={styles.Container}>
+    <Link to={PATH["STUDENT_POST_DETAIL"](postId)} className={styles.Container}>
       {false ? (
         <Avatar
           src={AvtDefaut}
@@ -25,7 +27,7 @@ const Notification = (props) => {
         {numImgs === 0 ? "1 bài viết mới" : numImgs + " ảnh mới"}
         <div className={styles.CreateAt}>{formatDistance(createdAt)}</div>
       </div>
-    </div>
+    </Link>
   );
 };
 

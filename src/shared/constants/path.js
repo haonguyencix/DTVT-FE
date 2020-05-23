@@ -20,6 +20,7 @@ class PATH {
   // params
   CLASSROOM_ID = ":classroomId";
   POST_TYPE = ":postType";
+  POST_ID = ":postId";
 
   // children 1
   // student login (common)
@@ -29,8 +30,10 @@ class PATH {
   TREE_SUBJECT = this.STUDENT_HOME + "/tree-subject";
   STUDENT_POST_LIST = this.STUDENT_HOME + this.#POST_LIST;
   STUDENT_PROFILE = this.STUDENT_HOME + this.#PROFILE;
-  STUDENT_POST_DETAIL = this.STUDENT_HOME + this.#POST_DETAIL;
   STUDENT_POST_SAVED = this.STUDENT_HOME + this.#POST_SAVED;
+  STUDENT_POST_DETAIL(postId){
+    return this.STUDENT_HOME + this.#POST_DETAIL + "/" + postId;
+  }
   STUDENT_CLASSROOM(classroomId, postType) {
     return this.STUDENT_HOME + this.#CLASSROOM + "/" + classroomId + "/" + postType;
   }
@@ -41,7 +44,9 @@ class PATH {
   // lecture home
   LECTURE_POST_LIST = this.LECTURE_HOME + this.#POST_LIST;
   LECTURE_PROFILE = this.LECTURE_HOME + this.#PROFILE;
-  LECTURE_POST_DETAIL = this.LECTURE_HOME + this.#POST_DETAIL;
+  LECTURE_POST_DETAIL(postId){
+    return this.LECTURE_HOME + this.#POST_DETAIL + "/" + postId;
+  } 
   LECTURE_CLASSROOM(classroomId, postType) {
     return this.LECTURE_HOME + this.#CLASSROOM + "/" + classroomId + "/" + postType;
   }

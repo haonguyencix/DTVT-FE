@@ -23,6 +23,13 @@ class PostService {
       method: "GET"
     });
   }
+  
+  getPostDetail(postId) {
+    return restConnector({
+      url: `posts/detail/${postId}`,
+      method: "GET"
+    });
+  }
 
   interactPost(interact) {
     return restConnector({

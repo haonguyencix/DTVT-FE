@@ -60,7 +60,7 @@ const LectureHomeRoutes = {
         },
         {
           key: "LECTURE_POST_DETAIL",
-          path: PATH["LECTURE_POST_DETAIL"],
+          path: PATH["LECTURE_POST_DETAIL"](PATH["POST_ID"]),
           exact: true,
           component: PostDetail,
         },

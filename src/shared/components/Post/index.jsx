@@ -7,6 +7,7 @@ import MoreHorizon from "./MoreHorizon";
 import Gallery from "./Gallery";
 
 const Post = (props) => {
+  console.log(props.item)
   const {
     id,
     avt,
@@ -50,8 +51,8 @@ const Post = (props) => {
         <div className={styles.Left}>
           <Avatar src={avt} className={styles.AvtImg} alt="Avatar mặc định" />
           <div>
-            <h6 className={styles.PostedBy}>{firstName + " " + lastName} <span>- [Điện tử tương tự - Nhóm 2 - NK 2019-2020 - HK II]</span></h6>
-            <span className={styles.PostedAt}>{formatDistance(createdAt)}</span>
+            <h6 className={styles.PostedBy}>{firstName + " " + lastName}</h6>
+            <span className={styles.PostedAt}>{createdAt ? formatDistance(createdAt) : ''}</span>
           </div>
         </div>
         <div className={styles.Right}>

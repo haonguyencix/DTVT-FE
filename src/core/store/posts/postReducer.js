@@ -1,5 +1,6 @@
 import {
   FETCH_POST_LIST,
+  FETCH_POST_DETAIL,
   STOP_FETCH_POSTS,
   CHECK_SUBMIT,
   FETCH_NOTI_LIST,
@@ -10,6 +11,7 @@ import {
 
 let initialState = {
   postList: [],
+  postDetail: {},
   stopFetch: false,
   isSubmit: false,
   notiList: [],
@@ -27,6 +29,9 @@ const PostReducer = (state = initialState, { type, payload }) => {
           ? [...state.postList, ...payload.postList]
           : payload.postList,
       };
+    
+    case FETCH_POST_DETAIL:
+      return { state, postDetail: payload }
 
     case STOP_FETCH_POSTS:
       return { ...state, stopFetch: payload };

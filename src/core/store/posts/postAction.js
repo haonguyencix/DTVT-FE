@@ -1,6 +1,7 @@
 import { toast } from "react-toastify";
 import {
   FETCH_POST_LIST,
+  FETCH_POST_DETAIL,
   STOP_FETCH_POSTS,
   CHECK_SUBMIT,
   FETCH_NOTI_LIST,
@@ -76,6 +77,20 @@ export const deletePost = (delObj, horizBtn) => {
   };
 };
 
+export const getPostDetail = (postId) => {
+  return (dispatch) => {
+    PostService.getPostDetail(postId)
+      .then((res) => {
+        dispatch(actFetchPostDetail(res.data));
+      })
+      .catch((err) => {
+        if (err.response) {
+          toast.error(err.response.data.message);
+        }
+      });
+  };
+};
+
 // normal function to call service
 export const interactPost = (interact) => {
   PostService.interactPost(interact)
@@ -91,6 +106,11 @@ export const interactPost = (interact) => {
 export const actFetchPostList = (condition, postList) => ({
   type: FETCH_POST_LIST,
   payload: { condition, postList },
+});
+
+export const actFetchPostDetail = (postDetail) => ({
+  type: FETCH_POST_DETAIL,
+  payload: postDetail,
 });
 
 export const actStopFetch = (status) => ({

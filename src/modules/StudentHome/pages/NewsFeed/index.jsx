@@ -31,8 +31,7 @@ const NewsFeed = (props) => {
   useEffect(() => {
     socket.on(SOCKET.CREATE_POST_NOTI, (payload) => {
       toast(<Notification payload={payload} />, {
-        autoClose: false,
-        closeOnClick: false,
+        autoClose: 30000,
         position: toast.POSITION.BOTTOM_LEFT,
       });
       dispatch(actAdjustNumNoti(+1));

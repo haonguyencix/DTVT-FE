@@ -5,6 +5,7 @@ import accountData from "./accounts/accountReducer";
 import otpData from "./otp/otpReducer";
 import postData from "./posts/postReducer";
 import classroomData from "./classrooms/classroomReducer";
+import scoreData from "./scores/scoreReducer";
 
 const appReducer = combineReducers({
   isLoading,
@@ -12,6 +13,7 @@ const appReducer = combineReducers({
   otpData,
   postData,
   classroomData,
+  scoreData
 });
 
 const rootReducer = (state, action) => {

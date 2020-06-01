@@ -2,9 +2,8 @@
 @import "assets/scss/mixins";
 
 .Wrapper {
-    margin-top: calc(64px + 25px);
     @include flex();
-    .Navbar {
+    .Offset {
         width: 19%;
     }
     .Children {

@@ -1,27 +1,6 @@
 import React from "react";
-import { withStyles } from "@material-ui/core/styles";
-import { FormControl, NativeSelect, InputBase } from "@material-ui/core";
-
-const CustomSelect = withStyles((theme) => ({
-  root: {
-    marginBottom: theme.spacing(2),
-  },
-  input: {
-    borderRadius: 8,
-    fontSize: 14,
-    backgroundColor: theme.palette.background.paper,
-    border: "1px solid #c1c1c1",
-    padding: "10px 26px 10px 12px",
-    "&:focus": {
-      backgroundColor: theme.palette.background.paper,
-      borderColor: "#000",
-      borderRadius: 8,
-    },
-    "&:hover": {
-      backgroundColor: "#f9f9f9",
-    },
-  },
-}))(InputBase);
+import { FormControl, NativeSelect } from "@material-ui/core";
+import SelectCustom from "../SelectCustom";
 
 const Control = (props) => {
   const { selectList, className, handleChange, value } = props;
@@ -38,7 +17,7 @@ const Control = (props) => {
               disabled={disabled}
             >
               <NativeSelect
-                input={<CustomSelect />}
+                input={<SelectCustom />}
                 value={value[name]}
                 onChange={handleChange}
                 name={name}

@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import styles from "./styles.module.scss";
 import clsx from "clsx";
-
-// import Material UI
 import { InputBase } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 
-const Search = () => {
+const Search = (props) => {
   const [isChangeColor, setIsChangeColor] = useState(false);
 
   const handleFocus = () => {
@@ -29,7 +27,7 @@ const Search = () => {
         <SearchIcon />
       </div>
       <InputBase
-        placeholder="Tìm kiếm…"
+        placeholder={props.placeholder}
         className={styles.InputBase}
         onFocus={handleFocus}
         onBlur={handleBlur}

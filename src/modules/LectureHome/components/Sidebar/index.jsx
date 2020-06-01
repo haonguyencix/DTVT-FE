@@ -11,10 +11,13 @@ import SubjectItem from "../SubjectItem";
 import ConsultantItem from "../ConsultantItem";
 import GradeItem from "../GradeItem";
 import { actSelectPostType } from "core/store/posts/postAction";
+import { useHistory } from "react-router-dom";
+import { PATH } from "shared/constants";
 
 const Sidebar = () => {
   const now = new Date();
   const dispatch = useDispatch();
+  const history = useHistory();
   const change = useSelector((state) => state.classroomData.isFetchClassroom);
   const isBubble = useSelector((state) => state.postData.isBubble);
 
@@ -117,12 +120,13 @@ const Sidebar = () => {
       })}
     >
       <Button
+        fullWidth
         variant="contained"
         className={styles.CreateClassBtn}
         startIcon={<Add />}
         disabled={isBubble}
         classes={{ disabled: styles.BtnDisabled }}
-        fullWidth
+        onClick={() => history.push(PATH["CREATE_CLASS"])}
       >
         {!isBubble ? "Tạo lớp mới" : "Chọn nhóm bên dưới nhé!"}
       </Button>

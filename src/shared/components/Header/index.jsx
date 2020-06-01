@@ -2,9 +2,8 @@ import React from "react";
 import styles from "./styles.module.scss";
 import { Link } from "react-router-dom";
 import { Container, Avatar, IconButton, Tooltip } from "@material-ui/core";
-import { Notifications, Assignment } from "@material-ui/icons";
+import { Notifications } from "@material-ui/icons";
 import { useSelector } from "react-redux";
-import { PATH } from "shared/constants";
 import AvtDefault from "assets/img/avt-default-2.png";
 import Search from "shared/components/Search";
 import AccountSetting from "shared/components/AccountSetting";
@@ -29,18 +28,9 @@ const Header = (props) => {
             </Link>
           </div>
           <div className={styles.Center}>
-            <Search />
+            <Search placeholder="Tìm kiếm..." />
           </div>
           <div className={styles.Right}>
-            {credential && credential.role === "student" && (
-              <Tooltip title="Sơ đồ cây môn học" arrow>
-                <Link to={PATH["TREE_SUBJECT"]}>
-                  <IconButton className={styles.IconButton}>
-                    <Assignment className={styles.Icon} />
-                  </IconButton>
-                </Link>
-              </Tooltip>
-            )}
             <Tooltip title="Thông báo" arrow>
               <IconButton className={styles.IconButton}>
                 <NotificationBadge>

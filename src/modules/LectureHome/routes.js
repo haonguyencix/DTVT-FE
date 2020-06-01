@@ -11,6 +11,7 @@ import * as Cookies from "js-cookie";
 const LectureHomeLayout = lazy(() => import("."));
 const ClassroomDetail = lazy(() => import("shared/hocs/ClassroomDetail"));
 const PostDetail = lazy(() => import("shared/components/PostDetail"));
+const CreateClass = lazy(() => import("./pages/CreateClass"));
 
 const LectureHomeGuard = ({ routes }) => {
   if (!Cookies.get(TOKEN["LECTURE"])) {
@@ -63,6 +64,12 @@ const LectureHomeRoutes = {
           path: PATH["LECTURE_POST_DETAIL"](PATH["POST_ID"]),
           exact: true,
           component: PostDetail,
+        },
+        {
+          key: "CREATE_CLASS",
+          path: PATH["CREATE_CLASS"],
+          exact: true,
+          component: CreateClass,
         },
         {
           key: "LECTURE_CLASSROOM",

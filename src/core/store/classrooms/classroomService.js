@@ -4,9 +4,17 @@ class ClassroomService {
   getClassrooms(filter, role) {
     return restConnector({
       url: `classrooms/${role}${
-        role === "LECTURE" ? `/${filter.category}` : ""
+        filter.category ? `/${filter.category}` : ""
       }?schoolYear=${filter.schoolYear}&semester=${filter.semester}`,
       method: "GET",
+    });
+  }
+
+  createClassroom(data) {
+    return restConnector({
+      url: `classrooms`,
+      method: "POST",
+      data
     });
   }
 

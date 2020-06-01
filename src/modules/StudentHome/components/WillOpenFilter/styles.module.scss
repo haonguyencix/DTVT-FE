@@ -1,0 +1,30 @@
+@import "assets/scss/variables";
+@import "assets/scss/mixins";
+
+.FilterBar {
+    @include flex();
+    align-items: center;
+    justify-content: space-between;
+    .FilterSelect {
+        flex-grow: 2;
+        margin-right: 16px;
+    }
+    .Search {
+        margin-bottom: 16px;
+        margin-right: 16px;
+        flex-grow: 9;
+    }
+    .BtnFilter {
+        margin-bottom: 16px;
+        text-align: left;
+        padding: 7px 14px;
+        color: $color-default-lightest;
+        background-color: $color-default-darkest;
+        box-shadow: none;
+        @include border-radius(8px);
+        &:hover {
+            color: $color-default-lightest;
+            background-color: $color-default-darkest;
+        }
+    }
+}

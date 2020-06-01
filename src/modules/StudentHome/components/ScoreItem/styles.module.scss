@@ -1,0 +1,16 @@
+@import "assets/scss/variables";
+@import "assets/scss/mixins";
+
+.StatusBold {
+    font-weight: $fw-bold;
+    color: $color-default-darkest;
+}
+.StatusFail {
+    color: $color-red-400;
+}
+.StatusWarning {
+    color: $color-yellow-900;
+}
+.StatusSuccess {
+    color: $color-green-400;
+}

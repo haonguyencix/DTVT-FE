@@ -9,6 +9,14 @@ class PostService {
     });
   }
 
+  createPostPDF(formData) {
+    return restConnector({
+      url: "posts/pdf",
+      method: "POST",
+      data: formData
+    });
+  }
+
   deletePost(delObj) {
     return restConnector({
       url: "posts",

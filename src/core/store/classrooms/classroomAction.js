@@ -53,7 +53,13 @@ export const getStudentList = (classroomId, postType) => {
   };
 };
 
-export const appointLead = (studentId, classroomId, status, horizBtn, postType) => {
+export const appointLead = (
+  studentId,
+  classroomId,
+  status,
+  horizBtn,
+  postType
+) => {
   return (dispatch) => {
     ClassroomService.appointLead(studentId, classroomId, status, postType)
       .then((res) => {
@@ -100,6 +106,21 @@ export const getClassroomInfo = (classroomId, postType) => {
   };
 };
 
+export const createClassroom = (data, resetForm) => {
+  ClassroomService.createClassroom(data)
+    .then((res) => {
+      toast.success(res.data.message);
+      if (window.confirm('Bạn có muốn reset?')) {
+        resetForm();
+      }
+    })
+    .catch((err) => {
+      if (err.response) {
+        toast.error(err.response.data.message);
+      }
+    });
+};
+
 // action creator
 export const actFetchClassroomList = (classrooms) => ({
   type: FETCH_CLASSROOM_LIST,
@@ -118,5 +139,5 @@ export const actFetchClassroomInfo = (classroomInfo, isLead, isFetch) => ({
 
 export const actSetClassroomSelecteds = (subjectId, selecteds) => ({
   type: SET_CLASSROOM_SELECTED,
-  payload: { subjectId, selecteds }
+  payload: { subjectId, selecteds },
 });

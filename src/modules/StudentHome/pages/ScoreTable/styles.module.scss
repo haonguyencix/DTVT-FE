@@ -1,0 +1,140 @@
+@import "assets/scss/variables";
+@import "assets/scss/mixins";
+
+.Container {
+    margin-left: 21.6%;
+    @include flex();
+    justify-content: space-between;
+    .Title {
+        padding: 8px 16px;
+        font-weight: $fw-bold;
+        @include font-size($fs-medium);
+    }
+    .TableContainer {
+        overflow: visible;
+        background-color: $color-default-lightest;
+        border: 1px solid $color-default-lighter;
+        margin-bottom: 20px;
+        @include border-radius(5px);
+        @include transition();
+        height: 78.8vh;
+        overflow-y: auto;
+        &::-webkit-scrollbar {
+            background-color: $color-default;
+            border-radius: 15px;
+            width: 8px;
+        }
+        &::-webkit-scrollbar-thumb {
+            cursor: pointer;
+            border-radius: 15px;
+            background-color: $color-default-lighter;
+            &:hover {
+                background-color: $color-default-darker;
+            }
+        }
+        .GroupHead {
+            background-color: $color-default;
+            font-weight: $fw-bold;
+            position: relative;
+            &::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 4px;
+                background-color: $color-default-darkest;
+                @include border-radius(8px);
+            }
+            > div {
+                @include flex();
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+        .TableRow {
+            &:hover {
+                background-color: $color-standard;
+            }
+        }
+    }
+    .TableShrink {
+        width: 70%;
+        > table > thead > tr {
+            width: 100%;
+            > th {
+                &:nth-child(2) {
+                    width: 10%;
+                }
+                &:nth-child(3) {
+                    width: 14%;
+                }
+                &:nth-child(4) {
+                    width: 13%;
+                }
+            }
+        }
+    }
+    .TableExpand {
+        width: 100%;
+        > table > thead > tr {
+            width: 100%;
+            > th {
+                &:nth-child(2) {
+                    width: 32%;
+                }
+                &:nth-child(3) {
+                    width: 5%;
+                }
+                &:nth-child(4) {
+                    width: 9%;
+                }
+                &:nth-child(5) {
+                    width: 9%;
+                }
+                &:nth-child(6) {
+                    width: 12%;
+                }
+                &:nth-child(7) {
+                    width: 12%;
+                }
+                &:nth-child(8) {
+                    width: 9%;
+                }
+                &:nth-child(9) {
+                    width: 8%;
+                }
+            }
+        }
+    }
+    .Info {
+        width: 0;
+        @include transition();
+        .Filter {
+            list-style: none;
+            padding: 10px 0;
+            background-color: $color-default-lightest;
+            border: 1px solid $color-default-lighter;
+            margin-bottom: 20px;
+            @include border-radius(5px);
+            > li {
+                cursor: pointer;
+                padding: 10px 25px;
+                color: $color-default-darkest;
+            }
+        }
+    }
+    .OpenInfo {
+        width: 26%;
+    }
+}
+
+.StatusFail {
+    color: $color-red-400;
+}
+.StatusWarning {
+    color: $color-yellow-900;
+}
+.StatusSuccess {
+    color: $color-green-400;
+}

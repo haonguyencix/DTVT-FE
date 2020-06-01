@@ -1,7 +1,7 @@
 import React, { useEffect, useCallback, useReducer } from 'react';
 import classes from './style.module.scss';
 import DispatchActLoad from 'shared/components/DispatchActLoad';
-import TreeSubjectService from 'core/store/treesubject/treesubjectService';
+import SubjectService from 'core/store/subjects/subjectService';
 import TreeList from 'modules/StudentHome/components/TreeList';
 
 const subjectReducer = (currentTree, action) => {
@@ -47,7 +47,7 @@ const httpReducer = (curHttpState, action) => {
 
     const onFetchSubjects = useCallback(() => {
         dispatchHttp({ type: 'SEND' });
-        TreeSubjectService.fetchSubjectsDDT().then(res => {
+        SubjectService.fetchSubjectsDDT().then(res => {
             dispatchTree({ type: 'FETCH_SUBJECTS', tree: res.data });
             dispatchHttp({ type: 'RESPONSE' });
         }).catch(err => {

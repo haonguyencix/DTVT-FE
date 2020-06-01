@@ -25,6 +25,13 @@ const StudentLoginGuard = ({ routes }) => {
   );
 };
 
+const ResetPasswordGuard = () => {
+  if (!Cookies.get(TOKEN["RESET_PASSWORD"])) {
+    return <Redirect to={PATH["STUDENT_LOGIN"]} />;
+  }
+  return <ResetPassword />
+}
+
 const StudentLoginRoutes = {
   key: "STUDENT_LOGIN",
   path: PATH["STUDENT_LOGIN"],
@@ -58,7 +65,7 @@ const StudentLoginRoutes = {
       key: "STUDENT_RESET_PASSWORD",
       path: PATH["RESET_PASSWORD"],
       exact: true,
-      component: ResetPassword,
+      component: ResetPasswordGuard,
     },
   ],
 };

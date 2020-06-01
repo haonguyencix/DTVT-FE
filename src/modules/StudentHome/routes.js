@@ -13,6 +13,8 @@ import * as Cookies from "js-cookie";
 const StudentHomeLayout = lazy(() => import("."));
 const TreeSubject = lazy(() => import("./pages/TreeSubject"));
 const PostDetail = lazy(() => import("shared/components/PostDetail"));
+const SubjectWillOpen = lazy(() => import("./pages/SubjectWillOpen"));
+const ScoreTable = lazy(() => import("./pages/ScoreTable"));
 
 const StudentHomeGuard = ({ routes }) => {
   if (!Cookies.get(TOKEN["STUDENT"])) {
@@ -50,6 +52,18 @@ const StudentHomeRoutes = {
       key: "TREE_SUBJECT",
       path: PATH["TREE_SUBJECT"],
       component: TreeSubject,
+    },
+    {
+      key: "SUBJECT_WILL_OPEN",
+      path: PATH["SUBJECT_WILL_OPEN"],
+      exact: true,
+      component: SubjectWillOpen,
+    },
+    {
+      key: "STUDENT_SCORE_TABLE",
+      path: PATH["STUDENT_SCORE_TABLE"],
+      exact: true,
+      component: ScoreTable,
     },
     {
       key: "NEWS_FEED",

@@ -28,8 +28,8 @@ const CreateClass = () => {
         practice: 0,
         endPercent: 50,
         examForms: "",
-        schoolYear: "2016-2017", // hard code
-        semester: 1, // hard code
+        schoolYear: "",
+        semester: 1,
         day: "",
         room: "",
         start: 1,
@@ -43,39 +43,13 @@ const CreateClass = () => {
       {({ handleChange, values, setFieldValue }) => (
         <Form>
           <Grid container spacing={2}>
-            <Grid item xs={2}>
-              <TextField
-                required
-                fullWidth
-                value={values.lectureId}
-                name="lectureId"
-                type="text"
-                margin="normal"
-                variant="outlined"
-                label="My ID"
-                autoComplete="lectureId"
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <TextField
-                required
-                fullWidth
-                value={values.subjectId}
-                name="subjectId"
-                type="text"
-                margin="normal"
-                variant="outlined"
-                label="Mã môn"
-                autoComplete="off"
-                onChange={handleChange}
-              />
-              {/* <Autocomplete
+            <Grid item xs={6}>
+              <Autocomplete
                 onChange={(e, v) => {
                   if (v) {
                     setFieldValue("subjectId", v.id);
-                    // setFieldValue("schoolYear", v.yearSchool);
-                    // setFieldValue("semester", v.semester);
+                    setFieldValue("schoolYear", v.yearSchool);
+                    setFieldValue("semester", v.semester);
                   }
                 }}
                 fullWidth
@@ -91,7 +65,7 @@ const CreateClass = () => {
                     label="Tên lớp"
                   />
                 )}
-              /> */}
+              />
             </Grid>
             <Grid item xs={3}>
               <TextField

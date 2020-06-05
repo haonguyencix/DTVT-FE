@@ -1,8 +1,11 @@
-import { FETCH_SCORE_LIST, UPDATE_FOUR_SCORE } from "./scoreType";
+import { FETCH_SCORE_LIST, UPDATE_FOUR_SCORE_IN_LIST, ADJUST_TOGGLE_C, RESET_SCORES_DEFAULT, SET_IS_RESET } from "./scoreType";
 
 let initialState = {
+  defaultValue: [],
   scoresDisplay: {},
-  scoresReal: []
+  scoresReal: [],
+  toggleC: false,
+  isReset: false
 };
 
 const ScoreReducer = (state = initialState, { type, payload }) => {
@@ -20,9 +23,11 @@ const ScoreReducer = (state = initialState, { type, payload }) => {
         return 0;
       };
 
-      let scoresDisplay = {};
+      let scoresDisplayClone = { ...state.scoresDisplayClone };
 
-      const mappingScores = payload.map((item) => {
+      const defaultValue = payload === RESET_SCORES_DEFAULT ? state.defaultValue : payload;
+
+      const mappingScores = defaultValue.map((item) => {
         const row = { ...item }; delete row.classroomId;
     
         row.average = parseFloat(row.midScore * caclPercent(100 - row.endPercent)) + row.endScore * caclPercent(row.endPercent);
@@ -31,20 +36,26 @@ const ScoreReducer = (state = initialState, { type, payload }) => {
         
         const id = item.classroomId.substring(item.classroomId.length - 5);
     
-        scoresDisplay[id] ? scoresDisplay[id].push(row) : (scoresDisplay[id] = row.id ? [row] : []);
+        scoresDisplayClone[id] ? scoresDisplayClone[id].push(row) : (scoresDisplayClone[id] = row.id ? [row] : []);
     
         return { id, subjectId: row.subjectId, credits: row.four ? row.credits : 0, status: row.status, four: parseInt(row.four * row.credits) }; 
       });
 
       const scoresReal = mappingScores.filter((v, i, a) => a.findIndex(t => (t.subjectId === v.subjectId) ) === i);
       
-      return { ...state, scoresDisplay, scoresReal };
+      return { ...state, defaultValue, scoresDisplay: scoresDisplayClone, scoresReal };
 
-    case UPDATE_FOUR_SCORE:
+    case UPDATE_FOUR_SCORE_IN_LIST:
       const index = state.scoresReal.findIndex(item => item.subjectId === payload.subjectId);
       state.scoresReal[index].four = payload.fourValue;
 
       return { ...state, scoresReal: [...state.scoresReal] }
+
+    case ADJUST_TOGGLE_C:
+      return { ...state, toggleC: payload }
+
+    case SET_IS_RESET:
+      return { ...state, isReset: payload }
 
     default:
       return state;

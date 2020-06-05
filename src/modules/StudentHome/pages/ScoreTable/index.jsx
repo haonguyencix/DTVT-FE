@@ -15,6 +15,7 @@ import {
 } from "@material-ui/core";
 import { Menu, MenuOpen } from "@material-ui/icons";
 import ScoreItem from "modules/StudentHome/components/ScoreItem";
+import ScoreFilter from "modules/StudentHome/components/ScoreFilter";
 
 const ScoreTable = () => {
   const dispatch = useDispatch();
@@ -28,20 +29,25 @@ const ScoreTable = () => {
   }, [dispatch]);
 
   let totalScores = 0;
+  let totalCredits = { total: 0, success: 0, fail: 0, warning: 0 };
+  let totalSubjects = { total: scoresReal.length, success: 0, fail: 0, warning: 0,};
+
   let totalCreditsSemester = {};
   let totalScoresSemester = {};
-  let totalSubjects = { total: 0, success: 0, fail: 0, warning: 0 };
-  let totalCredits = { total: 0, success: 0, fail: 0, warning: 0 };
 
-  for(let item of scoresReal) {
+  for (let item of scoresReal) {
     totalScores += item.four;
-    totalCredits['total'] += item.credits;
-    totalCredits[item.status] += item.credits;
-    if(item.credits) totalSubjects[item.status] += 1;
-    totalCreditsSemester[item.id] ? totalCreditsSemester[item.id] += item.credits : totalCreditsSemester[item.id] = item.id ? item.credits : 0;
-    totalScoresSemester[item.id] ? totalScoresSemester[item.id] += item.four : totalScoresSemester[item.id] = item.id ? item.four : 0;
+    totalCredits["total"] += item.credits;
+    totalCredits[item.status] += item.credits;
+    if (item.credits) totalSubjects[item.status] += 1;
+
+    totalCreditsSemester[item.id]
+      ? (totalCreditsSemester[item.id] += item.credits)
+      : (totalCreditsSemester[item.id] = item.id ? item.credits : 0);
+    totalScoresSemester[item.id]
+      ? (totalScoresSemester[item.id] += item.four)
+      : (totalScoresSemester[item.id] = item.id ? item.four : 0);
   }
-  totalSubjects['total'] = scoresReal.length;
 
   const renderTables = Object.keys(scoresDisplay).map((key, index) => {
     const semester = `Học kỳ ${key.substring(key.length - 1)}`;
@@ -49,7 +55,8 @@ const ScoreTable = () => {
     const title = semester + " - " + schoolYear;
 
     const scoreTemp = parseFloat(totalScoresSemester[key] / totalCreditsSemester[key]);
-    const averageScore = Math.round(scoreTemp * 100) / 100
+    const averageScore = Math.round(scoreTemp * 100) / 100;
+
     return (
       <Fragment key={index}>
         {scoresDisplay[key].length && (
@@ -58,35 +65,23 @@ const ScoreTable = () => {
               <TableCell colSpan={10} className={styles.GroupHead}>
                 <div>
                   <span>{title}</span>
-                  <span>Điểm tích lũy: {!isNaN(averageScore) ? `${averageScore} / ${totalCreditsSemester[key]} tín chỉ` : "chưa xét"}</span>
+                  <span>
+                    Điểm tích lũy:{" "}
+                    {!isNaN(averageScore)
+                      ? `${averageScore} / ${totalCreditsSemester[key]} tín chỉ`
+                      : "chưa xét"}
+                  </span>
                 </div>
               </TableCell>
             </TableRow>
             {scoresDisplay[key].map((v, i) => (
-              <ScoreItem
-                key={i}
-                item={v}
-                expand={expand}
-              />
+              <ScoreItem key={i} item={v} expand={expand} />
             ))}
           </TableBody>
         )}
       </Fragment>
     );
   });
-
-  const filterNavArr = [
-    { status: 'total', title: 'Tất cả' },
-    { status: 'success', title: 'Đã đạt', className: styles.StatusSuccess },
-    { status: 'fail', title: 'Chưa đạt', className: styles.StatusFail },
-    { status: 'warning', title: 'Nên cải thiện', className: styles.StatusWarning },
-  ]
-
-  const renderFilterNav = (filterNavArr || []).map((key, index) => (
-    <li key={index}><span className={key.className}><b>{key.title}</b></span>: {totalSubjects[key.status]} môn - {totalCredits[key.status]} tín chỉ</li>
-  ));
-
-  const accScore = Math.round((totalScores / totalCredits['total']) * 100) / 100
 
   return (
     <div className={styles.Container}>
@@ -123,15 +118,12 @@ const ScoreTable = () => {
           {renderTables}
         </Table>
       </TableContainer>
-      <div
-        className={clsx(styles.Info, {
-          [styles.OpenInfo]: !expand,
-        })}
-      >
-        {!expand && (
-          <ul className={styles.Filter}>{renderFilterNav}<li>Điểm tích lũy: <b>{!isNaN(accScore) ? accScore : 'đợi tí nha...'}</b></li></ul>
-        )}
-      </div>
+      <ScoreFilter
+        expand={expand}
+        totalScores={totalScores}
+        totalCredits={totalCredits}
+        totalSubjects={totalSubjects}
+      />
     </div>
   );
 };

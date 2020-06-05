@@ -107,34 +107,4 @@
             }
         }
     }
-    .Info {
-        width: 0;
-        @include transition();
-        .Filter {
-            list-style: none;
-            padding: 10px 0;
-            background-color: $color-default-lightest;
-            border: 1px solid $color-default-lighter;
-            margin-bottom: 20px;
-            @include border-radius(5px);
-            > li {
-                cursor: pointer;
-                padding: 10px 25px;
-                color: $color-default-darkest;
-            }
-        }
-    }
-    .OpenInfo {
-        width: 26%;
-    }
-}
-
-.StatusFail {
-    color: $color-red-400;
-}
-.StatusWarning {
-    color: $color-yellow-900;
-}
-.StatusSuccess {
-    color: $color-green-400;
 }

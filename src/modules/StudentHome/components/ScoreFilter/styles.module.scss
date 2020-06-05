@@ -1,0 +1,53 @@
+@import "assets/scss/variables";
+@import "assets/scss/mixins";
+
+.Container {
+    width: 0;
+    @include transition();
+    .ToggleC { 
+        padding: 10px;
+        background-color: $color-default-lightest;
+        border: 1px solid $color-default-lighter;
+        margin-bottom: 20px;
+        @include border-radius(5px);
+        > label {
+            margin: 0;
+        }
+    }
+    .Filter {
+        list-style: none;
+        padding: 10px 0;
+        background-color: $color-default-lightest;
+        border: 1px solid $color-default-lighter;
+        margin-bottom: 20px;
+        @include border-radius(5px);
+        > li {
+            cursor: pointer;
+            padding: 10px 25px;
+            color: $color-default-darkest;
+            .StatusFail {
+                color: $color-red-400;
+            }
+            .StatusWarning {
+                color: $color-yellow-900;
+            }
+            .StatusSuccess {
+                color: $color-green-400;
+            }
+        }
+    }
+    .BtnReset {
+        padding: 8px 14px;
+        margin-bottom: 18px;
+        color: $color-default-lightest;
+        background-color: $color-default-darkest;
+        @include border-radius(5px);
+        &:hover {
+            color: $color-default-lightest;
+            background-color: $color-default-darkest;
+        }
+    }
+}
+.OpenInfo {
+    width: 26%;
+}

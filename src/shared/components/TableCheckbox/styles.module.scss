@@ -1,0 +1,31 @@
+@import "assets/scss/variables";
+@import "assets/scss/mixins";
+
+.TableContainer {
+    overflow: visible;
+    background-color: $color-default-lightest;
+    border: 1px solid $color-default-lighter;
+    margin-bottom: 20px;
+    @include border-radius(5px);
+    @include transition();
+    height: 68vh;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+        background-color: $color-default;
+        border-radius: 15px;
+        width: 8px;
+    }
+    &::-webkit-scrollbar-thumb {
+        cursor: pointer;
+        border-radius: 15px;
+        background-color: $color-default-lighter;
+        &:hover {
+            background-color: $color-default-darker;
+        }
+    }
+    .TableRow {
+        &:hover {
+            background-color: $color-standard;
+        }
+    }
+}

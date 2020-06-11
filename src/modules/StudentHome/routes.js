@@ -17,9 +17,9 @@ const SubjectWillOpen = lazy(() => import("./pages/SubjectWillOpen"));
 const ScoreTable = lazy(() => import("./pages/ScoreTable"));
 
 const StudentHomeGuard = ({ routes }) => {
-  if (!Cookies.get(TOKEN["STUDENT"])) {
-    return <Redirect to={PATH["STUDENT_LOGIN"]} />;
-  }
+  // if (!Cookies.get(TOKEN["STUDENT"])) {
+  //   return <Redirect to={PATH["STUDENT_LOGIN"]} />;
+  // }
   return (
     <Suspense fallback={<LazyloadPage />}>
       <StudentHomeLayout>

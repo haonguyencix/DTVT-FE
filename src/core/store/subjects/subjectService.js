@@ -15,10 +15,18 @@ class TreeSubjectService {
     });
   }
 
-  fetchCommingSubject() {
+  fetchCommingSubject(id) {
     return restConnector({
-      url: "/coming-subject",
+      url: `/coming-subject/?id=${id}`,
       method: "GET",
+    });
+  }
+
+  postCommingSubject(data) {
+    return restConnector({
+      url: "/selected-subject",
+      method: "POST",
+      data: data
     });
   }
 }

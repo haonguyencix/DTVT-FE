@@ -1,48 +1,53 @@
 import React, { useEffect, useState } from "react";
 import styles from "./styles.module.scss";
-import WillOpenItem from "modules/StudentHome/components/WillOpenItem";
 import WillOpenFilter from "modules/StudentHome/components/WillOpenFilter";
 import subjectService from "core/store/subjects/subjectService";
 import TableCheckbox from "shared/components/TableCheckbox";
 import { Button } from "@material-ui/core";
-
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Donut", 452, 25.0, 51, 4.9),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-  createData("Honeycomb", 408, 3.2, 87, 6.5),
-];
+import { useSelector } from "react-redux";
 
 const head = {
-  name: "Dessert (100g serving)",
-  calories: "Calories",
-  fat: "Fat (g)",
-  carbs: "Carbs (g)",
-  protein: "Protein (g)",
+  calories: "Mã môn học",
+  fat: "Tên môn học",
+  carbs: "Học kỳ",
+  protein: "Niên khoá",
 };
 
 const SubjectWillOpen = () => {
   const [commingSubjects, setCommingSubjects] = useState([]);
+  const credential  = useSelector((state) => state.accountData.credential);
+  const accountId = credential.accountId;
+  const handleSubmit = (selectedIds) => {
+    const today = new Date();
+    const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    const createdAt = date + ' ' + time;
 
-  const handleSubmit = (selected) => {
-    console.log(selected);
+    selectedIds.forEach(subjectId => {
+      subjectService
+        .postCommingSubject({ studentId: accountId, subjectId, createdAt })
+        .then((res) => {
+          window.location.reload();
+        }).catch((err) => {
+          alert(err.response.data.message);
+        });
+    });    
   };
 
   useEffect(() => {
     subjectService
-      .fetchCommingSubject()
+      .fetchCommingSubject(accountId)
       .then((res) => {
-        setCommingSubjects(res.data.subjects);
+        const { subjects } = res.data;  
+        const newSubjects = subjects.map(subject => {
+          return Object.keys(subject).reduce((object, key) => {
+            if (key !== 'openID') {
+              object[key] = subject[key]
+            }
+            return object
+          }, {});
+        });
+        setCommingSubjects(newSubjects);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -52,10 +57,10 @@ const SubjectWillOpen = () => {
       <WillOpenFilter />
       <div className={styles.WorkSpace}>
         <TableCheckbox
-          rows={rows}
+          rows={commingSubjects}
           head={head}
           haveSort={true}
-          primaryKey="name"
+          primaryKey="id"
           renderBtnSubmit={(selected) => (
             <Button
               fullWidth

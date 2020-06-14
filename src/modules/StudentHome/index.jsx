@@ -59,6 +59,11 @@ const StudentHomeLayout = (props) => {
         slug: PATH["SUBJECT_WILL_OPEN"],
         Icon: LibraryBooks,
       },
+      {
+        name: "Môn đã chọn",
+        slug: PATH["SUBJECT_SELECTED"],
+        Icon: LibraryBooks,
+      },
       { name: "Bảng điểm", slug: PATH["STUDENT_SCORE_TABLE"], Icon: Timeline },
       { name: "Nghỉ học", slug: PATH["STUDENT_POST_SAVED"], Icon: AlarmOff },
     ],

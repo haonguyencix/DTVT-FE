@@ -15,6 +15,7 @@ const TreeSubject = lazy(() => import("./pages/TreeSubject"));
 const PostDetail = lazy(() => import("shared/components/PostDetail"));
 const SubjectWillOpen = lazy(() => import("./pages/SubjectWillOpen"));
 const ScoreTable = lazy(() => import("./pages/ScoreTable"));
+const SubjectSelected = lazy(() => import("./pages/SelectedSubject"));
 
 const StudentHomeGuard = ({ routes }) => {
   // if (!Cookies.get(TOKEN["STUDENT"])) {
@@ -58,6 +59,12 @@ const StudentHomeRoutes = {
       path: PATH["SUBJECT_WILL_OPEN"],
       exact: true,
       component: SubjectWillOpen,
+    },
+    {
+      key: "SUBJECT_SELECTED",
+      path: PATH["SUBJECT_SELECTED"],
+      exact: true,
+      component: SubjectSelected,
     },
     {
       key: "STUDENT_SCORE_TABLE",

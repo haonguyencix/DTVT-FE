@@ -29,6 +29,7 @@ class PATH {
   // student home
   TREE_SUBJECT = this.STUDENT_HOME + "/tree-subject";
   SUBJECT_WILL_OPEN = this.STUDENT_HOME + "/subject-will-open";
+  SUBJECT_SELECTED = this.STUDENT_HOME + "/subject-selected";
   STUDENT_SCORE_TABLE = this.STUDENT_HOME + "/score-table";
   STUDENT_POST_LIST = this.STUDENT_HOME + this.#POST_LIST;
   STUDENT_PROFILE = this.STUDENT_HOME + this.#PROFILE;

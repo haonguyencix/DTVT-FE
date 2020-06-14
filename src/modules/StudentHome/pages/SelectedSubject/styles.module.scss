@@ -1,0 +1,17 @@
+@import "assets/scss/variables";
+@import "assets/scss/mixins";
+
+.Container {
+    margin-left: 22%;
+    .BtnSubmit {
+        padding: 8px 14px;
+        margin-bottom: 18px;
+        color: $color-default-lightest;
+        background-color: $color-default-darkest;
+        @include border-radius(5px);
+        &:hover {
+            color: $color-default-lightest;
+            background-color: $color-default-darkest;
+        }
+    }
+}

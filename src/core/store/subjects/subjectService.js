@@ -29,5 +29,20 @@ class TreeSubjectService {
       data: data
     });
   }
+
+  fetchSelectedSubject(id) {
+    return restConnector({
+      url: `/selected-subject/${id}`,
+      method: "GET"
+    });
+  }
+
+  deleteSelectedSubject(data) {
+    return restConnector({
+      url: `/selected-subject`,
+      method: "DELETE",
+      data: data
+    });
+  }
 }
 export default new TreeSubjectService();

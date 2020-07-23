@@ -80,7 +80,7 @@
             background-color: $color-default-lightest;
             > div {
                 @include flex();
-                @include element-center(76%);
+                @include element-center(86%);
                 justify-content: space-between;
                 align-items: center;
                 .NavLink {
@@ -113,3 +113,4 @@
         }
     }
 }
+

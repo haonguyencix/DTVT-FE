@@ -15,7 +15,7 @@ const head = {
 const SubjectWillOpen = () => {
   const [commingSubjects, setCommingSubjects] = useState([]);
   const credential  = useSelector((state) => state.accountData.credential);
-  const accountId = credential.accountId;
+  const accountId = credential ? credential.accountId : "";
   const handleSubmit = (selectedIds) => {
     selectedIds.forEach(subjectId => {
       subjectService
@@ -44,6 +44,7 @@ const SubjectWillOpen = () => {
         setCommingSubjects(newSubjects);
       })
       .catch((err) => console.log(err));
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

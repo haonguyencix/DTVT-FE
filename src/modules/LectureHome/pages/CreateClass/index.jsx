@@ -6,14 +6,16 @@ import { ChevronRight } from "@material-ui/icons";
 import { Autocomplete } from "@material-ui/lab";
 import subjectService from "core/store/subjects/subjectService";
 import { createClassroom } from "core/store/classrooms/classroomAction";
+import { useSelector } from "react-redux";
 
 const CreateClass = () => {
-  const [commingSubjects, setCommingSubjects] = useState([]);
 
+  const [commingSubjects, setCommingSubjects] = useState([]);  
   useEffect(() => {
     subjectService
       .fetchCommingSubject()
       .then((res) => {
+        console.log(res.data.subjects)
         setCommingSubjects(res.data.subjects);
       })
       .catch((err) => console.log(err));
@@ -22,7 +24,7 @@ const CreateClass = () => {
   return (
     <Formik
       initialValues={{
-        lectureId: "",
+        lectureId: '',
         subjectId: "",
         theory: 1,
         practice: 0,

@@ -43,7 +43,7 @@ const StudentHomeLayout = (props) => {
       { name: "Bảng tin", slug: PATH["STUDENT_POST_LIST"], Icon: Home },
       {
         name: "Diễn đàn sinh viên",
-        slug: PATH["STUDENT_POST_SAVED"],
+        slug: "/student-forum",
         Icon: LocalLibrary,
       },
       {
@@ -65,12 +65,12 @@ const StudentHomeLayout = (props) => {
         Icon: LibraryBooks,
       },
       { name: "Bảng điểm", slug: PATH["STUDENT_SCORE_TABLE"], Icon: Timeline },
-      { name: "Nghỉ học", slug: PATH["STUDENT_POST_SAVED"], Icon: AlarmOff },
+      { name: "Nghỉ học", slug: "/student-absent", Icon: AlarmOff },
     ],
     Nhóm: [
       {
         name: grade,
-        slug: PATH["STUDENT_POST_SAVED"],
+        slug: "/student-grade",
         Icon: PermContactCalendar,
       },
       {

@@ -18,9 +18,9 @@ const ScoreTable = lazy(() => import("./pages/ScoreTable"));
 const SubjectSelected = lazy(() => import("./pages/SelectedSubject"));
 
 const StudentHomeGuard = ({ routes }) => {
-  // if (!Cookies.get(TOKEN["STUDENT"])) {
-  //   return <Redirect to={PATH["STUDENT_LOGIN"]} />;
-  // }
+  if (!Cookies.get(TOKEN["STUDENT"])) {
+    return <Redirect to={PATH["STUDENT_LOGIN"]} />;
+  }
   return (
     <Suspense fallback={<LazyloadPage />}>
       <StudentHomeLayout>

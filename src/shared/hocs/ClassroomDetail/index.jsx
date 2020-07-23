@@ -58,7 +58,7 @@ const ClassroomDetail = (props) => {
         postType
       ),
     },
-    { content: "Giảng viên", slug: "/asdfhwefsd/asdfqwe/fasdfasdf/as" },
+    { content: "Giảng viên", slug: "/asdfhwefsd/asdfqwe/fasdfasdf/as"},
     { content: "Tài liệu", slug: "/asdfhwefsd/asdfqwe/fasdfasdf/as" },
     { content: "Điểm số", slug: "/asdfhwefsd/asdfqwe/fasdfasdf/as" },
   ];

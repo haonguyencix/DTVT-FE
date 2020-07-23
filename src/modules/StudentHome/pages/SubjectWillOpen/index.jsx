@@ -5,7 +5,9 @@ import subjectService from "core/store/subjects/subjectService";
 import TableCheckbox from "shared/components/TableCheckbox";
 import { Button } from "@material-ui/core";
 import { useSelector } from "react-redux";
-
+import * as Cookies from "js-cookie";
+import { TOKEN } from "shared/constants";
+var jwtDecode = require('jwt-decode');
 const head = {
   calories: "Mã môn học",
   fat: "Tên môn học",
@@ -14,9 +16,11 @@ const head = {
 };
 
 const SubjectWillOpen = () => {
+  const token = Cookies.get(TOKEN['STUDENT']);;
+  var decoded = jwtDecode(token);
   const [commingSubjects, setCommingSubjects] = useState([]);
   const credential  = useSelector((state) => state.accountData.credential);
-  const accountId = credential.accountId;
+  const accountId = credential ? credential.accountId : decoded.accountId;
   const handleSubmit = (selectedIds) => {
     const today = new Date();
     const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
@@ -50,6 +54,7 @@ const SubjectWillOpen = () => {
         setCommingSubjects(newSubjects);
       })
       .catch((err) => console.log(err));
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
